@@ -4,7 +4,6 @@ import { Hero } from './sections/Hero';
 import { About } from './sections/About';
 import { Skills } from './sections/Skills';
 import { Projects } from './sections/Projects';
-import { FutureProjects } from './sections/FutureProjects';
 import { WhatILearned } from './sections/WhatILearned';
 import { Contact } from './sections/Contact';
 
