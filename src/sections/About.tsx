@@ -20,10 +20,16 @@ export const About = () => {
             className="space-y-6 text-slate-300 text-lg leading-relaxed relative z-10"
           >
             <p>
-              I enjoy working on practical web projects and exploring how systems behave in different situations. While building applications, I focus on making sure everything works as expected, including how the system handles edge cases and unexpected inputs. I’ve developed a strong interest in identifying small issues that affect performance or user experience. I spend time testing features, validating data, and debugging problems carefully, with a focus on understanding why they occur and how to prevent them.
+              I enjoy working on practical web projects and exploring how systems behave in different situations. While building applications, I focus on making sure everything works as expected, including how the system handles edge cases and unexpected inputs.
             </p>
             <p>
-              I use modern tools, including AI-assisted development, to learn faster and explore different approaches. At the same time, I review and refine my work to improve consistency and reliability. Overall, I aim to build systems that are functional, stable, and dependable in real-world use.
+              I’ve developed a strong interest in identifying small issues that affect performance or user experience. I spend time testing features, validating data, and debugging problems carefully, with a focus on understanding why they occur and how to prevent them.
+            </p>
+            <p>
+              I use modern tools, including AI-assisted development, to learn faster and explore different approaches. At the same time, I review and refine my work to improve consistency and reliability.
+            </p>
+            <p>
+              Overall, I aim to build systems that are functional, stable, and dependable in real-world use.
             </p>
           </motion.div>
         </div>
