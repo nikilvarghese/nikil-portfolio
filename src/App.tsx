@@ -17,11 +17,9 @@ function App() {
         <About />
         <Skills />
         <Projects />
-        <FutureProjects />
         <WhatILearned />
         <Contact />
       </main>
-
       <ScrollToTop />
     </div>
   );
