@@ -26,10 +26,7 @@ export const About = () => {
               I’ve developed a strong interest in identifying small issues that affect performance or user experience. I spend time testing features, validating data, and debugging problems carefully, with a focus on understanding why they occur and how to prevent them.
             </p>
             <p>
-              I use modern tools, including AI-assisted development, to learn faster and explore different approaches. At the same time, I review and refine my work to improve consistency and reliability.
-            </p>
-            <p>
-              Overall, I aim to build systems that are functional, stable, and dependable in real-world use.
+              I use modern tools, including AI-assisted development, to learn faster and explore different approaches, while reviewing and refining my work to improve consistency and reliability. Overall, I aim to build systems that are functional, stable, and dependable in real-world use.
             </p>
           </motion.div>
         </div>
