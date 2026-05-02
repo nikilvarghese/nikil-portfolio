@@ -20,10 +20,14 @@ export const About = () => {
             className="space-y-6 text-slate-300 text-lg leading-relaxed relative z-10"
           >
             <p>
-              I am a dedicated Full-Stack Developer with comprehensive experience in building scalable application architectures. My development philosophy is deeply rooted in system reliability, where I prioritize rigorous testing and systematic debugging throughout the development lifecycle to ensure robust performance.
+              I enjoy working on practical web projects and exploring how systems behave in different situations. While building applications, I focus on making sure everything works as expected, from basic functionality to how the system handles edge cases and unexpected inputs.
+
+              I’ve developed a strong interest in the small issues that can affect performance or user experience. Because of that, I spend time testing features, validating data, and carefully debugging problems. I’m not just interested in fixing issues quickly. I prefer understanding why they happen and how they can be prevented in the future.
             </p>
             <p>
-              Beyond simply writing code, I focus heavily on understanding real-world deployment challenges and effectively managing edge cases. By anticipating potential failure points and implementing resilient error handling strategies, I build digital solutions that not only meet business requirements but maintain stability in unpredictable production environments.
+              In my projects, I’ve used modern tools, including AI-assisted development, to learn faster and try different approaches. At the same time, I review, test, and refine what I build. This has helped me develop a habit of checking workflows, identifying inconsistencies, and improving overall reliability.
+
+              Overall, I aim to build systems that are functional, stable, and dependable in real-world use.
             </p>
           </motion.div>
         </div>
