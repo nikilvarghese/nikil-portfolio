@@ -57,7 +57,7 @@ export const Contact = () => {
         >
           <div className="flex gap-6">
             <a 
-              href="https://github.com/secretphoenix1" 
+              href="https://github.com/nikilvarghese" 
               target="_blank" 
               rel="noopener noreferrer"
               className="flex items-center gap-2 hover:text-blue-400 transition-colors text-base font-medium"

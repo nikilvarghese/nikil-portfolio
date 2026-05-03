@@ -112,7 +112,7 @@ export const Projects = () => {
                   <ArrowTopRightOnSquareIcon className="w-5 h-5" />
                   Live Demo
                 </Button>
-                <Button variant="outline" href="https://github.com/secretphoenix1/Worklance" target="_blank" rel="noopener noreferrer" className="gap-2">
+                <Button variant="outline" href="https://github.com/nikilvarghese/Worklance" target="_blank" rel="noopener noreferrer" className="gap-2">
                   <CodeBracketIcon className="w-5 h-5" />
                   GitHub Repo
                 </Button>
