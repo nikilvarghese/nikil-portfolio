@@ -2,14 +2,84 @@ import { SectionHeading } from '../components/SectionHeading';
 import { motion } from 'framer-motion';
 
 const skills = [
-  { category: 'Frontend', items: ['React', 'TypeScript', 'Tailwind CSS', 'React Router', 'Axios'] },
-  { category: 'Backend', items: ['Node.js', 'Express.js', 'REST APIs', 'JWT Authentication'] },
-  { category: 'Database', items: ['MongoDB', 'Mongoose'] },
-  { category: 'Authentication', items: ['JWT', 'Google OAuth', 'Email OTP'] },
-  { category: 'Quality & Testing', items: ['Manual Testing', 'API Testing (Postman)', 'Bug Tracking', 'User Flow Validation'] },
-  { category: 'Tools & Deployment', items: ['Git', 'Nodemailer', 'Multer', 'Render'] },
-  { category: 'Game Server Development', items: ['Minecraft Server Development', 'Spigot / PaperMC', 'Plugin Configuration & Integration', 'Skript (custom logic scripting)', 'Multiverse (multi-world management)', 'EssentialsX (core server features)', 'Vault (economy integration)', 'GeyserMC (Java + Bedrock compatibility)'] },
-  { category: 'System Design & Architecture', items: ['Role-based access control', 'Validation systems', 'API integration', 'Modular architecture', 'Real-world debugging & edge-case handling'] },
+  {
+    category: 'Frontend',
+    items: [
+      'React',
+      'TypeScript',
+      'Tailwind CSS',
+      'React Router',
+      'Axios (API Integration)'
+    ]
+  },
+  {
+    category: 'Backend',
+    items: [
+      'Node.js',
+      'Express.js',
+      'REST API Design & Development',
+      'Auth Flow Design (JWT / OAuth)',
+      'Role-based Access Control',
+      'File Upload Handling (Multer)'
+    ]
+  },
+  {
+    category: 'Database',
+    items: [
+      'MongoDB',
+      'Mongoose (Schema Design & Validation)'
+    ]
+  },
+  {
+    category: 'Authentication',
+    items: [
+      'JWT Authentication',
+      'Google OAuth',
+      'Email OTP Verification (Nodemailer)'
+    ]
+  },
+  {
+    category: 'Quality & Testing',
+    items: [
+      'Manual Testing',
+      'API Testing (Postman)',
+      'Debugging & Issue Tracking',
+      'User Flow Validation',
+      'Error Handling'
+    ]
+  },
+  {
+    category: 'Tools & Deployment',
+    items: [
+      'Git',
+      'Render (Deployment)',
+      'Vercel',
+      'MongoDB Atlas'
+    ]
+  },
+  {
+    category: 'Game Server Development',
+    items: [
+      'Minecraft Server Development',
+      'Spigot / PaperMC',
+      'Plugin Configuration & Integration',
+      'Skript (Custom Server Logic)',
+      'Multiverse (Multi-World Management)',
+      'EssentialsX (Core Server Features)',
+      'Vault (Economy System Integration)',
+      'GeyserMC (Java + Bedrock Compatibility)'
+    ]
+  },
+  {
+    category: 'System Design & Architecture',
+    items: [
+      'Validation Systems',
+      'API Integration',
+      'Modular Architecture',
+      'Authentication & Authorization Flows',
+      'Real-world Debugging & Edge-case Handling'
+    ]
+  }
 ];
 
 const containerVariants = {
