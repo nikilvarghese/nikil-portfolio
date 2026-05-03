@@ -2,12 +2,14 @@ import { SectionHeading } from '../components/SectionHeading';
 import { motion } from 'framer-motion';
 
 const skills = [
-  { category: 'Quality & Testing', items: ['Manual Testing', 'API Testing (Postman)', 'Bug Tracking', 'User Flow Validation'] },
-  { category: 'Frontend', items: ['React', 'Tailwind CSS', 'React Router', 'Axios'] },
-  { category: 'Backend', items: ['Node.js', 'Express'] },
-  { category: 'Database', items: ['MongoDB (Mongoose)'] },
+  { category: 'Frontend', items: ['React', 'TypeScript', 'Tailwind CSS', 'React Router', 'Axios'] },
+  { category: 'Backend', items: ['Node.js', 'Express.js', 'REST APIs', 'JWT Authentication'] },
+  { category: 'Database', items: ['MongoDB', 'Mongoose'] },
   { category: 'Authentication', items: ['JWT', 'Google OAuth', 'Email OTP'] },
+  { category: 'Quality & Testing', items: ['Manual Testing', 'API Testing (Postman)', 'Bug Tracking', 'User Flow Validation'] },
   { category: 'Tools & Deployment', items: ['Git', 'Nodemailer', 'Multer', 'Render'] },
+  { category: 'Game Server Development', items: ['Minecraft Server Development', 'Spigot / PaperMC', 'Plugin Configuration & Integration', 'Skript (custom logic scripting)', 'Multiverse (multi-world management)', 'EssentialsX (core server features)', 'Vault (economy integration)', 'GeyserMC (Java + Bedrock compatibility)'] },
+  { category: 'System Design & Architecture', items: ['Role-based access control', 'Validation systems', 'API integration', 'Modular architecture', 'Real-world debugging & edge-case handling'] },
 ];
 
 const containerVariants = {

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { SectionHeading } from '../components/SectionHeading';
 import { Button } from '../components/Button';
 import { motion } from 'framer-motion';
@@ -6,7 +7,8 @@ import {
   CodeBracketIcon,
   ServerStackIcon,
   ChartBarIcon,
-  ShieldCheckIcon
+  ShieldCheckIcon,
+  ChevronDownIcon
 } from '@heroicons/react/24/outline';
 
 // Import Screenshots
@@ -21,6 +23,15 @@ import applyJob from "../assets/screenshots/applyjob.png";
 import userProfile from "../assets/screenshots/user-profile.png";
 import hrProfile from "../assets/screenshots/hr-profile.png";
 
+// Import Minecraft Screenshots
+import lobbySpawn from "../assets/Minecraft/lobby-spawn.jpeg";
+import lobbyNpc from "../assets/Minecraft/lobby-npc.jpeg";
+import skyblockNpc from "../assets/Minecraft/skyblock-npc1.jpeg";
+import skyblockGui from "../assets/Minecraft/skyblock-gui.png";
+import skyblockGui2 from "../assets/Minecraft/skyblock-gui2.png";
+import pvpLobby from "../assets/Minecraft/pvp-lobby.jpeg";
+import survivalLobby from "../assets/Minecraft/survival-lobby.jpeg";
+
 const ImageCard = ({ src, alt, caption }: { src: string, alt: string, caption: string }) => (
   <div className="group flex flex-col gap-3">
     <div className="rounded-xl overflow-hidden border border-slate-800/80 bg-[#0a0f1d] shadow-lg relative flex items-center justify-center">
@@ -31,19 +42,56 @@ const ImageCard = ({ src, alt, caption }: { src: string, alt: string, caption: s
   </div>
 );
 
+const ProjectHeading = ({ title, subtitle }: { title: string, subtitle: string }) => (
+  <div className="flex flex-col items-start text-left mb-2 mt-4">
+    <motion.h3 
+      initial={{ opacity: 0, x: -20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.5 }}
+      className="text-2xl md:text-3xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-violet-400 mb-2"
+    >
+      {title}
+    </motion.h3>
+    {subtitle && (
+      <motion.p 
+        initial={{ opacity: 0, x: -20 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.5, delay: 0.1 }}
+        className="text-slate-400 max-w-2xl text-base mb-4"
+      >
+        {subtitle}
+      </motion.p>
+    )}
+  </div>
+);
+
 export const Projects = () => {
+  const [worklanceOpen, setWorklanceOpen] = useState(false);
+  const [minecraftOpen, setMinecraftOpen] = useState(false);
+
   return (
     <section id="work" className="py-24 relative bg-slate-950">
       <div className="max-w-6xl mx-auto px-6">
         <SectionHeading 
-          title="Case Study: Worklance" 
-          subtitle="A deep dive into building a robust, role-based job portal system."
+          title="Featured Projects" 
+          subtitle="A selection of systems I've built focusing on real-world functionality, validation, and scalability."
         />
         
-        <div className="mt-12 space-y-16">
+        <div className="w-full h-px bg-slate-800/50 my-16" />
+
+        <div className="projects-container mt-12 space-y-32">
           
-          {/* Header & Project Intro */}
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8 lg:p-12 shadow-2xl relative overflow-hidden">
+          <div className="project-group">
+            <ProjectHeading 
+              title="Worklance" 
+              subtitle="A deep dive into building a robust, role-based job portal system."
+            />
+            
+            <div className="project-block mt-6">
+            {/* Header & Project Intro */}
+          <div className={`bg-slate-900 border ${worklanceOpen ? 'border-blue-500/50 shadow-[0_0_30px_rgba(59,130,246,0.15)]' : 'border-slate-800 shadow-2xl hover:border-slate-700'} transition-all duration-500 rounded-2xl p-8 lg:p-12 relative overflow-hidden group`}>
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-900/20 via-transparent to-transparent pointer-events-none" />
             <div className="relative z-10 flex flex-col md:flex-row md:items-start justify-between gap-8 mb-10">
               <div>
@@ -81,8 +129,17 @@ export const Projects = () => {
               <div className="absolute inset-0 bg-blue-500/0 group-hover:bg-blue-500/10 transition-colors duration-500 z-10 pointer-events-none" />
               <img src={landingPage} alt="Worklance Landing Page" className="w-full object-cover transform group-hover:scale-[1.02] transition-transform duration-700" />
             </motion.div>
+            
+            <div className="mt-10 flex justify-center w-full relative z-20">
+              <Button variant="primary" onClick={() => setWorklanceOpen(!worklanceOpen)} className="gap-2">
+                {worklanceOpen ? 'Hide Details' : 'View Details'}
+                <ChevronDownIcon className={`w-5 h-5 transition-transform duration-300 ${worklanceOpen ? 'rotate-180' : ''}`} />
+              </Button>
+            </div>
           </div>
 
+          <div className={`transition-all duration-700 ease-in-out overflow-hidden ${worklanceOpen ? 'max-h-[5000px] opacity-100 mt-16' : 'max-h-0 opacity-0 mt-0'}`}>
+            <div className="space-y-16">
           {/* Smart Validation / Protection Section (Priority Focus) */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -255,6 +312,159 @@ export const Projects = () => {
                 </ul>
               </div>
             </motion.div>
+          </div>
+          </div>
+          </div>
+          </div>
+          </div>
+
+          {/* Minecraft Multi-Game Server System */}
+          <div className="project-group">
+            <ProjectHeading 
+              title="Minecraft Multi-Game Server System" 
+              subtitle="A deep dive into building a scalable multi-world game server system with validation, permissions, and modular architecture."
+            />
+            
+            <div className="project-block mt-6">
+              <div className={`bg-slate-900 border ${minecraftOpen ? 'border-blue-500/50 shadow-[0_0_30px_rgba(59,130,246,0.15)]' : 'border-slate-800 shadow-2xl hover:border-slate-700'} transition-all duration-500 rounded-2xl p-8 lg:p-12 relative overflow-hidden group`}>
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-900/20 via-transparent to-transparent pointer-events-none" />
+            <div className="relative z-10 flex flex-col gap-8">
+              <div>
+                <h3 className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-4">Minecraft Multi-Game Server System</h3>
+                <p className="text-slate-300 text-lg font-medium leading-relaxed max-w-2xl mb-3">
+                  A scalable multi-world Minecraft server integrating Survival, SkyBlock, One Block, and PvP using plugin-based architecture and custom validation logic.
+                </p>
+                <p className="text-slate-400 text-base leading-relaxed max-w-2xl mb-6">
+                  Designed and deployed a multi-world Minecraft server system supporting multiple game modes within a unified environment. Implemented strict validation, role-based permissions, and command restrictions to ensure fair gameplay and system stability.
+                </p>
+                
+                <div className="bg-slate-900/80 p-5 rounded-xl border border-slate-800 mb-6 max-w-2xl">
+                  <h5 className="font-semibold text-slate-300 mb-3">Key Features</h5>
+                  <ul className="space-y-2">
+                    {[
+                      "Multi-world architecture using Multiverse (Survival, SkyBlock, One Block, PvP)",
+                      "Cross-platform support (Java + Bedrock via GeyserMC)",
+                      "Economy system integrated using Vault",
+                      "Land claim and trust-based permission system",
+                      "Custom command validation using Skript",
+                      "NPC-based navigation system"
+                    ].map((feature, idx) => (
+                      <li key={idx} className="text-sm text-slate-400 flex gap-2">
+                        <span className="text-blue-500">•</span> {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="flex flex-wrap gap-3 mt-6">
+                  {['Aternos', 'PaperMC', 'Multiverse', 'EssentialsX', 'Vault', 'GeyserMC', 'Skript'].map(tech => (
+                    <span key={tech} className="px-3 py-1 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full text-xs font-medium">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Hero Image */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="w-full mt-8 rounded-xl overflow-hidden border border-slate-700/50 shadow-2xl relative group bg-[#0a0f1d]"
+              >
+                <div className="absolute inset-0 bg-blue-500/0 group-hover:bg-blue-500/10 transition-colors duration-500 z-10 pointer-events-none" />
+                <img src={lobbySpawn} alt="Minecraft Lobby Spawn" className="w-full h-auto transform group-hover:scale-[1.02] transition-transform duration-700" />
+              </motion.div>
+
+              <div className="mt-10 flex justify-center w-full relative z-20">
+                <Button variant="primary" onClick={() => setMinecraftOpen(!minecraftOpen)} className="gap-2">
+                  {minecraftOpen ? 'Hide Details' : 'View Details'}
+                  <ChevronDownIcon className={`w-5 h-5 transition-transform duration-300 ${minecraftOpen ? 'rotate-180' : ''}`} />
+                </Button>
+              </div>
+            </div>
+          </div>
+
+          <div className={`transition-all duration-700 ease-in-out overflow-hidden ${minecraftOpen ? 'max-h-[5000px] opacity-100 mt-16' : 'max-h-0 opacity-0 mt-0'}`}>
+            <div className="space-y-16">
+          {/* SECTION 1: Game Mode Navigation */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="space-y-8 pt-8 border-t border-slate-800/50"
+          >
+            <div>
+              <h4 className="text-2xl font-bold text-slate-200">Game Mode Navigation</h4>
+              <p className="text-slate-400 mt-2 max-w-2xl">Central lobby system using NPC-based interaction to allow players to seamlessly switch between different game modes like Survival, SkyBlock, OneBlock, and PvP.</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <ImageCard 
+                src={lobbyNpc} 
+                alt="NPC-Based Mode Selection" 
+                caption="NPC-Based Mode Selection" 
+              />
+              <ImageCard 
+                src={skyblockNpc} 
+                alt="SkyBlock Entry System" 
+                caption="SkyBlock Entry System" 
+              />
+            </div>
+          </motion.div>
+
+          {/* SECTION 2: Custom GUI Systems */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="space-y-8 pt-8 border-t border-slate-800/50"
+          >
+            <div>
+              <h4 className="text-2xl font-bold text-slate-200">Custom GUI Systems</h4>
+              <p className="text-slate-400 mt-2 max-w-2xl">Implemented custom GUI interfaces for gameplay systems like OneBlock progression, shops, and missions to enhance user interaction and control.</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <ImageCard 
+                src={skyblockGui} 
+                alt="SkyBlock Main GUI System" 
+                caption="SkyBlock Main GUI System" 
+              />
+              <ImageCard 
+                src={skyblockGui2} 
+                alt="SkyBlock Mission & Economy Interface" 
+                caption="SkyBlock Mission & Economy Interface" 
+              />
+            </div>
+          </motion.div>
+
+          {/* SECTION 3: Multi-Mode Gameplay System */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="space-y-8 pt-8 border-t border-slate-800/50"
+          >
+            <div>
+              <h4 className="text-2xl font-bold text-slate-200">Multi-Mode Gameplay System</h4>
+              <p className="text-slate-400 mt-2 max-w-2xl">Designed multiple independent game modes including Survival, PvP, and SkyBlock with shared permissions, economy integration, and stable performance.</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <ImageCard 
+                src={pvpLobby} 
+                alt="PvP Lobby" 
+                caption="PvP Lobby" 
+              />
+              <ImageCard 
+                src={survivalLobby} 
+                alt="Survival World" 
+                caption="Survival World" 
+              />
+            </div>
+          </motion.div>
+            </div>
+          </div>
+
+          </div>
           </div>
 
         </div>

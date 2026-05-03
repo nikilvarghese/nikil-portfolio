@@ -1,6 +1,6 @@
 import { SectionHeading } from '../components/SectionHeading';
 import { motion } from 'framer-motion';
-import { EnvelopeIcon, PhoneIcon } from '@heroicons/react/24/outline';
+import { EnvelopeIcon, PhoneIcon, MapPinIcon } from '@heroicons/react/24/outline';
 import { CodeBracketIcon } from '@heroicons/react/24/solid';
 
 export const Contact = () => {
@@ -37,6 +37,15 @@ export const Contact = () => {
             </div>
             +91 8591766970
           </a>
+
+          <div 
+            className="flex items-center gap-4 text-xl md:text-2xl font-medium text-slate-300 hover:text-blue-400 transition-colors group cursor-default"
+          >
+            <div className="p-3 bg-slate-800 rounded-full group-hover:bg-blue-500/20 transition-colors border border-slate-700 group-hover:border-blue-500/50">
+              <MapPinIcon className="w-6 h-6 text-slate-400 group-hover:text-blue-400" />
+            </div>
+            Mumbai, India
+          </div>
         </motion.div>
 
         <motion.div

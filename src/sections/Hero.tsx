@@ -22,7 +22,7 @@ export const Hero = () => {
             Nikil Edwin Varghese
           </span>
         </motion.div>
-        
+
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -51,7 +51,7 @@ export const Hero = () => {
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <Button href="#work">
-            View Case Study
+            View Featured Projects
           </Button>
           <Button variant="outline" href="https://github.com/secretphoenix1" target="_blank" rel="noopener noreferrer" className="gap-2">
             <CodeBracketIcon className="w-5 h-5" />
