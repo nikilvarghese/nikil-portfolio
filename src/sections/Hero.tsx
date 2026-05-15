@@ -29,9 +29,9 @@ export const Hero = () => {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-6"
         >
-          Technical Analyst <br className="hidden md:block" />
+          Technical Analyst & <br className="hidden md:block" />
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-violet-400">
-            & Solution Specialist
+            Infrastructure-Focused Developer
           </span>
         </motion.h1>
 

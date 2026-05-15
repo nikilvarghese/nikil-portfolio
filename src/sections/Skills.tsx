@@ -9,7 +9,7 @@ const skills = [
       'TypeScript',
       'Tailwind CSS',
       'React Router',
-      'Axios (API Integration)'
+      'API Integration'
     ]
   },
   {
@@ -17,67 +17,61 @@ const skills = [
     items: [
       'Node.js',
       'Express.js',
-      'REST API Design & Development',
-      'Auth Flow Design (JWT / OAuth)',
-      'Role-based Access Control',
-      'File Upload Handling (Multer)'
+      'REST API Development',
+      'JWT Authentication',
+      'OAuth Authentication',
+      'Role-Based Access Control'
     ]
   },
   {
     category: 'Database',
     items: [
       'MongoDB',
-      'Mongoose (Schema Design & Validation)'
+      'Mongoose',
+      'Schema Design & Validation'
     ]
   },
   {
-    category: 'Authentication',
+    category: 'Infrastructure & DevOps',
     items: [
-      'JWT Authentication',
-      'Google OAuth',
-      'Email OTP Verification (Nodemailer)'
+      'VMware Workstation',
+      'Ubuntu Server Administration',
+      'Nginx Load Balancing',
+      'Apache Web Hosting',
+      'Bash Automation',
+      'Git & GitHub'
     ]
   },
   {
-    category: 'Quality & Testing',
+    category: 'Testing & Reliability',
     items: [
-      'Manual Testing',
-      'API Testing (Postman)',
-      'Debugging & Issue Tracking',
-      'User Flow Validation',
-      'Error Handling'
+      'API Testing',
+      'Form & User Flow Validation',
+      'Error Handling & Debugging',
+      'Edge Case Testing',
+      'System Reliability Validation'
     ]
   },
   {
-    category: 'Tools & Deployment',
+    category: 'Game Server Infrastructure',
     items: [
-      'Git',
-      'Render (Deployment)',
-      'Vercel',
-      'MongoDB Atlas'
+      'Minecraft Server Administration',
+      'PaperMC / Spigot',
+      'Multiverse Multi-World Systems',
+      'EssentialsX Configuration',
+      'Vault Economy Integration',
+      'GeyserMC Java-Bedrock Support',
+      'Skript-Based Automation',
+      'Permissions & Gameplay Systems'
     ]
   },
   {
-    category: 'Game Server Development',
+    category: 'Architecture & Systems',
     items: [
-      'Minecraft Server Development',
-      'Spigot / PaperMC',
-      'Plugin Configuration & Integration',
-      'Skript (Custom Server Logic)',
-      'Multiverse (Multi-World Management)',
-      'EssentialsX (Core Server Features)',
-      'Vault (Economy System Integration)',
-      'GeyserMC (Java + Bedrock Compatibility)'
-    ]
-  },
-  {
-    category: 'System Design & Architecture',
-    items: [
-      'Validation Systems',
-      'API Integration',
-      'Modular Architecture',
       'Authentication & Authorization Flows',
-      'Real-world Debugging & Edge-case Handling'
+      'Modular Backend Architecture',
+      'Multi-Service System Design',
+      'High-Availability Infrastructure'
     ]
   }
 ];
