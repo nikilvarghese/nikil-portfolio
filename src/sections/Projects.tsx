@@ -501,7 +501,7 @@ export const Projects = () => {
                     </div>
                   </div>
                   <div className="flex flex-col sm:flex-row gap-4 shrink-0">
-                    <Button variant="outline" href="https://github.com/nikilvarghese" target="_blank" rel="noopener noreferrer" className="gap-2">
+                    <Button variant="outline" href="https://github.com/nikilvarghese/virtualized-ha-infrastructure" target="_blank" rel="noopener noreferrer" className="gap-2">
                       <CodeBracketIcon className="w-5 h-5" />
                       GitHub Repo
                     </Button>
