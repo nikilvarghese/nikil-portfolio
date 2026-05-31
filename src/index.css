@@ -2,11 +2,40 @@
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  
+  --color-brand-bg-dark: #0f1115;
+  --color-brand-bg-light: #f8fafc;
+  
+  --color-brand-surface-dark: #161922;
+  --color-brand-surface-light: #ffffff;
+  
+  --color-brand-surface-hover-dark: #1e222e;
+  --color-brand-surface-hover-light: #f1f5f9;
+  
+  --color-brand-border-dark: #2a3140;
+  --color-brand-border-light: #e2e8f0;
+  
+  --color-brand-text-primary-dark: #f5f7fa;
+  --color-brand-text-primary-light: #0f172a;
+  
+  --color-brand-text-secondary-dark: #d6dce5;
+  --color-brand-text-secondary-light: #334155;
+  
+  --color-brand-text-tertiary-dark: #a3acb9;
+  --color-brand-text-tertiary-light: #64748b;
+  
+  --color-brand-accent-blue: #4f7df3;
+  --color-brand-accent-indigo: #5e6ad2;
 }
+
+@custom-variant dark (&:where(.dark, .dark *));
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    color-scheme: dark;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+  body {
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
   }
 }

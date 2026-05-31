@@ -80,21 +80,22 @@ const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.1 }
+    transition: { staggerChildren: 0.05 }
   }
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 12 },
   visible: {
-    opacity: 1, y: 0,
-    transition: { duration: 0.5 }
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.35 }
   }
 };
 
 export const Skills = () => {
   return (
-    <section id="skills" className="py-24 bg-slate-900 border-t border-slate-800/50">
+    <section id="skills" className="py-24 bg-brand-bg-light dark:bg-brand-bg-dark border-t border-brand-border-light dark:border-brand-border-dark transition-colors duration-300">
       <div className="max-w-6xl mx-auto px-6">
         <SectionHeading 
           title="Technical Expertise" 
@@ -111,15 +112,15 @@ export const Skills = () => {
             <motion.div 
               key={skillGroup.category} 
               variants={itemVariants}
-              className="bg-[#0f172a] border border-blue-500/40 rounded-xl p-6 transition-all duration-300 group hover:border-blue-400/60 shadow-[0_0_15px_rgba(59,130,246,0.1)] hover:shadow-[0_0_25px_rgba(59,130,246,0.2)] hover:-translate-y-1"
+              className="bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark rounded-xl p-6 transition-all duration-200 group hover:border-slate-350 dark:hover:border-slate-700 shadow-xs dark:shadow-none hover:shadow-sm hover:-translate-y-0.5"
             >
-              <h3 className="text-xl font-bold mb-5 pb-2 border-b border-blue-500/20 text-blue-200 transition-colors">
+              <h3 className="text-lg font-bold mb-5 pb-3 border-b border-brand-border-light dark:border-brand-border-dark/60 text-brand-text-primary-light dark:text-brand-text-primary-dark group-hover:text-brand-accent-blue dark:group-hover:text-brand-accent-indigo transition-colors">
                 {skillGroup.category}
               </h3>
               <ul className="space-y-3">
                 {skillGroup.items.map((skill) => (
-                  <li key={skill} className="flex items-center text-slate-300">
-                    <span className="w-1.5 h-1.5 rounded-full mr-3 shrink-0 bg-blue-400 shadow-[0_0_8px_rgba(96,165,250,0.8)]" />
+                  <li key={skill} className="flex items-center text-sm text-brand-text-secondary-light dark:text-brand-text-secondary-dark">
+                    <span className="w-1.5 h-1.5 rounded-full mr-3 shrink-0 bg-brand-accent-blue/60 dark:bg-brand-accent-indigo/60" />
                     {skill}
                   </li>
                 ))}

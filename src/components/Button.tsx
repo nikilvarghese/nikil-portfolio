@@ -20,12 +20,12 @@ export type ButtonProps = ButtonAsButton | ButtonAsAnchor;
 
 export const Button = React.forwardRef<HTMLElement, ButtonProps>(
   ({ className, variant = 'primary', isLoading, children, href, ...props }, ref) => {
-    const baseStyles = 'inline-flex items-center justify-center rounded-lg px-6 py-3 font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-950 disabled:opacity-50 disabled:pointer-events-none active:scale-[0.98]';
+    const baseStyles = 'inline-flex items-center justify-center rounded-lg px-5 py-2.5 font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-slate-950 disabled:opacity-50 disabled:pointer-events-none active:scale-[0.97]';
     
     const variants = {
-      primary: 'bg-gradient-to-r from-blue-500 to-violet-500 text-white hover:from-blue-400 hover:to-violet-400 focus:ring-blue-500 shadow-lg shadow-blue-500/25',
-      secondary: 'bg-slate-800 text-slate-200 hover:bg-slate-700 focus:ring-slate-500',
-      outline: 'border border-slate-700 bg-transparent text-slate-200 hover:bg-slate-800 focus:ring-slate-500'
+      primary: 'bg-slate-900 hover:bg-slate-800 text-white dark:bg-slate-100 dark:hover:bg-slate-200 dark:text-slate-950 focus:ring-slate-500 shadow-xs border border-transparent',
+      secondary: 'bg-slate-100 hover:bg-slate-200 text-slate-800 dark:bg-brand-surface-dark dark:hover:bg-brand-surface-hover-dark dark:text-brand-text-primary-dark border border-slate-200 dark:border-brand-border-dark focus:ring-slate-500',
+      outline: 'border border-brand-border-light dark:border-brand-border-dark bg-transparent text-brand-text-secondary-light dark:text-brand-text-secondary-dark hover:bg-brand-surface-hover-light dark:hover:bg-brand-surface-dark focus:ring-slate-500'
     };
 
     const combinedClasses = cn(baseStyles, variants[variant], className);

@@ -8,7 +8,7 @@ import { Contact } from './sections/Contact';
 
 function App() {
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-200 selection:bg-purple-500/30 font-sans">
+    <div className="min-h-screen bg-brand-bg-light text-brand-text-primary-light dark:bg-brand-bg-dark dark:text-brand-text-primary-dark selection:bg-brand-accent-blue/15 dark:selection:bg-brand-accent-indigo/20 selection:text-brand-accent-blue dark:selection:text-brand-accent-indigo font-sans transition-colors duration-300">
       <Navbar />
 
       <main>

@@ -28,7 +28,7 @@ export const ScrollToTop = () => {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.5 }}
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 p-3 rounded-full bg-slate-800/80 backdrop-blur-md border border-slate-700 text-slate-300 hover:text-white hover:bg-slate-700 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 z-50 shadow-lg shadow-black/50"
+          className="fixed bottom-8 right-8 p-3 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 z-50 shadow-sm dark:shadow-none"
           aria-label="Scroll to top"
         >
           <ChevronUpIcon className="h-6 w-6" />

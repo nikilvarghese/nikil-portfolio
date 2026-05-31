@@ -11,35 +11,35 @@ const LinkedInIcon = ({ className }: { className?: string }) => (
 
 export const Contact = () => {
   return (
-    <section id="contact" className="py-24 bg-slate-900 border-t border-slate-800/50">
+    <section id="contact" className="py-24 bg-brand-bg-light dark:bg-brand-bg-dark border-t border-brand-border-light dark:border-brand-border-dark transition-colors duration-300">
       <div className="max-w-3xl mx-auto px-6 text-center">
         <SectionHeading 
           title="Get In Touch" 
         />
         
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4 }}
           className="mt-12 flex flex-col items-center gap-6"
         >
           <a 
             href="mailto:nikiledwin6@gmail.com" 
-            className="flex items-center gap-4 text-xl md:text-2xl font-medium text-slate-300 hover:text-blue-400 transition-colors group"
+            className="flex items-center gap-4 text-lg md:text-xl font-medium text-brand-text-secondary-light hover:text-brand-accent-blue dark:text-brand-text-secondary-dark dark:hover:text-brand-accent-indigo transition-colors group cursor-pointer"
           >
-            <div className="p-3 bg-slate-800 rounded-full group-hover:bg-blue-500/20 transition-colors border border-slate-700 group-hover:border-blue-500/50">
-              <EnvelopeIcon className="w-6 h-6 text-slate-400 group-hover:text-blue-400" />
+            <div className="p-3 bg-brand-surface-light dark:bg-brand-surface-dark rounded-full group-hover:bg-brand-accent-blue/10 dark:group-hover:bg-brand-accent-indigo/20 transition-colors border border-brand-border-light dark:border-brand-border-dark shadow-xs dark:shadow-none group-hover:border-brand-accent-blue/30 dark:group-hover:border-brand-accent-indigo/30">
+              <EnvelopeIcon className="w-5 h-5 text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark group-hover:text-brand-accent-blue dark:group-hover:text-brand-accent-indigo" />
             </div>
             nikiledwin6@gmail.com
           </a>
 
           <a 
             href="tel:8591766970" 
-            className="flex items-center gap-4 text-xl md:text-2xl font-medium text-slate-300 hover:text-blue-400 transition-colors group"
+            className="flex items-center gap-4 text-lg md:text-xl font-medium text-brand-text-secondary-light hover:text-brand-accent-blue dark:text-brand-text-secondary-dark dark:hover:text-brand-accent-indigo transition-colors group cursor-pointer"
           >
-            <div className="p-3 bg-slate-800 rounded-full group-hover:bg-blue-500/20 transition-colors border border-slate-700 group-hover:border-blue-500/50">
-              <PhoneIcon className="w-6 h-6 text-slate-400 group-hover:text-blue-400" />
+            <div className="p-3 bg-brand-surface-light dark:bg-brand-surface-dark rounded-full group-hover:bg-brand-accent-blue/10 dark:group-hover:bg-brand-accent-indigo/20 transition-colors border border-brand-border-light dark:border-brand-border-dark shadow-xs dark:shadow-none group-hover:border-brand-accent-blue/30 dark:group-hover:border-brand-accent-indigo/30">
+              <PhoneIcon className="w-5 h-5 text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark group-hover:text-brand-accent-blue dark:group-hover:text-brand-accent-indigo" />
             </div>
             +91 8591766970
           </a>
@@ -48,19 +48,19 @@ export const Contact = () => {
             href="https://www.linkedin.com/in/nikil-varghese-956281255/" 
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-4 text-xl md:text-2xl font-medium text-slate-300 hover:text-blue-400 transition-colors group"
+            className="flex items-center gap-4 text-lg md:text-xl font-medium text-brand-text-secondary-light hover:text-brand-accent-blue dark:text-brand-text-secondary-dark dark:hover:text-brand-accent-indigo transition-colors group cursor-pointer"
           >
-            <div className="p-3 bg-slate-800 rounded-full group-hover:bg-blue-500/20 transition-colors border border-slate-700 group-hover:border-blue-500/50">
-              <LinkedInIcon className="w-6 h-6 text-slate-400 group-hover:text-blue-400" />
+            <div className="p-3 bg-brand-surface-light dark:bg-brand-surface-dark rounded-full group-hover:bg-brand-accent-blue/10 dark:group-hover:bg-brand-accent-indigo/20 transition-colors border border-brand-border-light dark:border-brand-border-dark shadow-xs dark:shadow-none group-hover:border-brand-accent-blue/30 dark:group-hover:border-brand-accent-indigo/30">
+              <LinkedInIcon className="w-5 h-5 text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark group-hover:text-brand-accent-blue dark:group-hover:text-brand-accent-indigo" />
             </div>
             LinkedIn
           </a>
 
           <div 
-            className="flex items-center gap-4 text-xl md:text-2xl font-medium text-slate-300 hover:text-blue-400 transition-colors group cursor-default"
+            className="flex items-center gap-4 text-lg md:text-xl font-medium text-brand-text-secondary-light dark:text-brand-text-secondary-dark cursor-default"
           >
-            <div className="p-3 bg-slate-800 rounded-full group-hover:bg-blue-500/20 transition-colors border border-slate-700 group-hover:border-blue-500/50">
-              <MapPinIcon className="w-6 h-6 text-slate-400 group-hover:text-blue-400" />
+            <div className="p-3 bg-brand-surface-light dark:bg-brand-surface-dark rounded-full border border-brand-border-light dark:border-brand-border-dark shadow-xs dark:shadow-none">
+              <MapPinIcon className="w-5 h-5 text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark" />
             </div>
             Mumbai, India
           </div>
@@ -70,21 +70,21 @@ export const Contact = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-24 pt-8 border-t border-slate-800 text-slate-500 text-sm flex flex-col items-center gap-6"
+          transition={{ duration: 0.4, delay: 0.2 }}
+          className="mt-20 pt-8 border-t border-brand-border-light dark:border-brand-border-dark text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark text-sm flex flex-col items-center gap-6"
         >
           <div className="flex gap-6">
             <a 
               href="https://github.com/nikilvarghese" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="flex items-center gap-2 hover:text-blue-400 transition-colors text-base font-medium"
+              className="flex items-center gap-2 text-brand-text-secondary-light hover:text-brand-accent-blue dark:text-brand-text-secondary-dark dark:hover:text-brand-accent-indigo transition-colors text-base font-semibold cursor-pointer"
             >
-              <CodeBracketIcon className="w-5 h-5" />
+              <CodeBracketIcon className="w-4 h-4" />
               GitHub
             </a>
           </div>
-          <p className="tracking-wide text-slate-600">&copy; {new Date().getFullYear()} Nikil Edwin Varghese. All rights reserved.</p>
+          <p className="tracking-wide text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark">&copy; {new Date().getFullYear()} Nikil Edwin Varghese. All rights reserved.</p>
         </motion.div>
       </div>
     </section>

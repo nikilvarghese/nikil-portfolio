@@ -3,21 +3,19 @@ import { motion } from 'framer-motion';
 
 export const About = () => {
   return (
-    <section id="about" className="py-24 relative">
+    <section id="about" className="py-24 relative bg-brand-bg-light dark:bg-brand-bg-dark transition-colors duration-300">
       <div className="max-w-4xl mx-auto px-6">
         <SectionHeading
           title="About Me"
         />
 
-        <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-8 md:p-12 backdrop-blur-sm relative overflow-hidden shadow-xl">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/5 rounded-full blur-[80px]" />
-
+        <div className="bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark rounded-xl p-8 md:p-12 relative overflow-hidden shadow-xs transition-colors duration-300">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="space-y-6 text-slate-300 text-lg leading-relaxed relative z-10"
+            transition={{ duration: 0.4 }}
+            className="space-y-6 text-brand-text-secondary-light dark:text-brand-text-secondary-dark text-base md:text-lg leading-relaxed relative z-10 font-normal"
           >
             <p>
               I enjoy working on practical web projects and exploring how systems behave in different situations. While building applications, I focus on making sure everything works as expected, including how the system handles edge cases and unexpected inputs.
