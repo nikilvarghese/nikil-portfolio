@@ -105,7 +105,7 @@ export const Navbar = () => {
           : 'bg-transparent border-b border-transparent py-5'
       }`}
     >
-      <div className="max-w-6xl mx-auto px-6 flex items-center justify-between gap-4 w-full">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between gap-4 w-full">
         {/* Brand Logo & Name */}
         <a 
           href="#" 
@@ -113,7 +113,7 @@ export const Navbar = () => {
           aria-label="Nikil Varghese Home"
         >
           <NavbarLogo className="h-10 w-auto shrink-0 transition-transform duration-200 group-hover:scale-[1.02]" alt="" />
-          <span className="whitespace-nowrap shrink-0">Nikil Varghese</span>
+          <span className="hidden min-[480px]:inline whitespace-nowrap shrink-0">Nikil Varghese</span>
         </a>
 
         {/* Desktop Centered Navigation */}
@@ -215,7 +215,7 @@ export const Navbar = () => {
             className="lg:hidden absolute top-full left-0 right-0 bg-brand-surface-light dark:bg-[#0f0f11] border-b border-brand-border-light dark:border-brand-border-dark/80 shadow-md"
             aria-label="Main mobile navigation"
           >
-            <div className="flex flex-col px-6 py-5 space-y-4">
+            <div className="flex flex-col px-4 sm:px-6 py-5 space-y-4">
               {navItems.map((item) => {
                 const isLinkActive = item.href.slice(1) === activeSection;
                 return (
