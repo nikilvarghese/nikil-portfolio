@@ -44,7 +44,7 @@ export const Hero = () => {
             className="space-y-2"
           >
             <span className="text-xs font-semibold text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark uppercase tracking-wider block">
-              Nikil Edwin Varghese
+              Nikil Varghese
             </span>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-brand-text-primary-light dark:text-brand-text-primary-dark leading-[1.2]">
               Technical Analyst & <br />
