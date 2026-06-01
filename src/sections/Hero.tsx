@@ -13,26 +13,26 @@ const focusAreas = [
 
 export const Hero = () => {
   return (
-    <section className="relative min-h-[90vh] flex items-center pt-28 pb-16 overflow-hidden bg-brand-bg-light dark:bg-brand-bg-dark transition-colors duration-200">
+    <section className="relative min-h-[90vh] flex flex-col justify-center pt-28 pb-16 overflow-hidden bg-brand-bg-light dark:bg-brand-bg-dark transition-colors duration-200">
       {/* Editorial Grid */}
-      <div className="max-w-6xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center z-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center z-10">
 
         {/* Left Column: Headline and Focus */}
-        <div className="lg:col-span-7 flex flex-col items-start text-left border-l border-brand-border-light dark:border-brand-border-dark/60 pl-6 sm:pl-8">
+        <div className="lg:col-span-7 flex flex-col items-start text-left border-l border-brand-border-light dark:border-brand-border-dark/60 pl-4 sm:pl-8">
 
           {/* Status Badge */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
-            className="mb-6"
+            className="mb-6 max-w-full"
           >
-            <span className="inline-flex items-center gap-2 py-1 px-3.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:bg-emerald-500/5 dark:text-emerald-400 border border-emerald-500/20 text-xs font-semibold tracking-wide">
-              <span className="relative flex h-2 w-2">
+            <span className="inline-flex items-start sm:items-center gap-2 py-1.5 px-3.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:bg-emerald-500/5 dark:text-emerald-400 border border-emerald-500/20 text-xs font-semibold tracking-wide max-w-full">
+              <span className="relative flex h-2 w-2 shrink-0 mt-1 sm:mt-0">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
               </span>
-              Available for IT, Support & Development Roles
+              <span className="break-words text-left">Available for IT, Support & Development Roles</span>
             </span>
           </motion.div>
 
@@ -47,9 +47,9 @@ export const Hero = () => {
               Nikil Varghese
             </span>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-brand-text-primary-light dark:text-brand-text-primary-dark leading-[1.2]">
-              IT, Support & <br />
+              IT Graduate & <br />
               <span className="font-semibold text-brand-accent-indigo">
-                Development Roles
+                Developer
               </span>
             </h1>
           </motion.div>
@@ -82,7 +82,7 @@ export const Hero = () => {
         </div>
 
         {/* Right Column: Clean Portrait Frame */}
-        <div className="lg:col-span-5 flex justify-center items-center">
+        <div className="hidden md:flex lg:col-span-5 justify-center items-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -102,7 +102,7 @@ export const Hero = () => {
       </div>
 
       {/* Areas of Focus Grid */}
-      <div className="max-w-6xl mx-auto px-6 w-full z-10 border-t border-brand-border-light dark:border-brand-border-dark/50 pt-12 mt-16">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full z-10 border-t border-brand-border-light dark:border-brand-border-dark/50 pt-12 mt-16">
         <ScrollReveal>
           <h2 className="text-xs font-bold text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark uppercase tracking-wider mb-6">
             Areas of Focus
