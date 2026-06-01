@@ -281,14 +281,16 @@ export const Projects = () => {
                     className="max-w-full max-h-full object-contain transform group-hover:scale-[1.02] transition-transform duration-500 rounded-lg shadow-sm"
                   />
                   
-                  <span className={`absolute top-4 left-4 z-20 px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider rounded-md border flex items-center gap-1.5 ${catStyle.bg} ${catStyle.text}`}>
-                    <span className={`w-1.5 h-1.5 rounded-full ${catStyle.dot}`} />
-                    {project.category}
-                  </span>
                 </div>
 
                 {/* Info Body */}
-                <div className="p-6 flex flex-col flex-grow">
+                <div className="p-6 flex flex-col flex-grow text-left">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className={`px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider rounded-md border flex items-center gap-1.5 ${catStyle.bg} ${catStyle.text}`}>
+                      <span className={`w-1.5 h-1.5 rounded-full ${catStyle.dot}`} />
+                      {project.category}
+                    </span>
+                  </div>
                   <h3 
                     className="text-lg font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark group-hover:text-brand-accent-indigo transition-colors cursor-pointer"
                     onClick={() => setSelectedProject(project)}

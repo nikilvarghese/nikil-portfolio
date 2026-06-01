@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import { Button } from '../components/Button';
 import { CodeBracketIcon } from '@heroicons/react/24/solid';
-import { Logo } from '../components/Logo';
 import { ScrollReveal } from '../components/ScrollReveal';
 
 const focusAreas = [
@@ -13,11 +12,11 @@ const focusAreas = [
 
 export const Hero = () => {
   return (
-    <section className="relative min-h-[90vh] flex flex-col justify-center pt-28 pb-16 overflow-hidden bg-brand-bg-light dark:bg-brand-bg-dark transition-colors duration-200">
-      {/* Editorial Grid */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center z-10">
+    <section className="relative min-h-[90vh] flex items-center pt-28 pb-16 overflow-hidden bg-brand-bg-light dark:bg-brand-bg-dark transition-colors duration-200">
+      {/* Main Grid Wrapper */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start z-10">
 
-        {/* Left Column: Headline and Focus */}
+        {/* Left Column: Headline and CTAs */}
         <div className="lg:col-span-7 flex flex-col items-start text-left border-l border-brand-border-light dark:border-brand-border-dark/60 pl-4 sm:pl-8">
 
           {/* Status Badge */}
@@ -81,52 +80,34 @@ export const Hero = () => {
           </motion.div>
         </div>
 
-        {/* Right Column: Clean Portrait Frame */}
-        <div className="hidden md:flex lg:col-span-5 justify-center items-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="relative w-72 sm:w-80 aspect-square group"
-          >
-            {/* Minimal Outer Border Accent */}
-            <div className="absolute -inset-1.5 rounded-2xl border border-brand-border-light dark:border-brand-border-dark/60 opacity-60 pointer-events-none transition-transform duration-300 ease-out group-hover:scale-[1.02]" />
-
-            {/* Main Logo Card Container */}
-            <div className="logo-card w-full h-full rounded-2xl flex items-center justify-center p-6 select-none transition-transform duration-300 ease-out group-hover:scale-[1.02]">
-              <Logo className="w-[60%] h-[60%] object-contain" alt="Nikil Varghese Logo" />
-            </div>
-          </motion.div>
-        </div>
-
-      </div>
-
-      {/* Areas of Focus Grid */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full z-10 border-t border-brand-border-light dark:border-brand-border-dark/50 pt-12 mt-16">
-        <ScrollReveal>
-          <h2 className="text-xs font-bold text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark uppercase tracking-wider mb-6">
-            Areas of Focus
-          </h2>
-        </ScrollReveal>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {focusAreas.map((area, idx) => (
-            <ScrollReveal key={idx} delay={idx * 100} className="flex">
-              <div
-                className="p-5 w-full rounded-xl border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light/50 dark:bg-brand-surface-dark/40 hover:border-slate-350 dark:hover:border-zinc-800 transition-all duration-300 shadow-xs flex flex-col gap-2 group"
-              >
-                <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-brand-accent-indigo shrink-0 transition-transform duration-300 group-hover:scale-125" />
-                  <h3 className="text-sm font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark group-hover:text-brand-accent-indigo transition-colors duration-255">
-                    {area.title}
-                  </h3>
+        {/* Right Column: Areas of Focus Grid */}
+        <div className="lg:col-span-5 w-full border-t border-brand-border-light dark:border-brand-border-dark/50 pt-12 lg:pt-0 lg:border-t-0 lg:border-l border-brand-border-light dark:border-brand-border-dark/60 lg:pl-12 flex flex-col">
+          <ScrollReveal>
+            <h2 className="text-xs font-bold text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark uppercase tracking-wider mb-6">
+              Areas of Focus
+            </h2>
+          </ScrollReveal>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
+            {focusAreas.map((area, idx) => (
+              <ScrollReveal key={idx} delay={idx * 100} className="flex">
+                <div
+                  className="p-5 w-full rounded-xl border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light/50 dark:bg-brand-surface-dark/40 hover:border-slate-350 dark:hover:border-zinc-800 transition-all duration-300 shadow-xs flex flex-col gap-2 group"
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-brand-accent-indigo shrink-0 transition-transform duration-300 group-hover:scale-125" />
+                    <h3 className="text-sm font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark group-hover:text-brand-accent-indigo transition-colors duration-255">
+                      {area.title}
+                    </h3>
+                  </div>
+                  <p className="text-xs text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-relaxed font-normal">
+                    {area.desc}
+                  </p>
                 </div>
-                <p className="text-xs text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-relaxed font-normal">
-                  {area.desc}
-                </p>
-              </div>
-            </ScrollReveal>
-          ))}
+              </ScrollReveal>
+            ))}
+          </div>
         </div>
+
       </div>
     </section>
   );
