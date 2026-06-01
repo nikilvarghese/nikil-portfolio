@@ -47,9 +47,9 @@ export const Hero = () => {
               Nikil Varghese
             </span>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-brand-text-primary-light dark:text-brand-text-primary-dark leading-[1.2]">
-              Technical Analyst & <br />
+              IT, Support & <br />
               <span className="font-semibold text-brand-accent-indigo">
-                Developer
+                Development Roles
               </span>
             </h1>
           </motion.div>
@@ -111,7 +111,7 @@ export const Hero = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {focusAreas.map((area, idx) => (
             <ScrollReveal key={idx} delay={idx * 100} className="flex">
-              <div 
+              <div
                 className="p-5 w-full rounded-xl border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light/50 dark:bg-brand-surface-dark/40 hover:border-slate-350 dark:hover:border-zinc-800 transition-all duration-300 shadow-xs flex flex-col gap-2 group"
               >
                 <div className="flex items-center gap-2">
