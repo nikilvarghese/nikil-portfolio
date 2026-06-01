@@ -2,30 +2,32 @@
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   
-  --color-brand-bg-dark: #0f1115;
-  --color-brand-bg-light: #f8fafc;
+  --color-brand-bg-dark: #09090b;
+  --color-brand-bg-light: #fafafa;
   
-  --color-brand-surface-dark: #161922;
+  --color-brand-surface-dark: #121215;
   --color-brand-surface-light: #ffffff;
   
-  --color-brand-surface-hover-dark: #1e222e;
-  --color-brand-surface-hover-light: #f1f5f9;
+  --color-brand-surface-hover-dark: #18181b;
+  --color-brand-surface-hover-light: #f4f4f5;
   
-  --color-brand-border-dark: #2a3140;
-  --color-brand-border-light: #e2e8f0;
+  --color-brand-border-dark: #1f1f23;
+  --color-brand-border-light: #e4e4e7;
   
-  --color-brand-text-primary-dark: #f5f7fa;
-  --color-brand-text-primary-light: #0f172a;
+  --color-brand-text-primary-dark: #fafafa;
+  --color-brand-text-primary-light: #09090b;
   
-  --color-brand-text-secondary-dark: #d6dce5;
-  --color-brand-text-secondary-light: #334155;
+  --color-brand-text-secondary-dark: #a1a1aa;
+  --color-brand-text-secondary-light: #52525b;
   
-  --color-brand-text-tertiary-dark: #a3acb9;
-  --color-brand-text-tertiary-light: #64748b;
+  --color-brand-text-tertiary-dark: #71717a;
+  --color-brand-text-tertiary-light: #a1a1aa;
   
-  --color-brand-accent-blue: #4f7df3;
-  --color-brand-accent-indigo: #5e6ad2;
+  --color-brand-accent-blue: #3b82f6;
+  --color-brand-accent-indigo: #6366f1;
+  --color-brand-accent-violet: #8b5cf6;
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
@@ -33,9 +35,35 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
+    scroll-padding-top: 5rem;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
   }
   body {
-    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    @apply antialiased selection:bg-brand-accent-indigo/25 selection:text-brand-accent-indigo;
   }
 }
+
+/* Premium Logo Card Showcase Styling */
+.logo-card {
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  background: linear-gradient(135deg, #ffffff 0%, #fcfcfc 100%);
+  box-shadow: 
+    0 8px 30px rgba(0, 0, 0, 0.02),
+    0 1px 2px rgba(0, 0, 0, 0.01),
+    inset 0 1px 1px rgba(255, 255, 255, 0.9),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.02);
+  transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+:where(.dark) .logo-card {
+  border-color: rgba(255, 255, 255, 0.03);
+  background: linear-gradient(135deg, #0d0d0f 0%, #09090b 100%);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.45),
+    0 1px 3px rgba(0, 0, 0, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.03),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.3);
+}
+
+

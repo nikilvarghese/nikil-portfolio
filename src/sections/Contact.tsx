@@ -1,6 +1,13 @@
-import { SectionHeading } from '../components/SectionHeading';
-import { motion } from 'framer-motion';
-import { EnvelopeIcon, PhoneIcon, MapPinIcon } from '@heroicons/react/24/outline';
+import { useState } from 'react';
+import { ScrollReveal } from '../components/ScrollReveal';
+import { 
+  EnvelopeIcon, 
+  PhoneIcon, 
+  MapPinIcon, 
+  ClockIcon,
+  CheckIcon,
+  DocumentDuplicateIcon
+} from '@heroicons/react/24/outline';
 import { CodeBracketIcon } from '@heroicons/react/24/solid';
 
 const LinkedInIcon = ({ className }: { className?: string }) => (
@@ -10,82 +17,145 @@ const LinkedInIcon = ({ className }: { className?: string }) => (
 );
 
 export const Contact = () => {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText('nikiledwin6@gmail.com');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
-    <section id="contact" className="py-24 bg-brand-bg-light dark:bg-brand-bg-dark border-t border-brand-border-light dark:border-brand-border-dark transition-colors duration-300">
-      <div className="max-w-3xl mx-auto px-6 text-center">
-        <SectionHeading 
-          title="Get In Touch" 
-        />
+    <section id="contact" className="py-24 bg-brand-bg-light dark:bg-[#070709] border-t border-brand-border-light dark:border-brand-border-dark/60 transition-colors duration-200">
+      <div className="max-w-6xl mx-auto px-6">
         
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
-          className="mt-12 flex flex-col items-center gap-6"
-        >
-          <a 
-            href="mailto:nikiledwin6@gmail.com" 
-            className="flex items-center gap-4 text-lg md:text-xl font-medium text-brand-text-secondary-light hover:text-brand-accent-blue dark:text-brand-text-secondary-dark dark:hover:text-brand-accent-indigo transition-colors group cursor-pointer"
-          >
-            <div className="p-3 bg-brand-surface-light dark:bg-brand-surface-dark rounded-full group-hover:bg-brand-accent-blue/10 dark:group-hover:bg-brand-accent-indigo/20 transition-colors border border-brand-border-light dark:border-brand-border-dark shadow-xs dark:shadow-none group-hover:border-brand-accent-blue/30 dark:group-hover:border-brand-accent-indigo/30">
-              <EnvelopeIcon className="w-5 h-5 text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark group-hover:text-brand-accent-blue dark:group-hover:text-brand-accent-indigo" />
-            </div>
-            nikiledwin6@gmail.com
-          </a>
+        {/* Main Card Block */}
+        <ScrollReveal>
+          <div className="bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark rounded-xl p-8 md:p-12 relative overflow-hidden shadow-xs">
+          
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+            
+            {/* Left Info: Status & Headline */}
+            <div className="lg:col-span-7 space-y-6">
+              <span className="text-xs font-semibold text-brand-accent-indigo uppercase tracking-wider block">
+                Contact
+              </span>
+              
+              <h2 className="text-3xl sm:text-4xl font-light tracking-tight text-brand-text-primary-light dark:text-brand-text-primary-dark leading-tight">
+                Let's discuss how we <br />
+                <span className="font-semibold text-brand-text-primary-light dark:text-brand-text-primary-dark">
+                  can build reliable solutions.
+                </span>
+              </h2>
+              
+              <p className="text-xs sm:text-sm text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-relaxed font-normal max-w-md">
+                I am currently open to full-time opportunities and strategic projects. Feel free to reach out to schedule a technical chat.
+              </p>
 
-          <a 
-            href="tel:8591766970" 
-            className="flex items-center gap-4 text-lg md:text-xl font-medium text-brand-text-secondary-light hover:text-brand-accent-blue dark:text-brand-text-secondary-dark dark:hover:text-brand-accent-indigo transition-colors group cursor-pointer"
-          >
-            <div className="p-3 bg-brand-surface-light dark:bg-brand-surface-dark rounded-full group-hover:bg-brand-accent-blue/10 dark:group-hover:bg-brand-accent-indigo/20 transition-colors border border-brand-border-light dark:border-brand-border-dark shadow-xs dark:shadow-none group-hover:border-brand-accent-blue/30 dark:group-hover:border-brand-accent-indigo/30">
-              <PhoneIcon className="w-5 h-5 text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark group-hover:text-brand-accent-blue dark:group-hover:text-brand-accent-indigo" />
+              {/* Status Indicator */}
+              <div className="flex items-center gap-3 py-2 px-4 bg-brand-bg-light dark:bg-[#09090b] border border-brand-border-light dark:border-brand-border-dark/60 rounded-lg w-fit">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent-indigo opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-accent-indigo"></span>
+                </span>
+                <span className="text-[10px] font-semibold text-brand-text-secondary-light dark:text-brand-text-secondary-dark">
+                  OPEN TO FULL-TIME OPPORTUNITIES
+                </span>
+              </div>
             </div>
-            +91 8591766970
-          </a>
 
-          <a 
-            href="https://www.linkedin.com/in/nikil-varghese-956281255/" 
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-4 text-lg md:text-xl font-medium text-brand-text-secondary-light hover:text-brand-accent-blue dark:text-brand-text-secondary-dark dark:hover:text-brand-accent-indigo transition-colors group cursor-pointer"
-          >
-            <div className="p-3 bg-brand-surface-light dark:bg-brand-surface-dark rounded-full group-hover:bg-brand-accent-blue/10 dark:group-hover:bg-brand-accent-indigo/20 transition-colors border border-brand-border-light dark:border-brand-border-dark shadow-xs dark:shadow-none group-hover:border-brand-accent-blue/30 dark:group-hover:border-brand-accent-indigo/30">
-              <LinkedInIcon className="w-5 h-5 text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark group-hover:text-brand-accent-blue dark:group-hover:text-brand-accent-indigo" />
-            </div>
-            LinkedIn
-          </a>
+            {/* Right Connection Rows */}
+            <div className="lg:col-span-5 w-full space-y-3 pt-6 lg:pt-0">
+              
+              {/* Email Connection */}
+              <div className="flex items-center justify-between p-4 bg-brand-bg-light dark:bg-[#09090b] border border-brand-border-light dark:border-brand-border-dark/60 rounded-xl hover:border-brand-accent-indigo/35 dark:hover:border-brand-accent-indigo/35 transition-all">
+                <a 
+                  href="mailto:nikiledwin6@gmail.com" 
+                  className="flex items-center gap-3.5 group text-xs sm:text-sm font-semibold text-brand-text-primary-light dark:text-brand-text-primary-dark hover:text-brand-accent-indigo transition-colors"
+                >
+                  <EnvelopeIcon className="w-4 h-4 text-brand-text-tertiary-light group-hover:text-brand-accent-indigo transition-colors shrink-0" />
+                  nikiledwin6@gmail.com
+                </a>
+                
+                <button
+                  onClick={handleCopyEmail}
+                  className="px-3 py-1 bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark hover:bg-brand-surface-hover-light dark:hover:bg-brand-surface-hover-dark/40 text-[10px] text-brand-text-secondary-light dark:text-brand-text-secondary-dark rounded-md font-semibold cursor-pointer transition-colors flex items-center gap-1.5 min-w-[70px] justify-center shadow-xs"
+                >
+                  {copied ? (
+                    <>
+                      <CheckIcon className="w-3.5 h-3.5 text-green-500" />
+                      <span className="text-green-500">Copied</span>
+                    </>
+                  ) : (
+                    <>
+                      <DocumentDuplicateIcon className="w-3.5 h-3.5 text-brand-text-tertiary-light" />
+                      <span>Copy</span>
+                    </>
+                  )}
+                </button>
+              </div>
 
-          <div 
-            className="flex items-center gap-4 text-lg md:text-xl font-medium text-brand-text-secondary-light dark:text-brand-text-secondary-dark cursor-default"
-          >
-            <div className="p-3 bg-brand-surface-light dark:bg-brand-surface-dark rounded-full border border-brand-border-light dark:border-brand-border-dark shadow-xs dark:shadow-none">
-              <MapPinIcon className="w-5 h-5 text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark" />
+              {/* Phone Connection */}
+              <a 
+                href="tel:8591766970" 
+                className="flex items-center gap-3.5 p-4 bg-brand-bg-light dark:bg-[#09090b] border border-brand-border-light dark:border-brand-border-dark/60 rounded-xl text-xs sm:text-sm font-semibold text-brand-text-primary-light dark:text-brand-text-primary-dark hover:text-brand-accent-indigo hover:border-brand-accent-indigo/35 dark:hover:border-brand-accent-indigo/35 transition-all group"
+              >
+                <PhoneIcon className="w-4 h-4 text-brand-text-tertiary-light group-hover:text-brand-accent-indigo transition-colors shrink-0" />
+                +91 8591766970
+              </a>
+
+              {/* LinkedIn Connection */}
+              <a 
+                href="https://www.linkedin.com/in/nikil-varghese-956281255/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center justify-between p-4 bg-brand-bg-light dark:bg-[#09090b] border border-brand-border-light dark:border-brand-border-dark/60 rounded-xl text-xs sm:text-sm font-semibold text-brand-text-primary-light dark:text-brand-text-primary-dark hover:text-brand-accent-indigo hover:border-brand-accent-indigo/35 dark:hover:border-brand-accent-indigo/35 transition-all group"
+              >
+                <div className="flex items-center gap-3.5">
+                  <LinkedInIcon className="w-4 h-4 text-brand-text-tertiary-light group-hover:text-brand-accent-indigo transition-colors shrink-0" />
+                  nikil-varghese-956281255
+                </div>
+                <span className="text-[10px] text-brand-text-tertiary-light group-hover:text-brand-text-primary-light dark:group-hover:text-brand-text-primary-dark transition-colors font-medium">Connect &rarr;</span>
+              </a>
+
+              {/* Location & Timezone Details */}
+              <div className="flex items-center justify-between p-4 bg-brand-bg-light dark:bg-[#09090b] border border-brand-border-light dark:border-brand-border-dark/60 rounded-xl text-xs text-brand-text-secondary-light dark:text-brand-text-secondary-dark font-medium">
+                <div className="flex items-center gap-3.5">
+                  <MapPinIcon className="w-4 h-4 text-brand-text-tertiary-light shrink-0" />
+                  Mumbai, India
+                </div>
+                <div className="flex items-center gap-1.5 font-mono text-[10px] text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark uppercase tracking-tight">
+                  <ClockIcon className="w-3.5 h-3.5 text-brand-text-tertiary-light" />
+                  GMT+5:30
+                </div>
+              </div>
+
             </div>
-            Mumbai, India
+
           </div>
-        </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: 0.2 }}
-          className="mt-20 pt-8 border-t border-brand-border-light dark:border-brand-border-dark text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark text-sm flex flex-col items-center gap-6"
-        >
-          <div className="flex gap-6">
+        </div>
+        </ScrollReveal>
+
+        {/* Footer info */}
+        <ScrollReveal delay={200}>
+          <footer
+            className="mt-20 pt-8 border-t border-brand-border-light dark:border-brand-border-dark/60 text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark text-xs flex flex-col sm:flex-row items-center justify-between gap-6"
+          >
+            <p className="tracking-wide font-normal">&copy; {new Date().getFullYear()} Nikil Edwin Varghese. All rights reserved.</p>
+            
             <a 
               href="https://github.com/nikilvarghese" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-brand-text-secondary-light hover:text-brand-accent-blue dark:text-brand-text-secondary-dark dark:hover:text-brand-accent-indigo transition-colors text-base font-semibold cursor-pointer"
+              className="flex items-center gap-2 text-brand-text-secondary-light hover:text-brand-accent-indigo dark:text-brand-text-secondary-dark dark:hover:text-brand-accent-indigo transition-colors text-xs font-semibold cursor-pointer"
             >
               <CodeBracketIcon className="w-4 h-4" />
-              GitHub
+              GitHub Repository
             </a>
-          </div>
-          <p className="tracking-wide text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark">&copy; {new Date().getFullYear()} Nikil Edwin Varghese. All rights reserved.</p>
-        </motion.div>
+          </footer>
+        </ScrollReveal>
+
       </div>
     </section>
   );

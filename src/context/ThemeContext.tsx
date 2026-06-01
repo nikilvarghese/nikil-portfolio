@@ -1,4 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import faviconBlack from '../assets/logo/favicon_black-logo.png';
+import faviconWhite from '../assets/logo/favicon_white-logo.png';
+import blackLogo from '../assets/logo/black-logo.png';
+import whiteLogo from '../assets/logo/white-logo.png';
 
 type Theme = 'light' | 'dark';
 
@@ -31,6 +35,33 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       root.style.colorScheme = 'light';
     }
     localStorage.setItem('theme', theme);
+
+    // Dynamic favicon switching
+    const faviconUrl = theme === 'light' ? faviconBlack : faviconWhite;
+    const existingLinks = document.querySelectorAll("link[rel*='icon']");
+    if (existingLinks.length > 0) {
+      existingLinks.forEach(link => {
+        (link as HTMLLinkElement).href = faviconUrl;
+        (link as HTMLLinkElement).type = 'image/png';
+      });
+    } else {
+      const newLink = document.createElement('link');
+      newLink.rel = 'icon';
+      newLink.type = 'image/png';
+      newLink.href = faviconUrl;
+      document.head.appendChild(newLink);
+    }
+
+    // Dynamic Hero Logo preloading to prevent LCP layout shifts
+    const heroLogoUrl = theme === 'light' ? blackLogo : whiteLogo;
+    let preloadLink = document.querySelector("link[rel='preload'][as='image']");
+    if (!preloadLink) {
+      preloadLink = document.createElement('link');
+      preloadLink.setAttribute('rel', 'preload');
+      preloadLink.setAttribute('as', 'image');
+      document.head.appendChild(preloadLink);
+    }
+    preloadLink.setAttribute('href', heroLogoUrl);
   }, [theme]);
 
   const toggleTheme = () => {
@@ -44,6 +75,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useTheme = () => {
   const context = useContext(ThemeContext);
   if (context === undefined) {

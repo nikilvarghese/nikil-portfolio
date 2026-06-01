@@ -1,84 +1,73 @@
 import { useState, useEffect } from 'react';
-import { SectionHeading } from '../components/SectionHeading';
-import { Button } from '../components/Button';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowTopRightOnSquareIcon,
   CodeBracketIcon,
-  ServerStackIcon,
-  ChartBarIcon,
-  ShieldCheckIcon,
-  SparklesIcon,
   XMarkIcon
 } from '@heroicons/react/24/outline';
+import { ScrollReveal } from '../components/ScrollReveal';
 
-// Import Flirtyfy Screenshots
+// Import Screenshots
 import flirtyfyHome from "../assets/flirtyfy/home.png";
 import flirtyfyOCR from "../assets/flirtyfy/OCR.png";
 import flirtyfyReply from "../assets/flirtyfy/Reply Results (Funny).png";
-import flirtyfyOpener from "../assets/flirtyfy/Opener.png";
-import flirtyfyBio from "../assets/flirtyfy/Bio-writter.png";
 
-// Import Screenshots
 import landingPage from "../assets/screenshots/landing-page.png";
-import registerPage from "../assets/screenshots/register-page.png";
-import loginPage from "../assets/screenshots/login-page.png";
-import userDashboard from "../assets/screenshots/user-dashboard.png";
-import hrDashboard from "../assets/screenshots/hr-dashboard.png";
-import postJob from "../assets/screenshots/postjob.png";
 import postJobRestriction from "../assets/screenshots/postjob-restriction.png";
 import applyJob from "../assets/screenshots/applyjob.png";
-import userProfile from "../assets/screenshots/user-profile.png";
-import hrProfile from "../assets/screenshots/hr-profile.png";
 
-// Import Minecraft Screenshots
 import lobbySpawn from "../assets/Minecraft/lobby-spawn.jpeg";
-import lobbyNpc from "../assets/Minecraft/lobby-npc.jpeg";
-import skyblockNpc from "../assets/Minecraft/skyblock-npc1.jpeg";
 import skyblockGui from "../assets/Minecraft/skyblock-gui.png";
-import skyblockGui2 from "../assets/Minecraft/skyblock-gui2.png";
-import pvpLobby from "../assets/Minecraft/pvp-lobby.jpeg";
 import survivalLobby from "../assets/Minecraft/survival-lobby.jpeg";
 
-// Import VMware Screenshots
 import infrastructureArchitecture from "../assets/vmware/infrastructure-architecture.png";
-import vmwareDashboard from "../assets/vmware/vmware-dashboard.png";
 import loadBalancerSwitching from "../assets/vmware/load-balancer-switching.png";
-import faultToleranceDemo from "../assets/vmware/fault-tolerance-demo.png";
-import bashAutomationScript from "../assets/vmware/bash-automation-script.png";
 import htopMonitoring from "../assets/vmware/htop-monitoring.png";
+
+const ZoomIcon = () => (
+  <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
+  </svg>
+);
+
+const getCategoryStyles = (category: string) => {
+  switch (category) {
+    case 'Web & Full-Stack':
+      return { dot: 'bg-blue-500', text: 'text-blue-600 dark:text-blue-400', bg: 'bg-blue-500/5 dark:bg-blue-500/10 border-blue-500/10 dark:border-blue-500/20' };
+    case 'Mobile & AI':
+      return { dot: 'bg-violet-500', text: 'text-violet-600 dark:text-violet-400', bg: 'bg-violet-500/5 dark:bg-violet-500/10 border-violet-500/10 dark:border-violet-500/20' };
+    case 'Systems & Infrastructure':
+      return { dot: 'bg-emerald-500', text: 'text-emerald-600 dark:text-emerald-400', bg: 'bg-emerald-500/5 dark:bg-emerald-500/10 border-emerald-500/10 dark:border-emerald-500/20' };
+    default:
+      return { dot: 'bg-amber-500', text: 'text-amber-600 dark:text-amber-400', bg: 'bg-amber-500/5 dark:bg-amber-500/10 border-amber-500/10 dark:border-amber-500/20' };
+  }
+};
 
 const ImageCard = ({
   src,
   alt,
   caption,
   title,
-  containerClassName = "bg-brand-surface-light dark:bg-brand-surface-dark/50 p-2",
-  imgClassName = "w-full h-auto object-contain",
   onClick
 }: {
   src: string;
   alt: string;
   caption: string;
   title?: string;
-  containerClassName?: string;
-  imgClassName?: string;
   onClick?: () => void;
 }) => (
-  <div className="group flex flex-col gap-3 h-full cursor-pointer" onClick={onClick}>
-    <div className={`rounded-xl overflow-hidden border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark shadow-xs dark:shadow-none relative flex items-center justify-center ${containerClassName}`}>
-      <div className="absolute inset-0 bg-brand-accent-blue/0 group-hover:bg-brand-accent-blue/[0.03] dark:group-hover:bg-brand-accent-indigo/[0.04] transition-colors duration-300 z-10 pointer-events-none" />
-      <img src={src} alt={alt} className={`transform group-hover:scale-[1.02] transition-transform duration-500 ${imgClassName}`} />
+  <div className="group flex flex-col gap-2.5 h-full cursor-pointer" onClick={onClick}>
+    <div className="rounded-xl overflow-hidden border border-brand-border-light dark:border-brand-border-dark bg-slate-50 dark:bg-brand-surface-dark relative flex items-center justify-center p-2.5 aspect-video sm:aspect-auto">
+      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none z-10">
+        <div className="p-2 bg-zinc-900/80 rounded-full border border-zinc-800 backdrop-blur-xs shadow-md">
+          <ZoomIcon />
+        </div>
+      </div>
+      <img src={src} alt={alt} loading="lazy" className="max-h-48 object-contain transform group-hover:scale-[1.02] transition-transform duration-300 rounded shadow-xs" />
     </div>
-    <div className="border-l-2 border-brand-accent-blue/40 dark:border-brand-accent-indigo/40 pl-3 mt-auto flex flex-col gap-1">
-      {title && (
-        <h4 className="text-sm font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark group-hover:text-brand-accent-blue dark:group-hover:text-brand-accent-indigo transition-colors">
-          {title}
-        </h4>
-      )}
-      <p className="text-xs md:text-sm text-brand-text-secondary-light dark:text-brand-text-secondary-dark group-hover:text-brand-text-primary-light dark:group-hover:text-brand-text-primary-dark transition-colors leading-relaxed">
-        {caption}
-      </p>
+    <div className="border-l-2 border-brand-accent-indigo pl-2.5 flex flex-col gap-0.5">
+      {title && <h4 className="text-xs font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark group-hover:text-brand-accent-indigo transition-colors">{title}</h4>}
+      <p className="text-[11px] text-brand-text-secondary-light dark:text-brand-text-secondary-dark group-hover:text-brand-text-primary-light dark:group-hover:text-brand-text-primary-dark transition-colors leading-normal font-normal">{caption}</p>
     </div>
   </div>
 );
@@ -94,64 +83,110 @@ interface Project {
   liveDemo?: string;
   heroImage: string;
   isFeatured: boolean;
+  businessValue: string;
+  complexity: string;
+  decisions: string;
+  scalability: string;
 }
 
 const projectsData: Project[] = [
   {
     id: 'worklance',
-    title: 'Worklance',
-    subtitle: 'A deep dive into building a robust, role-based job portal system.',
-    description: 'A full-stack job portal platform bridging the gap between job seekers and HR professionals, featuring role-based workflows, strict profile validation, and secure authentication.',
+    title: 'Worklance Recruitment Hub',
+    subtitle: 'A full-stack role-based recruitment system with gatekeeping guards.',
+    description: 'A job portal platform that bridges candidates and hiring managers. It enforces profile verification steps, roles isolation (RBAC), and validation patterns to maintain operational data quality.',
     category: 'Web & Full-Stack',
-    technologies: ['React', 'Tailwind CSS', 'Node.js', 'Express', 'MongoDB', 'JWT'],
+    technologies: ['React', 'Tailwind CSS', 'Node.js', 'Express', 'MongoDB', 'JWT', 'REST API'],
     github: 'https://github.com/nikilvarghese/Worklance',
     liveDemo: 'https://worklance-nu.vercel.app/',
     heroImage: landingPage,
-    isFeatured: true
+    isFeatured: true,
+    businessValue: 'Reduces manual review cycles by ensuring applicant profiles meet complete verification requirements before database entries.',
+    complexity: 'Designed global Axios interceptors coupled with Express middleware to process candidate and manager routing securely.',
+    decisions: 'Chose token-based validation over local cookies to secure user sessions and route permissions.',
+    scalability: 'Stores references rather than nested collections, maintaining fast query speeds as candidate records expand.'
   },
   {
     id: 'flirtyfy',
-    title: 'Flirtyfy',
-    subtitle: 'An AI-powered dating assistant designed to elevate your conversation game.',
-    description: 'An AI-powered dating assistant that generates personalized replies, conversation openers, and profile bios. Users can paste dating app conversations or upload screenshots for AI-powered OCR extraction. The app analyzes context and generates multiple response options across different tones including Funny, Flirty, Direct, Romantic, Savage, Gen Z, Soft, and Bold. Features include OCR-based conversation parsing, AI persona selection, favorites, generation history, and localized multi-language support.',
+    title: 'Flirtyfy Conversationalist',
+    subtitle: 'An AI-powered helper built for vision parsing and mobile clients.',
+    description: 'A mobile application that generates icebreakers and profile rewrites. The app processes chat screenshots using OCR extraction, cleans textual buffers, and formats prompt values.',
     category: 'Mobile & AI',
-    technologies: ['React Native', 'Expo', 'Expo Router', 'TypeScript', 'OpenRouter API', 'Gemini Vision OCR', 'Vercel Serverless Functions', 'AsyncStorage', 'Expo Image Picker', 'Expo File System', 'i18n Localization'],
+    technologies: ['React Native', 'Expo', 'TypeScript', 'Gemini OCR', 'OpenRouter API', 'Serverless Functions', 'i18n'],
     github: 'https://github.com/nikilvarghese/flirtyfy',
     heroImage: flirtyfyHome,
-    isFeatured: true
+    isFeatured: true,
+    businessValue: 'Accelerates conversation setups by replacing manual text inputs with quick image processing.',
+    complexity: 'Developed text parsing filters to clean raw image data and isolate speakers from screenshot files.',
+    decisions: 'Decided on serverless function configurations to hide private LLM keys and configurations from client bundles.',
+    scalability: 'Separates layout states from the heavy OCR processing pipelines, maintaining fast client loads.'
   },
   {
     id: 'vmware',
-    title: 'Virtualized High-Availability Infrastructure',
-    subtitle: 'An enterprise-style infrastructure project demonstrating virtualization, load balancing, and high availability.',
-    description: 'An enterprise-style infrastructure project built using VMware Workstation and Ubuntu Server virtual machines. The system demonstrates virtualization, multi-VM architecture, Apache web hosting, Nginx load balancing, and fault tolerance.',
+    title: 'Virtualized High-Availability Lab',
+    subtitle: 'A redundant system environment illustrating virtualization, load balancing, and shell scripts.',
+    description: 'A local multi-server virtualization environment featuring isolated web servers and active proxy controllers. Implements scripted provisioning, resource tracking, and high-availability operations.',
     category: 'Systems & Infrastructure',
-    technologies: ['VMware', 'Ubuntu Server', 'Apache', 'Nginx', 'Bash', 'HTOP', 'Linux Networking'],
+    technologies: ['VMware', 'Ubuntu Server', 'Apache', 'Nginx Proxy', 'Bash Automation', 'Linux Network'],
     github: 'https://github.com/nikilvarghese/virtualized-ha-infrastructure',
     heroImage: infrastructureArchitecture,
-    isFeatured: true
+    isFeatured: true,
+    businessValue: 'Models zero-downtime service design patterns locally using bridged virtual networking.',
+    complexity: 'Established bridged virtual networks with static IP assignments and Nginx load configurations.',
+    decisions: 'Implemented Round-Robin proxy routing over single-server routing to split server queries.',
+    scalability: 'Designed custom Bash scripts to provision and join new server nodes to the load balancer pool dynamically.'
   },
   {
     id: 'minecraft',
-    title: 'Minecraft Multi-Game Server System',
-    subtitle: 'A deep dive into building a scalable multi-world game server system with validation, permissions, and modular architecture.',
-    description: 'A scalable multi-world Minecraft server integrating Survival, SkyBlock, One Block, and PvP using plugin-based architecture and custom validation logic. Designed and deployed a multi-world Minecraft server system supporting multiple game modes within a unified environment. Implemented strict validation, role-based permissions, and command restrictions to ensure fair gameplay and system stability.',
+    title: 'Minecraft Multi-World Server',
+    subtitle: 'A single-instance game server featuring isolated worlds, custom Skript rules, and cross-play bridging.',
+    description: 'A multi-mode game server integrating Lobby, Survival, SkyBlock, and PvP worlds within a single instance. Utilizes Multiverse world segregation, LuckPerms permissions, and automated Skript logic.',
     category: 'Game Infrastructure',
-    technologies: ['Aternos', 'PaperMC', 'Multiverse', 'EssentialsX', 'Vault', 'GeyserMC', 'Skript'],
+    technologies: ['Aternos Hosting', 'PaperMC', 'Multiverse-Core', 'Multiverse Inventories', 'EssentialsX', 'Vault', 'LuckPerms', 'Skript', 'GeyserMC', 'Floodgate', 'IridiumSkyblock', 'OneBlock', 'NPC Plugins'],
     github: '',
     heroImage: lobbySpawn,
-    isFeatured: false
+    isFeatured: false,
+    businessValue: 'Seamless navigation between game modes while maintaining world-specific inventories, permissions, and gameplay rules.',
+    complexity: 'Integrating multiple plugins (Multiverse, LuckPerms, EssentialsX) and resolving command conflicts across isolated worlds.',
+    decisions: 'Used world isolation through Multiverse and permission-based access control instead of running separate server instances.',
+    scalability: 'The server architecture allows additional worlds and game modes to be added through Multiverse without restructuring the existing setup.'
   }
 ];
+
+const getProjectProblem = (id: string) => {
+  switch (id) {
+    case 'worklance':
+      return "Online job portals frequently encounter data clutter from dynamic candidate fields and incomplete applications. Hiring teams require a systematic validation gate that locks out bad payloads prior to processing steps.";
+    case 'flirtyfy':
+      return "Interfacing chat transcripts from dating portals requires users to manually copy screens, which is slow and adds usability blockades on mobile clients.";
+    case 'vmware':
+      return "Developing infrastructure requires testing host behaviors, traffic routing, and redundancy patterns. Replicating this requires virtual sandbox environments that mimic actual web servers and proxy boundaries.";
+    case 'minecraft':
+      return "Managing multiple game modes usually requires players to switch servers, creating fragmented communities and inconsistent progression.";
+    default:
+      return "";
+  }
+};
+
+const getProjectSolution = (id: string) => {
+  switch (id) {
+    case 'worklance':
+      return "Implemented explicit check logic utilizing Express router hooks and schema validations. Candidates must pass complete fields before request operations are executed.";
+    case 'flirtyfy':
+      return "Built an automated image parser integrating Gemini Vision OCR to translate image pixels into text strings, cleaning conversational lines and feeding them to customized API prompts.";
+    case 'vmware':
+      return "Configured multi-node Ubuntu Server VMs running on VMware Workstation, routing upstream queries through an Nginx proxy load balancer configured with round-robin traffic routing rules.";
+    case 'minecraft':
+      return "Built a unified Minecraft server using Multiverse to host Survival, SkyBlock, One Block, PvP, and Lobby worlds inside a single PaperMC server instance.";
+    default:
+      return "";
+  }
+};
 
 export const Projects = () => {
   const [activeImage, setActiveImage] = useState<{ src: string; alt: string } | null>(null);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  
-  // Search & Filter state
-  const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [selectedTech, setSelectedTech] = useState('');
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -177,175 +212,122 @@ export const Projects = () => {
     };
   }, [activeImage, selectedProject]);
 
-  // Extract all unique technologies
-  const allTechs = Array.from(
-    new Set(projectsData.flatMap(p => p.technologies))
-  ).sort();
-
-  // Filter projects
   const filteredProjects = projectsData.filter(project => {
-    const matchesSearch = 
-      project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      project.subtitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      project.technologies.some(tech => tech.toLowerCase().includes(searchTerm.toLowerCase()));
-      
-    const matchesCategory = 
-      selectedCategory === 'All' || 
-      project.category === selectedCategory;
-      
-    const matchesTech = 
-      selectedTech === '' || 
-      project.technologies.includes(selectedTech);
-
-    return matchesSearch && matchesCategory && matchesTech;
+    return selectedCategory === 'All' || project.category === selectedCategory;
   });
 
   return (
-    <section id="work" className="py-24 bg-brand-bg-light dark:bg-brand-bg-dark transition-colors duration-300 relative border-t border-brand-border-light dark:border-brand-border-dark">
+    <section id="work" className="py-24 bg-brand-bg-light dark:bg-brand-bg-dark border-t border-brand-border-light dark:border-brand-border-dark/60 transition-colors duration-200">
       <div className="max-w-6xl mx-auto px-6">
-        <SectionHeading
-          title="Featured Projects"
-          subtitle="A selection of systems I've built focusing on real-world functionality, validation, and scalability."
-        />
-
-        {/* Search & Filter Controls */}
-        <div className="mt-8 mb-12 flex flex-col md:flex-row gap-4 justify-between items-stretch md:items-center">
-          {/* Category Tabs */}
-          <div className="flex flex-wrap gap-2 order-2 md:order-1">
-            {['All', 'Web & Full-Stack', 'Mobile & AI', 'Systems & Infrastructure', 'Game Infrastructure'].map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`px-4 py-2 text-xs font-semibold rounded-lg border transition-all cursor-pointer ${
-                  selectedCategory === cat
-                    ? 'bg-slate-900 border-slate-900 text-white dark:bg-slate-100 dark:border-slate-100 dark:text-slate-950 shadow-xs'
-                    : 'bg-brand-surface-light dark:bg-brand-surface-dark text-brand-text-secondary-light dark:text-brand-text-secondary-dark border-brand-border-light dark:border-brand-border-dark hover:border-slate-400 dark:hover:border-slate-700'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-
-          {/* Search & Tech Selection */}
-          <div className="flex flex-col sm:flex-row gap-3 order-1 md:order-2 flex-grow md:max-w-md">
-            {/* Search Input */}
-            <div className="relative flex-grow">
-              <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <svg className="h-4 w-4 text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
+        
+        {/* Header */}
+        <ScrollReveal>
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+            <div className="space-y-4 text-left">
+              <span className="text-xs font-semibold text-brand-accent-indigo uppercase tracking-wider block">
+                Projects
               </span>
-              <input
-                type="text"
-                placeholder="Search projects..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-9 pr-4 py-2 text-sm rounded-lg border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark text-brand-text-primary-light dark:text-brand-text-primary-dark placeholder-brand-text-tertiary-light dark:placeholder-brand-text-tertiary-dark focus:outline-none focus:ring-1 focus:ring-slate-400"
-              />
-              {searchTerm && (
-                <button 
-                  onClick={() => setSearchTerm('')} 
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark hover:text-brand-text-primary-light dark:hover:text-brand-text-primary-dark cursor-pointer"
-                >
-                  <XMarkIcon className="h-4 w-4" />
-                </button>
-              )}
+              <h2 className="text-3xl md:text-4xl font-light tracking-tight text-brand-text-primary-light dark:text-brand-text-primary-dark leading-tight">
+                Featured Work <br />
+                <span className="font-semibold text-brand-text-primary-light dark:text-brand-text-primary-dark">
+                  focusing on stability & validation.
+                </span>
+              </h2>
             </div>
 
-            {/* Tech Select */}
-            <select
-              value={selectedTech}
-              onChange={(e) => setSelectedTech(e.target.value)}
-              className="px-3 py-2 text-sm rounded-lg border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark text-brand-text-secondary-light dark:text-brand-text-secondary-dark focus:outline-none focus:ring-1 focus:ring-slate-400 cursor-pointer"
-            >
-              <option value="">All Tech</option>
-              {allTechs.map(tech => (
-                <option key={tech} value={tech}>{tech}</option>
+            {/* Filtering tabs */}
+            <div className="flex flex-wrap gap-1 bg-brand-surface-light dark:bg-[#121215]/50 border border-brand-border-light dark:border-brand-border-dark p-1 rounded-lg">
+              {['All', 'Web & Full-Stack', 'Mobile & AI', 'Systems & Infrastructure'].map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`px-3 py-1.5 text-[11px] font-medium tracking-tight rounded-md transition-all cursor-pointer ${
+                    selectedCategory === cat
+                      ? 'bg-brand-text-primary-light text-brand-bg-light dark:bg-[#1f1f23] dark:text-brand-text-primary-dark font-semibold'
+                      : 'text-brand-text-secondary-light dark:text-brand-text-secondary-dark hover:text-brand-text-primary-light dark:hover:text-brand-text-primary-dark'
+                  }`}
+                >
+                  {cat}
+                </button>
               ))}
-            </select>
+            </div>
           </div>
-        </div>
+        </ScrollReveal>
 
-        {/* Option A: Compact Responsive Cards Grid */}
-        {filteredProjects.length === 0 ? (
-          <div className="py-16 text-center text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark border border-dashed border-brand-border-light dark:border-brand-border-dark rounded-2xl">
-            No projects found matching your filters. Try resetting search or category filters.
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-            {filteredProjects.map((project) => (
-              <motion.div
+        {/* Projects Grid Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {filteredProjects.map((project, idx) => {
+            const catStyle = getCategoryStyles(project.category);
+            return (
+              <ScrollReveal
                 key={project.id}
-                layout
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.35 }}
-                className="bg-brand-surface-light dark:bg-brand-surface-dark/40 border border-brand-border-light dark:border-brand-border-dark rounded-xl overflow-hidden shadow-xs dark:shadow-none hover:border-slate-350 dark:hover:border-slate-700 transition-all duration-300 flex flex-col h-full group"
+                delay={idx * 100}
+                className="flex"
               >
-                {/* Image Container */}
+                <motion.div
+                  layout
+                  className="bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark rounded-xl overflow-hidden shadow-xs hover:border-slate-350 dark:hover:border-zinc-800 transition-all duration-300 flex flex-col h-full w-full group"
+                >
+                {/* Cover Image */}
                 <div 
-                  className="aspect-[16/10] bg-slate-50 dark:bg-brand-bg-dark flex items-center justify-center p-3 relative overflow-hidden border-b border-brand-border-light dark:border-brand-border-dark cursor-pointer"
+                  className="aspect-[16/9] bg-slate-50 dark:bg-brand-bg-dark/40 flex items-center justify-center p-6 relative overflow-hidden border-b border-brand-border-light dark:border-brand-border-dark cursor-pointer"
                   onClick={() => setSelectedProject(project)}
                 >
-                  <div className="absolute inset-0 bg-brand-accent-blue/0 group-hover:bg-brand-accent-blue/[0.02] dark:group-hover:bg-brand-accent-indigo/[0.03] transition-colors duration-300 z-10 pointer-events-none" />
+                  <div className="absolute inset-0 bg-brand-accent-indigo/[0.01] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                   <img
                     src={project.heroImage}
                     alt={project.title}
-                    className="max-w-full max-h-full object-contain transform group-hover:scale-[1.01] transition-transform duration-500 rounded-lg shadow-xs"
+                    loading="lazy"
+                    className="max-w-full max-h-full object-contain transform group-hover:scale-[1.02] transition-transform duration-500 rounded-lg shadow-sm"
                   />
-                  {project.isFeatured && (
-                    <span className="absolute top-4 left-4 z-20 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider bg-brand-accent-blue/10 dark:bg-brand-accent-indigo/10 text-brand-accent-blue dark:text-brand-accent-indigo border border-brand-accent-blue/20 dark:border-brand-accent-indigo/20 rounded-full">
-                      Featured
-                    </span>
-                  )}
-                </div>
-
-                {/* Card Info */}
-                <div className="p-6 flex flex-col flex-grow">
-                  <span className="text-[10px] font-bold text-brand-accent-blue dark:text-brand-accent-indigo uppercase tracking-wider mb-2">
+                  
+                  <span className={`absolute top-4 left-4 z-20 px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider rounded-md border flex items-center gap-1.5 ${catStyle.bg} ${catStyle.text}`}>
+                    <span className={`w-1.5 h-1.5 rounded-full ${catStyle.dot}`} />
                     {project.category}
                   </span>
-                  <h3 className="text-xl font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark group-hover:text-brand-accent-blue dark:group-hover:text-brand-accent-indigo transition-colors mb-2">
+                </div>
+
+                {/* Info Body */}
+                <div className="p-6 flex flex-col flex-grow">
+                  <h3 
+                    className="text-lg font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark group-hover:text-brand-accent-indigo transition-colors cursor-pointer"
+                    onClick={() => setSelectedProject(project)}
+                  >
                     {project.title}
                   </h3>
-                  <p className="text-xs text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark font-medium mb-3">
+                  
+                  <p className="text-xs text-brand-text-secondary-light dark:text-brand-text-secondary-dark mt-1 font-semibold leading-normal">
                     {project.subtitle}
                   </p>
-                  <p className="text-sm text-brand-text-secondary-light dark:text-brand-text-secondary-dark line-clamp-3 mb-6 leading-relaxed">
+                  
+                  <p className="text-xs text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark mt-3 leading-relaxed font-normal flex-grow line-clamp-3">
                     {project.description}
                   </p>
 
-                  {/* Tech stack badges */}
-                  <div className="flex flex-wrap gap-1.5 mb-6 mt-auto">
-                    {project.technologies.slice(0, 5).map(tech => (
-                      <span key={tech} className="px-2 py-0.5 bg-slate-50 dark:bg-[#1a1f29] border border-brand-border-light dark:border-brand-border-dark/60 text-brand-text-secondary-light dark:text-brand-text-secondary-dark rounded text-[11px] font-medium">
+                  {/* Tech list */}
+                  <div className="flex flex-wrap gap-1.5 mt-6 mb-6">
+                    {project.technologies.map(tech => (
+                      <span key={tech} className="px-2 py-0.5 bg-slate-50 dark:bg-brand-bg-dark border border-brand-border-light dark:border-brand-border-dark/60 text-brand-text-secondary-light dark:text-brand-text-secondary-dark rounded text-[10px] font-semibold">
                         {tech}
                       </span>
                     ))}
-                    {project.technologies.length > 5 && (
-                      <span className="px-1.5 py-0.5 bg-slate-50 dark:bg-[#1a1f29] border border-brand-border-light dark:border-brand-border-dark/60 text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark rounded text-[11px] font-semibold">
-                        +{project.technologies.length - 5} more
-                      </span>
-                    )}
                   </div>
 
-                  {/* Action Buttons */}
-                  <div className="flex items-center gap-3">
+                  {/* Action CTA */}
+                  <div className="flex gap-2">
                     <button
                       onClick={() => setSelectedProject(project)}
-                      className="flex-grow py-2.5 px-4 text-xs font-semibold rounded-lg bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-950 hover:bg-slate-800 dark:hover:bg-slate-200 transition-colors text-center cursor-pointer shadow-xs"
+                      className="flex-grow py-2 px-3 text-xs font-semibold rounded-lg bg-brand-text-primary-light text-brand-bg-light dark:bg-[#1f1f23] dark:text-brand-text-primary-dark hover:opacity-95 dark:hover:bg-zinc-800 transition-colors text-center cursor-pointer shadow-xs active:scale-[0.98]"
                     >
-                      View Details
+                      Project Details
                     </button>
                     {project.github && (
                       <a
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2.5 rounded-lg border border-brand-border-light dark:border-brand-border-dark text-brand-text-secondary-light dark:text-brand-text-secondary-dark hover:bg-slate-100 dark:hover:bg-brand-surface-dark hover:text-brand-text-primary-light dark:hover:text-brand-text-primary-dark transition-all shadow-xs"
-                        title="GitHub Repo"
+                        className="p-2 rounded-lg border border-brand-border-light dark:border-brand-border-dark text-brand-text-secondary-light dark:text-brand-text-secondary-dark hover:bg-slate-100 dark:hover:bg-brand-surface-dark transition-all"
+                        title="GitHub Repository"
                       >
                         <CodeBracketIcon className="w-4 h-4" />
                       </a>
@@ -353,629 +335,605 @@ export const Projects = () => {
                   </div>
                 </div>
               </motion.div>
-            ))}
-          </div>
-        )}
+            </ScrollReveal>
+            );
+          })}
+        </div>
 
-        {/* Project Details Modal */}
+        {/* Detailed Case Study Modal Overlay */}
         <AnimatePresence>
           {selectedProject && (
-            <div className="fixed inset-0 z-[100] flex items-start md:items-center justify-center bg-black/50 dark:bg-black/80 backdrop-blur-xs p-4 overflow-y-auto" onClick={() => setSelectedProject(null)}>
+            <div 
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 dark:bg-black/90 backdrop-blur-xs p-4 md:p-6 overflow-y-auto" 
+              onClick={() => setSelectedProject(null)}
+            >
               <motion.div
-                initial={{ scale: 0.96, opacity: 0 }}
+                initial={{ scale: 0.98, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.96, opacity: 0 }}
-                transition={{ duration: 0.25 }}
-                className="bg-brand-bg-light dark:bg-brand-bg-dark border border-brand-border-light dark:border-brand-border-dark w-full max-w-5xl rounded-xl shadow-xl overflow-hidden relative flex flex-col max-h-[90vh]"
+                exit={{ scale: 0.98, opacity: 0 }}
+                transition={{ duration: 0.25, ease: 'easeOut' }}
+                className="bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark w-full max-w-4xl rounded-xl shadow-xl overflow-hidden relative flex flex-col max-h-[90vh]"
                 onClick={(e) => e.stopPropagation()}
               >
-                {/* Modal Header / Toolbar */}
-                <div className="flex-shrink-0 bg-brand-bg-light/95 dark:bg-brand-bg-dark/95 backdrop-blur-md border-b border-brand-border-light dark:border-brand-border-dark px-6 py-4 flex items-center justify-between z-10">
-                  <span className="text-sm font-semibold text-brand-text-primary-light dark:text-brand-text-primary-dark normal-case truncate max-w-[150px] sm:max-w-xs md:max-w-md">
+                {/* Header Toolbar */}
+                <div className="flex-shrink-0 bg-brand-surface-light dark:bg-brand-surface-dark border-b border-brand-border-light dark:border-brand-border-dark/60 px-6 py-4 flex items-center justify-between z-10">
+                  <span className="text-xs font-semibold text-brand-text-primary-light dark:text-brand-text-primary-dark">
                     {selectedProject.title}
                   </span>
+                  
                   <div className="flex items-center gap-2">
                     {selectedProject.liveDemo && (
-                      <Button href={selectedProject.liveDemo} target="_blank" rel="noopener noreferrer" className="py-1.5 px-3 md:px-3.5 text-xs font-semibold gap-1.5">
-                        <ArrowTopRightOnSquareIcon className="w-4 h-4 shrink-0" />
-                        <span className="hidden sm:inline">Live Demo</span>
-                      </Button>
+                      <a 
+                        href={selectedProject.liveDemo} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="py-1.5 px-3 rounded bg-brand-text-primary-light text-brand-bg-light dark:bg-[#1f1f23] dark:text-brand-text-primary-dark hover:opacity-95 text-[10px] font-semibold flex items-center gap-1.5 shadow-sm"
+                      >
+                        <ArrowTopRightOnSquareIcon className="w-3.5 h-3.5" />
+                        <span>Live Site</span>
+                      </a>
                     )}
                     {selectedProject.github && (
-                      <Button variant="outline" href={selectedProject.github} target="_blank" rel="noopener noreferrer" className="py-1.5 px-3 md:px-3.5 text-xs font-semibold gap-1.5">
-                        <CodeBracketIcon className="w-4 h-4 shrink-0" />
-                        <span className="hidden sm:inline">GitHub</span>
-                      </Button>
+                      <a 
+                        href={selectedProject.github} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="py-1.5 px-3 rounded border border-brand-border-light dark:border-brand-border-dark text-brand-text-secondary-light dark:text-brand-text-secondary-dark hover:bg-slate-50 dark:hover:bg-brand-border-dark/30 text-[10px] font-semibold flex items-center gap-1.5"
+                      >
+                        <CodeBracketIcon className="w-3.5 h-3.5" />
+                        <span>Source Code</span>
+                      </a>
                     )}
                     <button
                       onClick={() => setSelectedProject(null)}
-                      className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-brand-surface-hover-dark/40 text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark hover:text-brand-text-primary-light dark:hover:text-brand-text-primary-dark cursor-pointer transition-colors"
-                      aria-label="Close details modal"
+                      className="p-1 rounded hover:bg-brand-surface-hover-light dark:hover:bg-brand-surface-hover-dark/40 text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark hover:text-brand-text-primary-light dark:hover:text-brand-text-primary-dark cursor-pointer transition-colors"
                     >
                       <XMarkIcon className="w-5 h-5" />
                     </button>
                   </div>
                 </div>
 
-                {/* Modal Content - Scrollable */}
-                <div className="flex-1 min-h-0 overflow-y-auto p-6 lg:p-10 pt-8 lg:pt-12 space-y-10 bg-brand-bg-light dark:bg-brand-bg-dark">
-                  {/* Category & Title Section at top of content */}
-                  <div className="space-y-2 border-b border-brand-border-light dark:border-brand-border-dark pb-6">
-                    <span className="text-xs font-bold text-brand-accent-blue dark:text-brand-accent-indigo uppercase tracking-wider">
-                      {selectedProject.category}
-                    </span>
-                    <h1 className="text-3xl md:text-4xl font-extrabold text-brand-text-primary-light dark:text-brand-text-primary-dark tracking-tight">
-                      {selectedProject.title}
-                    </h1>
+                {/* Modal Content - Scrollable narrative flow */}
+                <div className="flex-grow overflow-y-auto bg-brand-bg-light dark:bg-[#070709] p-6 sm:p-8 space-y-10">
+                  
+                  {/* 1. Hero Screenshot */}
+                  <div 
+                    className="rounded-xl overflow-hidden border border-brand-border-light dark:border-brand-border-dark bg-slate-50 dark:bg-brand-surface-dark p-4 flex items-center justify-center aspect-[16/9] max-h-96 cursor-pointer group relative"
+                    onClick={() => setActiveImage({ src: selectedProject.heroImage, alt: `${selectedProject.title} Main Screenshot` })}
+                  >
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none z-10">
+                      <div className="p-2.5 bg-zinc-900/80 rounded-full border border-zinc-800 backdrop-blur-xs shadow-md">
+                        <ZoomIcon />
+                      </div>
+                    </div>
+                    <img 
+                      src={selectedProject.heroImage} 
+                      alt={`${selectedProject.title} Main Screenshot`} 
+                      className="max-w-full max-h-full object-contain rounded shadow-sm transform group-hover:scale-[1.01] transition-transform duration-300"
+                    />
                   </div>
 
-                  {/* Overview */}
-                  <div className="space-y-4">
-                    <p className="text-brand-text-secondary-light dark:text-brand-text-secondary-dark text-base md:text-lg leading-relaxed">
-                      {selectedProject.description}
-                    </p>
-                    <div className="flex flex-wrap gap-2 pt-2">
-                      {selectedProject.technologies.map(tech => (
-                        <span key={tech} className="px-3 py-1 bg-brand-accent-blue/10 dark:bg-brand-accent-indigo/10 border border-brand-accent-blue/20 dark:border-brand-accent-indigo/20 text-brand-accent-blue dark:text-brand-accent-indigo rounded-full text-xs font-medium">
-                          {tech}
+                  {/* Executive Summary Grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
+                    {/* Problem */}
+                    <div className="p-4 rounded-xl border border-rose-500/10 dark:border-rose-500/5 bg-rose-500/[0.02] dark:bg-rose-500/[0.01] space-y-2 flex flex-col justify-start">
+                      <div className="flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-rose-500 shrink-0" />
+                        <h4 className="text-[10px] font-bold text-rose-600 dark:text-rose-400 uppercase tracking-wider">The Problem</h4>
+                      </div>
+                      <p className="text-[11px] text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-relaxed font-normal">
+                        {getProjectProblem(selectedProject.id)}
+                      </p>
+                    </div>
+
+                    {/* Solution */}
+                    <div className="p-4 rounded-xl border border-emerald-500/10 dark:border-emerald-500/5 bg-emerald-500/[0.02] dark:bg-emerald-500/[0.01] space-y-2 flex flex-col justify-start">
+                      <div className="flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
+                        <h4 className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">The Solution</h4>
+                      </div>
+                      <p className="text-[11px] text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-relaxed font-normal">
+                        {getProjectSolution(selectedProject.id)}
+                      </p>
+                    </div>
+
+                    {/* Key Decisions */}
+                    <div className="p-4 rounded-xl border border-indigo-500/10 dark:border-indigo-500/5 bg-indigo-500/[0.02] dark:bg-indigo-500/[0.01] space-y-2 flex flex-col justify-start">
+                      <div className="flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0" />
+                        <h4 className="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">Key Decisions</h4>
+                      </div>
+                      <p className="text-[11px] text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-relaxed font-normal">
+                        {selectedProject.decisions}
+                      </p>
+                    </div>
+
+                    {/* Business Value */}
+                    <div className="p-4 rounded-xl border border-amber-500/10 dark:border-amber-500/5 bg-amber-500/[0.02] dark:bg-amber-500/[0.01] space-y-2 flex flex-col justify-start">
+                      <div className="flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0" />
+                        <h4 className="text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider">Outcome & Value</h4>
+                      </div>
+                      <p className="text-[11px] text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-relaxed font-normal">
+                        {selectedProject.businessValue}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Split Section: Details Overview */}
+                  <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+                    
+                    {/* Left 8 columns: Narrative details */}
+                    <div className="md:col-span-8 space-y-10">
+                      
+                      {/* 2. Project Overview */}
+                      <div className="space-y-3.5">
+                        <h3 className="text-xs font-bold uppercase tracking-wider text-brand-text-primary-light dark:text-brand-text-primary-dark border-l-2 border-brand-accent-indigo pl-3">
+                          Project Overview
+                        </h3>
+                        <p className="text-sm text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-[1.65] font-normal">
+                          {selectedProject.description}
+                        </p>
+                      </div>
+
+                      {/* 3. Problem */}
+                      <div className="space-y-3.5">
+                        <h3 className="text-xs font-bold uppercase tracking-wider text-brand-text-primary-light dark:text-brand-text-primary-dark border-l-2 border-brand-accent-indigo pl-3">
+                          Problem
+                        </h3>
+                        <p className="text-sm text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-[1.65] font-normal">
+                          {selectedProject.id === 'worklance' && "Online job portals frequently encounter data clutter from dynamic candidate fields and incomplete applications. Hiring teams require a systematic validation gate that locks out bad payloads prior to processing steps."}
+                          {selectedProject.id === 'flirtyfy' && "Interfacing chat transcripts from dating portals requires users to manually copy screens, which is slow and adds usability blockades on mobile clients."}
+                          {selectedProject.id === 'vmware' && "Developing infrastructure requires testing host behaviors, traffic routing, and redundancy patterns. Replicating this requires virtual sandbox environments that mimic actual web servers and proxy boundaries."}
+                          {selectedProject.id === 'minecraft' && "Managing multiple game modes usually requires players to switch servers, creating fragmented communities and inconsistent progression."}
+                        </p>
+                      </div>
+
+                      {/* 4. Solution */}
+                      <div className="space-y-3.5">
+                        <h3 className="text-xs font-bold uppercase tracking-wider text-brand-text-primary-light dark:text-brand-text-primary-dark border-l-2 border-brand-accent-indigo pl-3">
+                          Solution
+                        </h3>
+                        <p className="text-sm text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-[1.65] font-normal">
+                          {selectedProject.id === 'worklance' && "Implemented explicit check logic utilizing Express router hooks and schema validations. Candidates must pass complete fields before request operations are executed."}
+                          {selectedProject.id === 'flirtyfy' && "Built an automated image parser integrating Gemini Vision OCR to translate image pixels into text strings, cleaning conversational lines and feeding them to customized API prompts."}
+                          {selectedProject.id === 'vmware' && "Configured multi-node Ubuntu Server VMs running on VMware Workstation, routing upstream queries through an Nginx proxy load balancer configured with round-robin traffic routing rules."}
+                          {selectedProject.id === 'minecraft' && "Built a unified Minecraft server using Multiverse to host Survival, SkyBlock, One Block, PvP, and Lobby worlds inside a single PaperMC server instance."}
+                        </p>
+                      </div>
+
+                      {/* 5. Technical Implementation (Visual Diagram) */}
+                      <div className="space-y-4 pt-2">
+                        <h3 className="text-xs font-bold uppercase tracking-wider text-brand-text-primary-light dark:text-brand-text-primary-dark border-l-2 border-brand-accent-indigo pl-3">
+                          Technical Implementation
+                        </h3>
+                        <p className="text-sm text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-[1.65] font-normal mb-3">
+                          The system architecture routes client traffic through validation, security, and distribution layers:
+                        </p>
+
+                        <div className="p-6 bg-slate-50 dark:bg-brand-bg-dark border border-brand-border-light dark:border-brand-border-dark/60 rounded-xl flex flex-col items-center justify-center font-sans text-xs text-brand-text-secondary-light dark:text-brand-text-secondary-dark">
+                          {selectedProject.id === 'vmware' && (
+                            <div className="w-full flex flex-col items-center gap-3 text-center max-w-sm">
+                              <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark px-3 py-1.5 rounded-lg w-full font-semibold">
+                                Client Request
+                              </div>
+                              <div className="text-brand-accent-indigo font-bold">↓</div>
+                              <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark px-3 py-1.5 rounded-lg w-full font-semibold">
+                                Nginx Load Balancer (Round-Robin Proxy)
+                              </div>
+                              <div className="flex justify-between w-full text-brand-accent-indigo font-bold px-10">
+                                <span>↙</span>
+                                <span>↘</span>
+                              </div>
+                              <div className="grid grid-cols-2 gap-4 w-full">
+                                <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark p-2 rounded-lg font-semibold">
+                                  Web Node 1<br />Ubuntu + Apache VM
+                                </div>
+                                <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark p-2 rounded-lg font-semibold">
+                                  Web Node 2<br />Ubuntu + Apache VM
+                                </div>
+                              </div>
+                            </div>
+                          )}
+
+                          {selectedProject.id === 'worklance' && (
+                            <div className="w-full flex flex-col items-center gap-3 text-center max-w-sm">
+                              <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark px-3 py-1.5 rounded-lg w-full font-semibold">
+                                Client UI (React Router)
+                              </div>
+                              <div className="text-brand-accent-indigo font-bold">↓</div>
+                              <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark px-3 py-1.5 rounded-lg w-full font-semibold">
+                                Authentication Guard & Role Verification Middleware
+                              </div>
+                              <div className="text-brand-accent-indigo font-bold">↓</div>
+                              <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark px-3 py-1.5 rounded-lg w-full font-semibold">
+                                Express REST API Endpoint
+                              </div>
+                              <div className="text-brand-accent-indigo font-bold">↓</div>
+                              <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark px-3 py-1.5 rounded-lg w-full font-semibold">
+                                MongoDB Database (Mongoose Validation)
+                              </div>
+                            </div>
+                          )}
+
+                          {selectedProject.id === 'flirtyfy' && (
+                            <div className="w-full space-y-6 text-center max-w-2xl mx-auto font-sans text-xs">
+                              {/* Top Node: User Entry */}
+                              <div className="flex flex-col items-center">
+                                <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark px-4 py-2 rounded-lg font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark shadow-sm">
+                                  User UI Client (React Native / Expo Mobile App)
+                                </div>
+                                <div className="text-brand-accent-indigo font-bold text-base mt-2">↓</div>
+                              </div>
+
+                              {/* Feature Columns Grid */}
+                              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
+                                {/* Reply Generator */}
+                                <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark/30 p-3.5 rounded-xl space-y-2 flex flex-col">
+                                  <div className="font-bold text-[10px] text-brand-accent-indigo uppercase tracking-wider text-center border-b border-brand-border-light dark:border-brand-border-dark/60 pb-1.5 mb-1">
+                                    Reply Generator
+                                  </div>
+                                  <ul className="space-y-1 text-[10px] text-brand-text-secondary-light dark:text-brand-text-secondary-dark flex-grow font-normal">
+                                    <li className="flex items-start gap-1.5">
+                                      <span className="text-brand-accent-indigo shrink-0 font-bold">&rarr;</span>
+                                      <span>Text Input & Screenshot Upload</span>
+                                    </li>
+                                    <li className="flex items-start gap-1.5">
+                                      <span className="text-brand-accent-indigo shrink-0 font-bold">&rarr;</span>
+                                      <span>Gemini Vision OCR Extraction</span>
+                                    </li>
+                                    <li className="flex items-start gap-1.5">
+                                      <span className="text-brand-accent-indigo shrink-0 font-bold">&rarr;</span>
+                                      <span>Context Data Cleaning</span>
+                                    </li>
+                                    <li className="flex items-start gap-1.5">
+                                      <span className="text-brand-accent-indigo shrink-0 font-bold">&rarr;</span>
+                                      <span>Tone Selection Filter</span>
+                                    </li>
+                                    <li className="flex items-start gap-1.5">
+                                      <span className="text-brand-accent-indigo shrink-0 font-bold">&rarr;</span>
+                                      <span>AI Response Generation</span>
+                                    </li>
+                                  </ul>
+                                </div>
+
+                                {/* Conversation Openers */}
+                                <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark/30 p-3.5 rounded-xl space-y-2 flex flex-col">
+                                  <div className="font-bold text-[10px] text-brand-accent-indigo uppercase tracking-wider text-center border-b border-brand-border-light dark:border-brand-border-dark/60 pb-1.5 mb-1">
+                                    Conversation Openers
+                                  </div>
+                                  <ul className="space-y-1 text-[10px] text-brand-text-secondary-light dark:text-brand-text-secondary-dark flex-grow font-normal">
+                                    <li className="flex items-start gap-1.5">
+                                      <span className="text-brand-accent-indigo shrink-0 font-bold">&rarr;</span>
+                                      <span>Profile Page Analysis</span>
+                                    </li>
+                                    <li className="flex items-start gap-1.5">
+                                      <span className="text-brand-accent-indigo shrink-0 font-bold">&rarr;</span>
+                                      <span>Interest & Tag Extraction</span>
+                                    </li>
+                                    <li className="flex items-start gap-1.5">
+                                      <span className="text-brand-accent-indigo shrink-0 font-bold">&rarr;</span>
+                                      <span>Dynamic Context Builder</span>
+                                    </li>
+                                    <li className="flex items-start gap-1.5">
+                                      <span className="text-brand-accent-indigo shrink-0 font-bold">&rarr;</span>
+                                      <span>AI Opener Generation</span>
+                                    </li>
+                                  </ul>
+                                </div>
+
+                                {/* Bio Writer */}
+                                <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark/30 p-3.5 rounded-xl space-y-2 flex flex-col">
+                                  <div className="font-bold text-[10px] text-brand-accent-indigo uppercase tracking-wider text-center border-b border-brand-border-light dark:border-brand-border-dark/60 pb-1.5 mb-1">
+                                    Bio Writer
+                                  </div>
+                                  <ul className="space-y-1 text-[10px] text-brand-text-secondary-light dark:text-brand-text-secondary-dark flex-grow font-normal">
+                                    <li className="flex items-start gap-1.5">
+                                      <span className="text-brand-accent-indigo shrink-0 font-bold">&rarr;</span>
+                                      <span>User Personal Details</span>
+                                    </li>
+                                    <li className="flex items-start gap-1.5">
+                                      <span className="text-brand-accent-indigo shrink-0 font-bold">&rarr;</span>
+                                      <span>Style & Vibe Selection</span>
+                                    </li>
+                                    <li className="flex items-start gap-1.5">
+                                      <span className="text-brand-accent-indigo shrink-0 font-bold">&rarr;</span>
+                                      <span>Persona Builder Ingestion</span>
+                                    </li>
+                                    <li className="flex items-start gap-1.5">
+                                      <span className="text-brand-accent-indigo shrink-0 font-bold">&rarr;</span>
+                                      <span>AI Bio Generation</span>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+
+                              <div className="text-brand-accent-indigo font-bold text-base">↓</div>
+
+                              {/* Shared Services Layer */}
+                              <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark p-4 rounded-xl space-y-3">
+                                <div className="text-[10px] text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark font-bold uppercase tracking-wider">
+                                  Shared Services Layer
+                                </div>
+                                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[10px] font-semibold text-center">
+                                  <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark/50 p-2 rounded-lg">
+                                    Gemini Vision OCR
+                                  </div>
+                                  <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark/50 p-2 rounded-lg">
+                                    OpenRouter API
+                                  </div>
+                                  <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark/50 p-2 rounded-lg">
+                                    Supabase Database
+                                  </div>
+                                  <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark/50 p-2 rounded-lg">
+                                    RevenueCat Billing
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div className="text-brand-accent-indigo font-bold text-base">↓</div>
+
+                              {/* Outputs */}
+                              <div className="space-y-2.5">
+                                <div className="text-[10px] text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark font-bold uppercase tracking-wider">
+                                  Outputs (Persona Tone Customizations)
+                                </div>
+                                <div className="flex flex-wrap justify-center gap-1.5">
+                                  {['Flirty', 'Funny', 'Direct', 'Romantic', 'Meme Lord', 'Gen Z'].map((tone) => (
+                                    <span 
+                                      key={tone} 
+                                      className="px-2.5 py-1 bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark text-brand-text-secondary-light dark:text-brand-text-secondary-dark rounded-md text-[10px] font-bold"
+                                    >
+                                      {tone}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
+                          )}
+
+                          {selectedProject.id === 'minecraft' && (
+                            <div className="w-full flex flex-col items-center gap-3 text-center max-w-md">
+                              <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark px-3 py-1.5 rounded-lg w-full font-semibold">
+                                Player (Java & Bedrock Cross-Play)
+                              </div>
+                              <div className="text-brand-accent-indigo font-bold">↓</div>
+                              <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark px-3 py-1.5 rounded-lg w-full font-semibold">
+                                Aternos Hosted PaperMC Server
+                              </div>
+                              <div className="text-brand-accent-indigo font-bold">↓</div>
+                              <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark px-3 py-1.5 rounded-lg w-full font-semibold">
+                                Lobby World (Hub)
+                              </div>
+                              <div className="text-brand-accent-indigo font-bold">↓</div>
+                              <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark px-3 py-1.5 rounded-lg w-full font-semibold">
+                                Multiverse World Management
+                              </div>
+                              <div className="text-brand-accent-indigo font-bold">↓</div>
+                              <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 w-full font-semibold text-[10px]">
+                                <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark/40 p-1.5 rounded-lg">
+                                  Survival
+                                </div>
+                                <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark/40 p-1.5 rounded-lg">
+                                  SkyBlock
+                                </div>
+                                <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark/40 p-1.5 rounded-lg">
+                                  One Block
+                                </div>
+                                <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark/40 p-1.5 rounded-lg">
+                                  PvP
+                                </div>
+                                <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark/40 p-1.5 rounded-lg col-span-2 sm:col-span-1">
+                                  Event Worlds
+                                </div>
+                              </div>
+                              <div className="mt-4 pt-4 border-t border-brand-border-light dark:border-brand-border-dark/40 w-full text-left">
+                                <div className="text-[10px] text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark font-bold uppercase tracking-wider mb-2 text-center">
+                                  Supporting Systems
+                                </div>
+                                <div className="grid grid-cols-2 gap-2 text-[10px] font-semibold text-center">
+                                  <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark/20 p-1.5 rounded-lg">
+                                    Vault Economy
+                                  </div>
+                                  <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark/20 p-1.5 rounded-lg">
+                                    LuckPerms Permissions
+                                  </div>
+                                  <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark/20 p-1.5 rounded-lg">
+                                    Skript Automation
+                                  </div>
+                                  <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark/20 p-1.5 rounded-lg">
+                                    GeyserMC Cross-Play
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* 6. Challenges */}
+                      <div className="space-y-3.5">
+                        <h3 className="text-xs font-bold uppercase tracking-wider text-brand-text-primary-light dark:text-brand-text-primary-dark border-l-2 border-brand-accent-indigo pl-3">
+                          Challenges
+                        </h3>
+                        <p className="text-sm text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-[1.65] font-normal">
+                          {selectedProject.id === 'worklance' && "Implementing multiple verification paths risked code duplication across separate routers. To resolve this, I consolidated the checking filters into a unified middleware handler and linked it to Express routing rules."}
+                          {selectedProject.id === 'flirtyfy' && "Screenshot crops contained various layout signals, timestamps, and network tags that corrupted prompt validations. I developed regex strings to exclude metadata lines and group conversational items prior to sending requests."}
+                          {selectedProject.id === 'vmware' && "Virtual machine host records often dropped connections under dynamic IP assignments. To solve this, I assigned static internal IPs and updated the proxy hosts definition layout."}
+                          {selectedProject.id === 'minecraft' && "Integrating multiple plugins and ensuring strict world isolation presented significant compatibility hurdles. I configured Multiverse Inventories to isolate player items across distinct game modes, set up command restrictions to prevent cross-world cheats, and balanced the Vault-based economies to prevent currency inflation between Survival and SkyBlock."}
+                        </p>
+                      </div>
+
+                      {/* 7. Key Features */}
+                      <div className="space-y-3.5">
+                        <h3 className="text-xs font-bold uppercase tracking-wider text-brand-text-primary-light dark:text-brand-text-primary-dark border-l-2 border-brand-accent-indigo pl-3">
+                          Key Features
+                        </h3>
+                        <ul className="space-y-2 text-xs sm:text-sm text-brand-text-secondary-light dark:text-brand-text-secondary-dark font-normal">
+                          {selectedProject.id === 'worklance' && [
+                            "Middleware validation interceptors blocking unverified applicants.",
+                            "Token-based user session validation utilizing JWT authorization.",
+                            "Role segregation dividing candidates and managers logically."
+                          ].map((feat, idx) => (
+                            <li key={idx} className="flex items-start gap-2.5">
+                              <span className="text-brand-accent-indigo mt-0.5 shrink-0 font-bold">&rarr;</span>
+                              <span className="text-sm text-brand-text-secondary-light dark:text-brand-text-secondary-dark font-normal">{feat}</span>
+                            </li>
+                          ))}
+                          {selectedProject.id === 'flirtyfy' && [
+                            "Screenshots conversion using Gemini Vision OCR integrations.",
+                            "Multiple persona outputs supporting custom response styles.",
+                            "Localized structures configuring app texts into distinct language properties."
+                          ].map((feat, idx) => (
+                            <li key={idx} className="flex items-start gap-2.5">
+                              <span className="text-brand-accent-indigo mt-0.5 shrink-0 font-bold">&rarr;</span>
+                              <span className="text-sm text-brand-text-secondary-light dark:text-brand-text-secondary-dark font-normal">{feat}</span>
+                            </li>
+                          ))}
+                          {selectedProject.id === 'vmware' && [
+                            "Round-Robin query balancing across isolated web servers.",
+                            "Local high-availability clustering preventing service outages.",
+                            "Bootstrapping configurations using custom install Bash scripts."
+                          ].map((feat, idx) => (
+                            <li key={idx} className="flex items-start gap-2.5">
+                              <span className="text-brand-accent-indigo mt-0.5 shrink-0 font-bold">&rarr;</span>
+                              <span className="text-sm text-brand-text-secondary-light dark:text-brand-text-secondary-dark font-normal">{feat}</span>
+                            </li>
+                          ))}
+                          {selectedProject.id === 'minecraft' && [
+                            "GeyserMC & Floodgate integration for seamless Java and Bedrock cross-platform play.",
+                            "Multiverse world segregation with isolated inventories, game modes, and chat channels.",
+                            "LuckPerms permission groups enforcing strict access controls and ranks per world.",
+                            "Skript-based gameplay automation for custom rules, events, and utility features."
+                          ].map((feat, idx) => (
+                            <li key={idx} className="flex items-start gap-2.5">
+                              <span className="text-brand-accent-indigo mt-0.5 shrink-0 font-bold">&rarr;</span>
+                              <span className="text-sm text-brand-text-secondary-light dark:text-brand-text-secondary-dark font-normal">{feat}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* 8. Outcome */}
+                      <div className="space-y-3.5">
+                        <h3 className="text-xs font-bold uppercase tracking-wider text-brand-text-primary-light dark:text-brand-text-primary-dark border-l-2 border-brand-accent-indigo pl-3">
+                          Outcome & Value
+                        </h3>
+                        <p className="text-sm text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-[1.65] font-normal">
+                          {selectedProject.id === 'worklance' && "The implementation of backend interceptors successfully prevented incomplete application submissions. This reduced administrative database cleanups and ensured higher candidate quality."}
+                          {selectedProject.id === 'flirtyfy' && "The vision pipeline allowed users to retrieve AI recommendations instantly from image files, improving mobile app usability and speed."}
+                          {selectedProject.id === 'vmware' && "The virtualized cluster demonstrated stable fail-over behaviors. Shutting down one server VM had zero impact on website access, showing high-availability routing logic."}
+                          {selectedProject.id === 'minecraft' && "Players could move between game modes seamlessly while maintaining world-specific inventories, permissions, and gameplay rules."}
+                        </p>
+                      </div>
+
+                      {/* Detail Visuals Evidence Grid */}
+                      <div className="space-y-3 pt-4 border-t border-brand-border-light dark:border-brand-border-dark/60">
+                        <h4 className="text-xs font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark">
+                          Project Screenshots
+                        </h4>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                          {selectedProject.id === 'worklance' && (
+                            <>
+                              <ImageCard src={landingPage} alt="Landing Page" caption="Recruitment landing page layout." onClick={() => setActiveImage({ src: landingPage, alt: "Landing Page" })} />
+                              <ImageCard src={postJobRestriction} alt="Gatekeeper Restrictions" caption="Applicant profile validation checks." onClick={() => setActiveImage({ src: postJobRestriction, alt: "Gatekeeper Restrictions" })} />
+                              <ImageCard src={applyJob} alt="Apply Workflow" caption="Clean submission form validations." onClick={() => setActiveImage({ src: applyJob, alt: "Apply Workflow" })} />
+                            </>
+                          )}
+                          {selectedProject.id === 'flirtyfy' && (
+                            <>
+                              <ImageCard src={flirtyfyHome} alt="App Home" caption="Sleek dashboard generator cards." onClick={() => setActiveImage({ src: flirtyfyHome, alt: "App Home" })} />
+                              <ImageCard src={flirtyfyOCR} alt="OCR Reading" caption="Extracting conversation text from screenshots." onClick={() => setActiveImage({ src: flirtyfyOCR, alt: "OCR Reading" })} />
+                              <ImageCard src={flirtyfyReply} alt="AI Outputs" caption="Personalized reply suggestions." onClick={() => setActiveImage({ src: flirtyfyReply, alt: "AI Outputs" })} />
+                            </>
+                          )}
+                          {selectedProject.id === 'vmware' && (
+                            <>
+                              <ImageCard src={infrastructureArchitecture} alt="VM Map" caption="VMware virtual networking mapping." onClick={() => setActiveImage({ src: infrastructureArchitecture, alt: "VM Map" })} />
+                              <ImageCard src={loadBalancerSwitching} alt="Balancer Logs" caption="Nginx round-robin switching logs." onClick={() => setActiveImage({ src: loadBalancerSwitching, alt: "Balancer Logs" })} />
+                              <ImageCard src={htopMonitoring} alt="Htop Monitoring" caption="CPU utilization stress check profiles." onClick={() => setActiveImage({ src: htopMonitoring, alt: "Htop Monitoring" })} />
+                            </>
+                          )}
+                          {selectedProject.id === 'minecraft' && (
+                            <>
+                              <ImageCard src={lobbySpawn} alt="Lobby Spawn" caption="Unified player lobby world spawn." onClick={() => setActiveImage({ src: lobbySpawn, alt: "Lobby Spawn" })} />
+                              <ImageCard src={skyblockGui} alt="Custom UI" caption="Custom server layout options." onClick={() => setActiveImage({ src: skyblockGui, alt: "Custom UI" })} />
+                              <ImageCard src={survivalLobby} alt="Survival World" caption="Modular game mode zone." onClick={() => setActiveImage({ src: survivalLobby, alt: "Survival World" })} />
+                            </>
+                          )}
+                        </div>
+                      </div>
+
+                    </div>
+
+                    {/* Right 4 columns: Meta info sidebar */}
+                    <div className="md:col-span-4 p-6 bg-slate-50/50 dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark rounded-xl space-y-6 shadow-xs sticky top-24">
+                      
+                      {/* Technical Decisions */}
+                      <div className="space-y-1.5">
+                        <span className="text-[10px] text-brand-accent-indigo font-bold uppercase tracking-wider block">
+                          Technical Decisions
                         </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Dynamic Project-Specific Subsections */}
-                  {selectedProject.id === 'worklance' && (
-                    <div className="space-y-16 border-t border-brand-border-light dark:border-brand-border-dark pt-10">
-                      {/* Smart Validation */}
-                      <div className="bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark rounded-xl p-6 md:p-10 shadow-xs">
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-                          <div className="space-y-4">
-                            <h4 className="text-xl font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark flex items-center gap-3">
-                              <ShieldCheckIcon className="w-7 h-7 text-brand-accent-blue dark:text-brand-accent-indigo" />
-                              Smart Validation & User Flow Protection
-                            </h4>
-                            <p className="text-sm md:text-base text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-relaxed">
-                              To maintain system integrity, strict gatekeeping mechanisms were integrated directly into the routing architecture. The system actively blocks incomplete profiles from performing critical actions like applying or posting jobs, guiding them instead to complete their setup.
-                            </p>
-                            <div className="bg-brand-bg-light dark:bg-brand-bg-dark p-4 rounded-xl border border-brand-border-light dark:border-brand-border-dark">
-                              <p className="text-xs md:text-sm text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-relaxed">
-                                <span className="text-brand-accent-blue dark:text-brand-accent-indigo font-semibold block mb-1">Why it matters: </span>
-                                This architecture prevents unverified or incomplete profiles from polluting the application pool, significantly reducing administrative noise and guaranteeing high-quality leads for HR professionals.
-                              </p>
-                            </div>
-                          </div>
-                          <div className="rounded-xl overflow-hidden shadow-xs border border-brand-border-light dark:border-brand-border-dark relative group bg-white dark:bg-transparent">
-                            <img 
-                              src={postJobRestriction} 
-                              alt="Smart Validation Prompt" 
-                              className="w-full transform group-hover:scale-[1.01] transition-transform duration-500 cursor-pointer" 
-                              onClick={() => setActiveImage({ src: postJobRestriction, alt: "Smart Validation Prompt" })} 
-                            />
-                          </div>
-                        </div>
+                        <p className="text-[11px] text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-relaxed font-normal">
+                          {selectedProject.decisions}
+                        </p>
                       </div>
 
-                      {/* Auth Flow */}
-                      <div className="space-y-6 pt-4">
-                        <div className="space-y-1">
-                          <h4 className="text-lg md:text-xl font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark">Secure Authentication Flow</h4>
-                          <p className="text-xs md:text-sm text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark max-w-2xl">Robust entry points designed to protect user identity and separate Candidate vs. HR data pools from the moment of registration.</p>
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          <ImageCard
-                            src={registerPage}
-                            alt="Registration Flow"
-                            caption="Multi-step registration clearly dividing user roles and securing identity."
-                            onClick={() => setActiveImage({ src: registerPage, alt: "Registration Flow" })}
-                          />
-                          <ImageCard
-                            src={loginPage}
-                            alt="Login Flow"
-                            caption="Reliable OTP & JWT-based authentication portal ensuring data privacy."
-                            onClick={() => setActiveImage({ src: loginPage, alt: "Login Flow" })}
-                          />
-                        </div>
+                      {/* Complexity */}
+                      <div className="space-y-1.5">
+                        <span className="text-[10px] text-brand-accent-indigo font-bold uppercase tracking-wider block">
+                          Implementation Complexity
+                        </span>
+                        <p className="text-[11px] text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-relaxed font-normal">
+                          {selectedProject.complexity}
+                        </p>
                       </div>
 
-                      {/* Candidate Experience */}
-                      <div className="space-y-6 pt-6 border-t border-brand-border-light dark:border-brand-border-dark">
-                        <div className="space-y-1">
-                          <h4 className="text-lg md:text-xl font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark">Candidate Experience</h4>
-                          <p className="text-xs md:text-sm text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark max-w-2xl">A frictionless journey for job seekers to discover roles, manage their profiles, and track application statuses.</p>
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                          <ImageCard
-                            src={userDashboard}
-                            alt="User Dashboard"
-                            caption="Clean overview of active applications and newly posted jobs."
-                            onClick={() => setActiveImage({ src: userDashboard, alt: "User Dashboard" })}
-                          />
-                          <ImageCard
-                            src={userProfile}
-                            alt="User Profile"
-                            caption="Comprehensive profile management with resume upload validation."
-                            onClick={() => setActiveImage({ src: userProfile, alt: "User Profile" })}
-                          />
-                          <ImageCard
-                            src={applyJob}
-                            alt="Job Application"
-                            caption="Streamlined application process confirming data submission."
-                            onClick={() => setActiveImage({ src: applyJob, alt: "Job Application" })}
-                          />
-                        </div>
+                      {/* Scalability */}
+                      <div className="space-y-1.5">
+                        <span className="text-[10px] text-brand-accent-indigo font-bold uppercase tracking-wider block">
+                          Scalability Setup
+                        </span>
+                        <p className="text-[11px] text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-relaxed font-normal">
+                          {selectedProject.scalability}
+                        </p>
                       </div>
 
-                      {/* HR Workflows */}
-                      <div className="space-y-6 pt-6 border-t border-brand-border-light dark:border-brand-border-dark">
-                        <div className="space-y-1">
-                          <h4 className="text-lg md:text-xl font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark">Recruiter Workflows</h4>
-                          <p className="text-xs md:text-sm text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark max-w-2xl">Dedicated tools empowering HR to craft accurate listings and manage their company's digital footprint.</p>
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                          <ImageCard
-                            src={hrDashboard}
-                            alt="HR Dashboard"
-                            caption="Centralized hub for managing active listings and reviewing candidates."
-                            onClick={() => setActiveImage({ src: hrDashboard, alt: "HR Dashboard" })}
-                          />
-                          <ImageCard
-                            src={hrProfile}
-                            alt="HR Profile"
-                            caption="Verified employer identities and standardized company details."
-                            onClick={() => setActiveImage({ src: hrProfile, alt: "HR Profile" })}
-                          />
-                          <ImageCard
-                            src={postJob}
-                            alt="Post a Job"
-                            caption="Dynamic job posting forms supporting comprehensive requirements."
-                            onClick={() => setActiveImage({ src: postJob, alt: "Post a Job" })}
-                          />
-                        </div>
+                      {/* Business Value */}
+                      <div className="space-y-1.5">
+                        <span className="text-[10px] text-brand-accent-indigo font-bold uppercase tracking-wider block">
+                          Value & Outcome
+                        </span>
+                        <p className="text-[11px] text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-relaxed font-normal">
+                          {selectedProject.businessValue}
+                        </p>
                       </div>
 
-                      {/* System Architecture & Impact */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-brand-border-light dark:border-brand-border-dark">
-                        <div className="bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark rounded-xl p-6 transition-colors">
-                          <h4 className="text-lg font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark mb-4 flex items-center gap-2">
-                            <ServerStackIcon className="w-5 h-5 text-brand-accent-indigo" />
-                            System Architecture
-                          </h4>
-                          <div className="space-y-3">
-                            {[
-                              { step: 'Frontend (React)', desc: 'Handles routing, global state, and strict form validation.' },
-                              { step: 'API Interceptors (Axios)', desc: 'Attaches JWT tokens and catches 401/403 errors globally.' },
-                              { step: 'Backend (Express)', desc: 'Validates payloads, enforces role checks, and executes business logic.' },
-                              { step: 'Database (MongoDB)', desc: 'Stores schemas with Mongoose validation rules and relational refs.' }
-                            ].map((item, idx) => (
-                              <div key={idx} className="flex gap-3 items-start bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark p-3 rounded-lg">
-                                <div className="w-5 h-5 rounded bg-brand-accent-blue/15 text-brand-accent-blue dark:bg-brand-accent-indigo/15 dark:text-brand-accent-indigo flex items-center justify-center font-bold text-[10px] border border-brand-accent-blue/20 dark:border-brand-accent-indigo/20 shrink-0">
-                                  {idx + 1}
-                                </div>
-                                <div>
-                                  <h5 className="font-semibold text-brand-text-primary-light dark:text-brand-text-primary-dark text-xs">{item.step}</h5>
-                                  <p className="text-[11px] text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark mt-0.5">{item.desc}</p>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-
-                        <div className="bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark rounded-xl p-6 transition-colors flex flex-col justify-between">
-                          <div>
-                            <h4 className="text-lg font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark mb-3 flex items-center gap-2">
-                              <ChartBarIcon className="w-5 h-5 text-brand-accent-blue" />
-                              Impact & Scalability
-                            </h4>
-                            <p className="text-xs md:text-sm text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-relaxed mb-4">
-                              The clear separation of concerns between candidate and HR workflows resulted in a highly predictable, secure user experience. By resolving edge cases like OAuth refresh loops and integrating Higher-Order Component (HOC) route protection, the platform can scale reliably.
-                            </p>
-                          </div>
-                          <div className="bg-brand-bg-light dark:bg-brand-bg-dark p-4 rounded-lg border border-brand-border-light dark:border-brand-border-dark">
-                            <h5 className="font-semibold text-xs text-brand-text-primary-light dark:text-brand-text-primary-dark mb-2">Future Enhancements</h5>
-                            <ul className="space-y-1">
-                              <li className="text-[11px] text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark flex gap-2">
-                                <span className="text-brand-accent-blue font-semibold">•</span> Real-time WebSocket notifications.
-                              </li>
-                              <li className="text-[11px] text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark flex gap-2">
-                                <span className="text-brand-accent-blue font-semibold">•</span> Advanced HR analytics dashboard.
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {selectedProject.id === 'flirtyfy' && (
-                    <div className="space-y-16 border-t border-brand-border-light dark:border-brand-border-dark pt-10">
-                      {/* OCR Screenshot */}
-                      <div className="bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark rounded-xl p-6 md:p-10 shadow-xs">
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-                          <div className="space-y-4">
-                            <h4 className="text-xl font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark flex items-center gap-3">
-                              <SparklesIcon className="w-7 h-7 text-brand-accent-blue dark:text-brand-accent-indigo" />
-                              OCR Screenshot Reader
-                            </h4>
-                            <p className="text-sm md:text-base text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-relaxed">
-                              Upload dating chat screenshots directly to extract conversation text using AI Vision. The system automatically detects conversation sides, cleans up the OCR output, and generates highly relevant contextual replies.
-                            </p>
-                            <div className="bg-brand-bg-light dark:bg-brand-bg-dark p-4 rounded-xl border border-brand-border-light dark:border-brand-border-dark">
-                              <p className="text-xs md:text-sm text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-relaxed">
-                                <span className="text-brand-accent-blue dark:text-brand-accent-indigo font-semibold block mb-1">Why it matters: </span>
-                                Leveraging Gemini Vision OCR directly from mobile screenshots eliminates manual typing barriers, allowing users to effortlessly bridge external dating chat screenshots with targeted AI suggestions.
-                              </p>
-                            </div>
-                          </div>
-                          <div className="rounded-xl overflow-hidden shadow-xs border border-brand-border-light dark:border-brand-border-dark relative group max-w-xs mx-auto p-2 bg-slate-50 dark:bg-brand-bg-dark cursor-pointer">
-                            <img 
-                              src={flirtyfyOCR} 
-                              alt="OCR Chat Reader Screenshot" 
-                              className="w-full h-auto object-contain transform group-hover:scale-[1.01] transition-transform duration-500 rounded-lg" 
-                              onClick={() => setActiveImage({ src: flirtyfyOCR, alt: "OCR Chat Reader Screenshot" })}
-                            />
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Suite Feature Grid */}
-                      <div className="space-y-6 pt-4">
-                        <div className="space-y-1">
-                          <h4 className="text-lg md:text-xl font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark">Dating Assistance Suite</h4>
-                          <p className="text-xs md:text-sm text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark max-w-2xl">A collection of custom-built utilities tailored to rewrite bios, optimize openers, and reply in multiple distinct personalities.</p>
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                          <ImageCard
-                            src={flirtyfyReply}
-                            alt="AI Conversation Replies"
-                            title="AI Conversation Replies"
-                            caption="Generate multiple personalized reply suggestions in tones like Savage, Flirty, Gen Z, Soft, Direct, or Funny."
-                            containerClassName="aspect-[9/16] bg-slate-50 dark:bg-brand-bg-dark p-2"
-                            imgClassName="w-full h-full object-contain"
-                            onClick={() => setActiveImage({ src: flirtyfyReply, alt: "AI Conversation Replies" })}
-                          />
-                          <ImageCard
-                            src={flirtyfyOpener}
-                            alt="AI Icebreaker Generator"
-                            title="AI Icebreaker Generator"
-                            caption="Create engaging first messages using information extracted from dating profiles and bios."
-                            containerClassName="aspect-[9/16] bg-slate-50 dark:bg-brand-bg-dark p-2"
-                            imgClassName="w-full h-full object-contain"
-                            onClick={() => setActiveImage({ src: flirtyfyOpener, alt: "AI Icebreaker Generator" })}
-                          />
-                          <ImageCard
-                            src={flirtyfyBio}
-                            alt="AI Bio Rewriter"
-                            title="AI Bio Rewriter"
-                            caption="Transform dating profile bios into different styles and personas such as Romantic, Direct, Funny, or Meme Lord."
-                            containerClassName="aspect-[9/16] bg-slate-50 dark:bg-brand-bg-dark p-2"
-                            imgClassName="w-full h-full object-contain"
-                            onClick={() => setActiveImage({ src: flirtyfyBio, alt: "AI Bio Rewriter" })}
-                          />
-                        </div>
-                      </div>
-
-                      {/* Workflow Pipeline */}
-                      <div className="space-y-6 pt-6 border-t border-brand-border-light dark:border-brand-border-dark">
-                        <div className="space-y-1">
-                          <h4 className="text-lg md:text-xl font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark">AI Generation Workflow</h4>
-                          <p className="text-xs md:text-sm text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark max-w-2xl">The complete end-to-end processing pipeline, from user input ingestion to context-aware reply outputs.</p>
-                        </div>
-                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
-                          {[
-                            { step: 'User Input', desc: 'Paste Chat OR Screenshot' },
-                            { step: 'OCR Ingest', desc: 'Gemini Vision Extraction' },
-                            { step: 'Conversation Mapping', desc: 'Detect Person A / Person B' },
-                            { step: 'Conversation Cleanup', desc: 'Remove UI Noise & Format Messages' },
-                            { step: 'Prompting', desc: 'Persona & Tone Selection' },
-                            { step: 'AI Orchestration', desc: 'Build Context-Aware Prompt' },
-                            { step: 'LLM Generation', desc: 'Generate Multiple Reply Styles' },
-                            { step: 'Response Ranking', desc: 'Best Reply Variations' },
-                            { step: 'Output', desc: 'Copy / Save Result' }
-                          ].map((item, idx) => (
-                            <div key={idx} className="relative flex flex-col bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark p-4 rounded-xl">
-                              <div className="w-6 h-6 rounded-full bg-brand-accent-blue/15 text-brand-accent-blue dark:bg-brand-accent-indigo/15 dark:text-brand-accent-indigo flex items-center justify-center font-bold text-xs border border-brand-accent-blue/20 dark:border-brand-accent-indigo/20 mb-2">
-                                {idx + 1}
-                              </div>
-                              <h5 className="font-semibold text-brand-text-primary-light dark:text-brand-text-primary-dark text-xs mb-0.5">{item.step}</h5>
-                              <p className="text-[10px] text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark leading-tight">{item.desc}</p>
-                            </div>
+                      {/* 9. Technologies Used */}
+                      <div className="space-y-2 pt-4 border-t border-brand-border-light dark:border-brand-border-dark/60">
+                        <h4 className="text-xs font-bold uppercase tracking-wider text-brand-text-primary-light dark:text-brand-text-primary-dark">
+                          Technologies Used
+                        </h4>
+                        <div className="flex flex-wrap gap-1.5">
+                          {selectedProject.technologies.map(tech => (
+                            <span key={tech} className="px-2.5 py-1 bg-brand-surface-light dark:bg-brand-bg-dark border border-brand-border-light dark:border-brand-border-dark text-brand-text-secondary-light dark:text-brand-text-secondary-dark rounded-md text-[10px] font-semibold">
+                              {tech}
+                            </span>
                           ))}
                         </div>
                       </div>
 
-                      {/* Technical Details & Impact */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-brand-border-light dark:border-brand-border-dark">
-                        <div className="bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark rounded-xl p-6 transition-colors">
-                          <h4 className="text-lg font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark mb-4 flex items-center gap-2">
-                            <ServerStackIcon className="w-5 h-5 text-brand-accent-indigo" />
-                            System Architecture
-                          </h4>
-                          <div className="space-y-3">
-                            {[
-                              { step: 'Frontend Mobile', desc: 'React Native, Expo Router, and TypeScript for cross-platform app.' },
-                              { step: 'Backend Layer', desc: 'Vercel Serverless Functions running fast node routing modules.' },
-                              { step: 'AI Orchestration', desc: 'OpenRouter LLM interfaces & Gemini Vision OCR OCR models.' },
-                              { step: 'Storage & Analytics', desc: 'Supabase DB, PostHog events, and RevenueCat subscription rails.' }
-                            ].map((item, idx) => (
-                              <div key={idx} className="flex gap-3 items-start bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark p-3 rounded-lg">
-                                <div className="w-5 h-5 rounded bg-brand-accent-blue/15 text-brand-accent-blue dark:bg-brand-accent-indigo/15 dark:text-brand-accent-indigo flex items-center justify-center font-bold text-[10px] border border-brand-accent-blue/20 dark:border-brand-accent-indigo/20 shrink-0">
-                                  {idx + 1}
-                                </div>
-                                <div>
-                                  <h5 className="font-semibold text-brand-text-primary-light dark:text-brand-text-primary-dark text-xs">{item.step}</h5>
-                                  <p className="text-[11px] text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark mt-0.5">{item.desc}</p>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-
-                        <div className="bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark rounded-xl p-6 transition-colors flex flex-col justify-between">
-                          <div>
-                            <h4 className="text-lg font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark mb-3 flex items-center gap-2">
-                              <ChartBarIcon className="w-5 h-5 text-brand-accent-blue" />
-                              Impact & Highlights
-                            </h4>
-                            <div className="space-y-1.5 mb-4">
-                              {[
-                                'Supports both raw text and chat screenshot inputs',
-                                'Generates highly contextual dating reply suggestions',
-                                'AI OCR-powered chat message side-detection',
-                                '9 distinct reply tones (Savage, Gen Z, soft, direct)',
-                                'Mobile-first UX with production-ready architecture'
-                              ].map((highlight, idx) => (
-                                <div key={idx} className="text-xs md:text-sm text-brand-text-secondary-light dark:text-brand-text-secondary-dark flex gap-2">
-                                  <span className="text-brand-accent-blue font-semibold">•</span>
-                                  {highlight}
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                          <div className="bg-brand-bg-light dark:bg-brand-bg-dark p-4 rounded-lg border border-brand-border-light dark:border-brand-border-dark">
-                            <h5 className="font-semibold text-xs text-brand-text-primary-light dark:text-brand-text-primary-dark mb-2">Future Improvements</h5>
-                            <ul className="space-y-1">
-                              <li className="text-[11px] text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark flex gap-2">
-                                <span className="text-brand-accent-blue font-semibold">•</span> Multi-language support & conversation memory.
-                              </li>
-                              <li className="text-[11px] text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark flex gap-2">
-                                <span className="text-brand-accent-blue font-semibold">•</span> Custom AI personas & dating platform integrations.
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
                     </div>
-                  )}
 
-                  {selectedProject.id === 'vmware' && (
-                    <div className="space-y-16 border-t border-brand-border-light dark:border-brand-border-dark pt-10">
-                      {/* Virtual Infrastructure */}
-                      <div className="bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark rounded-xl p-6 md:p-10 shadow-xs">
-                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-                          <div className="lg:col-span-5 space-y-4">
-                            <h4 className="text-xl font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark flex items-center gap-3">
-                              <ServerStackIcon className="w-7 h-7 text-brand-accent-blue dark:text-brand-accent-indigo" />
-                              Virtual Infrastructure
-                            </h4>
-                            <p className="text-sm md:text-base text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-relaxed">
-                              Built using VMware to simulate a scalable multi-node architecture, featuring multiple isolated Ubuntu Server VMs. This environment mirrors a real-world enterprise setup, establishing a secure and stable foundation for hosting applications.
-                            </p>
-                            <div className="bg-brand-bg-light dark:bg-brand-bg-dark p-4 rounded-xl border border-brand-border-light dark:border-brand-border-dark">
-                              <p className="text-xs md:text-sm text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-relaxed">
-                                <span className="text-brand-accent-blue dark:text-brand-accent-indigo font-semibold block mb-1">Architecture Focus: </span>
-                                VM cloning, bridged networking, and complete environment isolation ensure that each server operates independently while communicating securely within the simulated local network.
-                              </p>
-                            </div>
-                          </div>
-                          <div className="lg:col-span-7 rounded-xl overflow-hidden shadow-xs border border-brand-border-light dark:border-brand-border-dark relative group bg-slate-55 dark:bg-brand-bg-dark p-2 flex items-center justify-center min-h-[250px]">
-                            <img 
-                              src={vmwareDashboard} 
-                              alt="VMware Dashboard" 
-                              className="w-full h-full object-contain transform group-hover:scale-[1.01] transition-transform duration-500 rounded-lg cursor-pointer" 
-                              onClick={() => setActiveImage({ src: vmwareDashboard, alt: "VMware Dashboard" })} 
-                            />
-                          </div>
-                        </div>
-                      </div>
+                  </div>
 
-                      {/* Load Balancing & Fault Tolerance */}
-                      <div className="space-y-6 pt-4">
-                        <div className="space-y-1">
-                          <h4 className="text-lg md:text-xl font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark">Load Balancing & Fault Tolerance</h4>
-                          <p className="text-xs md:text-sm text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark max-w-2xl font-medium">Enterprise-style high availability ensuring zero downtime. Nginx actively distributes traffic, and the architecture guarantees continuous operation even during node failures.</p>
-                        </div>
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                          <ImageCard
-                            src={loadBalancerSwitching}
-                            alt="Nginx Load Balancing"
-                            caption="Nginx round-robin traffic distribution, alternating requests between Web-Server-01 and Web-Server-02."
-                            containerClassName="aspect-[16/10] bg-slate-50 dark:bg-brand-bg-dark p-2"
-                            imgClassName="w-full h-full object-contain"
-                            onClick={() => setActiveImage({ src: loadBalancerSwitching, alt: "Nginx Load Balancing" })}
-                          />
-                          <ImageCard
-                            src={faultToleranceDemo}
-                            alt="Fault Tolerance Demo"
-                            caption="Demonstrating redundancy: one server can fail completely while the infrastructure remains fully operational."
-                            containerClassName="aspect-[16/10] bg-slate-50 dark:bg-brand-bg-dark p-2"
-                            imgClassName="w-full h-full object-contain"
-                            onClick={() => setActiveImage({ src: faultToleranceDemo, alt: "Fault Tolerance Demo" })}
-                          />
-                        </div>
-                      </div>
-
-                      {/* Automation & Monitoring */}
-                      <div className="space-y-6 pt-6 border-t border-brand-border-light dark:border-brand-border-dark">
-                        <div className="space-y-1">
-                          <h4 className="text-lg md:text-xl font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark">Automation & Monitoring</h4>
-                          <p className="text-xs md:text-sm text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark max-w-2xl font-medium">Applying Infrastructure as Code concepts for rapid deployment, combined with real-time resource observation and stress testing.</p>
-                        </div>
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                          <ImageCard
-                            src={bashAutomationScript}
-                            alt="Bash Automation"
-                            caption="Automated Apache provisioning using Bash scripting, reflecting basic IaC principles."
-                            containerClassName="aspect-[16/10] bg-slate-50 dark:bg-brand-bg-dark p-2"
-                            imgClassName="w-full h-full object-contain"
-                            onClick={() => setActiveImage({ src: bashAutomationScript, alt: "Bash Automation" })}
-                          />
-                          <ImageCard
-                            src={htopMonitoring}
-                            alt="HTOP Monitoring"
-                            caption="Live CPU/RAM monitoring via HTOP for resource observation and performance tracking during stress tests."
-                            containerClassName="aspect-[16/10] bg-slate-50 dark:bg-brand-bg-dark p-2"
-                            imgClassName="w-full h-full object-contain"
-                            onClick={() => setActiveImage({ src: htopMonitoring, alt: "HTOP Monitoring" })}
-                          />
-                        </div>
-                      </div>
-
-                      {/* System Architecture & Highlights */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-brand-border-light dark:border-brand-border-dark">
-                        <div className="bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark rounded-xl p-6 transition-colors">
-                          <h4 className="text-lg font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark mb-4 flex items-center gap-2">
-                            <ServerStackIcon className="w-5 h-5 text-brand-accent-indigo" />
-                            System Architecture
-                          </h4>
-                          <div className="space-y-3">
-                            {[
-                              { step: 'Hypervisor', desc: 'VMware Workstation managing multiple isolated virtual machines.' },
-                              { step: 'Load Balancer', desc: 'Nginx configuring round-robin proxy distribution for HTTP/HTTPS.' },
-                              { step: 'Web Servers', desc: 'Dual Apache servers serving synchronized web payloads.' },
-                              { step: 'Automation', desc: 'Bash scripts automating setup, user creation, and log rotation.' }
-                            ].map((item, idx) => (
-                              <div key={idx} className="flex gap-3 items-start bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark p-3 rounded-lg">
-                                <div className="w-5 h-5 rounded bg-brand-accent-blue/15 text-brand-accent-blue dark:bg-brand-accent-indigo/15 dark:text-brand-accent-indigo flex items-center justify-center font-bold text-[10px] border border-brand-accent-blue/20 dark:border-brand-accent-indigo/20 shrink-0">
-                                  {idx + 1}
-                                </div>
-                                <div>
-                                  <h5 className="font-semibold text-brand-text-primary-light dark:text-brand-text-primary-dark text-xs">{item.step}</h5>
-                                  <p className="text-[11px] text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark mt-0.5">{item.desc}</p>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-
-                        <div className="bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark rounded-xl p-6 transition-colors flex flex-col justify-between">
-                          <div>
-                            <h4 className="text-lg font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark mb-3 flex items-center gap-2">
-                              <ChartBarIcon className="w-5 h-5 text-brand-accent-blue" />
-                              Impact & Highlights
-                            </h4>
-                            <div className="space-y-1.5 mb-4">
-                              {[
-                                'Zero-downtime Nginx load balancer distribution',
-                                'Fully redundant host systems maintaining availability',
-                                'Isolated private networking within VMware hypervisor',
-                                'Scalable server pools configured for rapid extension',
-                                'Scripted server setup streamlining provisioning'
-                              ].map((highlight, idx) => (
-                                <div key={idx} className="text-xs md:text-sm text-brand-text-secondary-light dark:text-brand-text-secondary-dark flex gap-2">
-                                  <span className="text-brand-accent-blue font-semibold">•</span>
-                                  {highlight}
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                          <div className="bg-brand-bg-light dark:bg-brand-bg-dark p-4 rounded-lg border border-brand-border-light dark:border-brand-border-dark">
-                            <h5 className="font-semibold text-xs text-brand-text-primary-light dark:text-brand-text-primary-dark mb-2">Future Improvements</h5>
-                            <ul className="space-y-1">
-                              <li className="text-[11px] text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark flex gap-2">
-                                <span className="text-brand-accent-blue font-semibold">•</span> Distributed file synchronization using GlusterFS.
-                              </li>
-                              <li className="text-[11px] text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark flex gap-2">
-                                <span className="text-brand-accent-blue font-semibold">•</span> Automated monitoring alerts using Prometheus & Grafana.
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {selectedProject.id === 'minecraft' && (
-                    <div className="space-y-16 border-t border-brand-border-light dark:border-brand-border-dark pt-10">
-                      {/* Game Mode Navigation */}
-                      <div className="space-y-6">
-                        <div className="space-y-1">
-                          <h4 className="text-lg md:text-xl font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark">Game Mode Navigation</h4>
-                          <p className="text-xs md:text-sm text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark max-w-2xl font-medium">Central lobby system using NPC-based interaction to allow players to seamlessly switch between different game modes like Survival, SkyBlock, OneBlock, and PvP.</p>
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          <ImageCard
-                            src={lobbyNpc}
-                            alt="NPC-Based Mode Selection"
-                            caption="NPC-Based Mode Selection"
-                            containerClassName="bg-slate-50 dark:bg-brand-bg-dark p-2"
-                            onClick={() => setActiveImage({ src: lobbyNpc, alt: "NPC-Based Mode Selection" })}
-                          />
-                          <ImageCard
-                            src={skyblockNpc}
-                            alt="SkyBlock Entry System"
-                            caption="SkyBlock Entry System"
-                            containerClassName="bg-slate-50 dark:bg-brand-bg-dark p-2"
-                            onClick={() => setActiveImage({ src: skyblockNpc, alt: "SkyBlock Entry System" })}
-                          />
-                        </div>
-                      </div>
-
-                      {/* Custom GUI */}
-                      <div className="space-y-6 pt-6 border-t border-brand-border-light dark:border-brand-border-dark">
-                        <div className="space-y-1">
-                          <h4 className="text-lg md:text-xl font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark">Custom GUI Systems</h4>
-                          <p className="text-xs md:text-sm text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark max-w-2xl font-medium">Implemented custom GUI interfaces for gameplay systems like OneBlock progression, shops, and missions to enhance user interaction and control.</p>
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          <ImageCard
-                            src={skyblockGui}
-                            alt="SkyBlock Main GUI System"
-                            caption="SkyBlock Main GUI System"
-                            containerClassName="bg-slate-50 dark:bg-brand-bg-dark p-2"
-                            onClick={() => setActiveImage({ src: skyblockGui, alt: "SkyBlock Main GUI System" })}
-                          />
-                          <ImageCard
-                            src={skyblockGui2}
-                            alt="SkyBlock Mission & Economy Interface"
-                            caption="SkyBlock Mission & Economy Interface"
-                            containerClassName="bg-slate-50 dark:bg-brand-bg-dark p-2"
-                            onClick={() => setActiveImage({ src: skyblockGui2, alt: "SkyBlock Mission & Economy Interface" })}
-                          />
-                        </div>
-                      </div>
-
-                      {/* Multi-Mode Gameplay */}
-                      <div className="space-y-6 pt-6 border-t border-brand-border-light dark:border-brand-border-dark">
-                        <div className="space-y-1">
-                          <h4 className="text-lg md:text-xl font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark">Multi-Mode Gameplay System</h4>
-                          <p className="text-xs md:text-sm text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark max-w-2xl font-medium">Designed multiple independent game modes including Survival, PvP, and SkyBlock with shared permissions, economy integration, and stable performance.</p>
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          <ImageCard
-                            src={pvpLobby}
-                            alt="PvP Lobby"
-                            caption="PvP Lobby"
-                            containerClassName="bg-slate-50 dark:bg-brand-bg-dark p-2"
-                            onClick={() => setActiveImage({ src: pvpLobby, alt: "PvP Lobby" })}
-                          />
-                          <ImageCard
-                            src={survivalLobby}
-                            alt="Survival World"
-                            caption="Survival World"
-                            containerClassName="bg-slate-50 dark:bg-brand-bg-dark p-2"
-                            onClick={() => setActiveImage({ src: survivalLobby, alt: "Survival World" })}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  )}
                 </div>
               </motion.div>
             </div>
           )}
         </AnimatePresence>
 
-        {/* Lightbox Modal Overlay (Higher z-index) */}
+        {/* Lightbox screenshot backdrop */}
         <AnimatePresence>
           {activeImage && (
             <motion.div
@@ -989,16 +947,16 @@ export const Projects = () => {
               <button
                 onClick={() => setActiveImage(null)}
                 className="absolute top-6 right-6 text-slate-400 hover:text-white p-2 rounded-full bg-slate-900/50 border border-slate-800 hover:border-slate-700 transition-all duration-200 cursor-pointer z-[120]"
-                aria-label="Close modal"
+                aria-label="Close image light box"
               >
                 <XMarkIcon className="w-6 h-6" />
               </button>
 
               <motion.div
-                initial={{ scale: 0.96, opacity: 0 }}
+                initial={{ scale: 0.97, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.96, opacity: 0 }}
-                transition={{ type: "spring", duration: 0.35 }}
+                exit={{ scale: 0.97, opacity: 0 }}
+                transition={{ type: "spring", duration: 0.3 }}
                 className="relative max-w-5xl max-h-[90vh] flex items-center justify-center"
                 onClick={(e) => e.stopPropagation()}
               >

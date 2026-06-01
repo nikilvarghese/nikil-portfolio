@@ -1,8 +1,19 @@
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Bars3Icon, XMarkIcon, SunIcon, MoonIcon, EnvelopeIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline';
+import { 
+  Bars3Icon, 
+  XMarkIcon, 
+  SunIcon, 
+  MoonIcon, 
+  EnvelopeIcon, 
+  ArrowDownTrayIcon, 
+  CheckIcon,
+  DocumentDuplicateIcon
+} from '@heroicons/react/24/outline';
 import { useTheme } from '../context/ThemeContext';
 import resumePdf from '../assets/resume.pdf';
+import { NavbarLogo } from './NavbarLogo';
 
 const LinkedInIcon = ({ className }: { className?: string }) => (
   <svg className={className} fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -18,8 +29,10 @@ const GitHubIcon = ({ className }: { className?: string }) => (
 
 const navItems = [
   { name: 'About', href: '#about' },
-  { name: 'Skills', href: '#skills' },
-  { name: 'Work', href: '#work' },
+  { name: 'Projects', href: '#work' },
+  { name: 'Achievements', href: '#achievements' },
+  { name: 'Expertise', href: '#skills' },
+  { name: 'Principles', href: '#philosophy' },
   { name: 'Contact', href: '#contact' },
 ];
 
@@ -59,9 +72,8 @@ export const Navbar = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
 
-      // Simple active section detection based on page offsets
-      const sections = ['about', 'skills', 'work', 'contact'];
-      const scrollPosition = window.scrollY + 120; // 120px offset for headers
+      const sections = ['about', 'work', 'achievements', 'skills', 'philosophy', 'contact'];
+      const scrollPosition = window.scrollY + 140;
 
       for (const sectionId of sections) {
         const el = document.getElementById(sectionId);
@@ -75,7 +87,6 @@ export const Navbar = () => {
         }
       }
       
-      // If at the very top, clear active section
       if (window.scrollY < 100) {
         setActiveSection('');
       }
@@ -86,99 +97,130 @@ export const Navbar = () => {
 
   return (
     <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.4 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
+      className={`fixed top-0 left-0 right-0 transition-all duration-300 ${
+        isHireModalOpen ? 'z-[200]' : 'z-50'
+      } ${
         isScrolled
-          ? 'bg-brand-surface-light/80 dark:bg-brand-bg-dark/80 backdrop-blur-md border-brand-border-light dark:border-brand-border-dark shadow-xs'
-          : 'bg-transparent border-transparent'
+          ? 'bg-brand-bg-light/75 dark:bg-brand-bg-dark/70 backdrop-blur-md border-b border-brand-border-light dark:border-brand-border-dark/60 py-3 shadow-xs'
+          : 'bg-transparent border-b border-transparent py-5'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        <a href="#" className="text-2xl font-bold text-slate-900 dark:text-white hover:text-brand-accent-blue dark:hover:text-brand-accent-indigo transition-colors">
-          N.
+      <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
+        {/* Brand Logo */}
+        <a 
+          href="#" 
+          className="flex items-center gap-3 text-lg font-bold tracking-tight text-brand-text-primary-light dark:text-brand-text-primary-dark transition-colors duration-200 group"
+          aria-label="Nikil Varghese Home"
+        >
+          <NavbarLogo className="h-[32px] w-auto shrink-0 transition-transform duration-200 group-hover:scale-[1.02]" alt="" />
+          <span>Nikil Varghese</span>
         </a>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8">
-          {navItems.map((item) => {
-            const isLinkActive = item.href.slice(1) === activeSection;
-            return (
-              <a
-                key={item.name}
-                href={item.href}
-                className={`text-sm font-medium transition-colors ${
-                  isLinkActive
-                    ? 'text-brand-accent-blue dark:text-brand-accent-indigo font-semibold'
-                    : 'text-brand-text-secondary-light hover:text-brand-text-primary-light dark:text-brand-text-secondary-dark dark:hover:text-brand-text-primary-dark'
-                }`}
-              >
-                {item.name}
-              </a>
-            );
-          })}
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-7">
+          <div className="flex items-center gap-6 border border-brand-border-light dark:border-brand-border-dark/85 bg-brand-surface-light/40 dark:bg-[#121215]/50 px-5 py-2 rounded-full">
+            {navItems.map((item) => {
+              const isLinkActive = item.href.slice(1) === activeSection;
+              return (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className={`relative z-10 text-xs font-medium tracking-tight transition-colors duration-200 px-2 py-0.5 ${
+                    isLinkActive
+                      ? 'text-brand-accent-indigo font-semibold dark:text-brand-text-primary-dark'
+                      : 'text-brand-text-secondary-light hover:text-brand-text-primary-light dark:text-brand-text-secondary-dark dark:hover:text-brand-text-primary-dark'
+                  }`}
+                >
+                  {item.name}
+                  {isLinkActive && (
+                    <motion.span
+                      layoutId="activeTab"
+                      className="absolute inset-0 bg-brand-accent-indigo/10 dark:bg-brand-accent-indigo/15 rounded-full -z-10"
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </a>
+              );
+            })}
+          </div>
           
-          {/* Theme Toggle Button */}
+          <div className="h-4 w-px bg-brand-border-light dark:bg-brand-border-dark/80" />
+
+          {/* Theme Toggler */}
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-lg border border-brand-border-light dark:border-brand-border-dark text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark hover:bg-brand-surface-hover-light dark:hover:bg-brand-surface-hover-dark/40 hover:text-brand-text-primary-light dark:hover:text-brand-text-primary-dark transition-all cursor-pointer"
+            className="p-2 rounded-lg border border-brand-border-light dark:border-brand-border-dark/80 text-brand-text-secondary-light dark:text-brand-text-secondary-dark hover:bg-brand-surface-hover-light dark:hover:bg-brand-surface-hover-dark/40 hover:text-brand-text-primary-light dark:hover:text-brand-text-primary-dark transition-all cursor-pointer"
             aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}
           >
             {theme === 'light' ? (
-              <MoonIcon className="h-5 w-5" />
+              <MoonIcon className="h-4 w-4" />
             ) : (
-              <SunIcon className="h-5 w-5" />
+              <SunIcon className="h-4 w-4" />
             )}
           </button>
 
+          {/* Resume CTA */}
+          <a
+            href={resumePdf}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 px-4 py-2 text-xs font-semibold rounded-lg border border-brand-border-light dark:border-brand-border-dark/80 text-brand-text-secondary-light hover:text-brand-text-primary-light dark:text-brand-text-secondary-dark dark:hover:text-brand-text-primary-dark hover:bg-brand-surface-hover-light dark:hover:bg-brand-surface-hover-dark/40 transition-all duration-200 cursor-pointer shadow-xs active:scale-[0.98]"
+          >
+            <ArrowDownTrayIcon className="w-3.5 h-3.5 shrink-0" />
+            <span>Resume</span>
+          </a>
+
+          {/* Recruiter CTA */}
           <button
             onClick={() => setIsHireModalOpen(true)}
-            className="px-5 py-2.5 text-sm font-medium rounded-lg bg-slate-900 text-white hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-950 dark:hover:bg-slate-200 transition-colors shadow-xs border border-transparent cursor-pointer"
+            className="px-4 py-2 text-xs font-semibold rounded-lg bg-brand-text-primary-light text-brand-bg-light hover:opacity-90 dark:bg-brand-text-primary-dark dark:text-brand-bg-dark transition-all duration-200 cursor-pointer shadow-sm active:scale-[0.98]"
           >
             Hire Me
           </button>
         </nav>
 
-        {/* Mobile Nav Actions */}
-        <div className="flex items-center gap-4 md:hidden">
-          {/* Theme Toggle Button Mobile */}
+        {/* Mobile Navigation Trigger */}
+        <div className="flex items-center gap-3 md:hidden">
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-lg border border-brand-border-light dark:border-brand-border-dark text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark hover:bg-brand-surface-hover-light dark:hover:bg-brand-surface-hover-dark/40 hover:text-brand-text-primary-light dark:hover:text-brand-text-primary-dark transition-all cursor-pointer"
+            className="p-2 rounded-lg border border-brand-border-light dark:border-brand-border-dark/80 text-brand-text-secondary-light dark:text-brand-text-secondary-dark hover:bg-brand-surface-hover-light dark:hover:bg-brand-surface-hover-dark/40 hover:text-brand-text-primary-light dark:hover:text-brand-text-primary-dark transition-all cursor-pointer"
             aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}
           >
             {theme === 'light' ? (
-              <MoonIcon className="h-5 w-5" />
+              <MoonIcon className="h-4 w-4" />
             ) : (
-              <SunIcon className="h-5 w-5" />
+              <SunIcon className="h-4 w-4" />
             )}
           </button>
 
           <button
-            className="p-2 text-brand-text-secondary-light dark:text-brand-text-secondary-dark hover:text-brand-text-primary-light dark:hover:text-brand-text-primary-dark focus:outline-none"
+            className="p-2 text-brand-text-secondary-light dark:text-brand-text-secondary-dark hover:text-brand-text-primary-light dark:hover:text-brand-text-primary-dark border border-brand-border-light dark:border-brand-border-dark/80 rounded-lg cursor-pointer"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? (
-              <XMarkIcon className="h-6 w-6" />
+              <XMarkIcon className="h-4 w-4" />
             ) : (
-              <Bars3Icon className="h-6 w-6" />
+              <Bars3Icon className="h-4 w-4" />
             )}
           </button>
         </div>
       </div>
 
-      {/* Mobile Nav */}
+      {/* Mobile Nav Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.nav
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-brand-surface-light dark:bg-brand-surface-dark border-b border-brand-border-light dark:border-brand-border-dark shadow-sm"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden absolute top-full left-0 right-0 bg-brand-surface-light dark:bg-[#0f0f11] border-b border-brand-border-light dark:border-brand-border-dark/80 shadow-md"
           >
-            <div className="flex flex-col px-6 py-4 space-y-4">
+            <div className="flex flex-col px-6 py-5 space-y-4">
               {navItems.map((item) => {
                 const isLinkActive = item.href.slice(1) === activeSection;
                 return (
@@ -186,9 +228,9 @@ export const Navbar = () => {
                     key={item.name}
                     href={item.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className={`text-base font-medium transition-colors ${
+                    className={`text-sm font-medium transition-colors ${
                       isLinkActive
-                        ? 'text-brand-accent-blue dark:text-brand-accent-indigo font-semibold'
+                        ? 'text-brand-accent-indigo font-semibold'
                         : 'text-brand-text-secondary-light hover:text-brand-text-primary-light dark:text-brand-text-secondary-dark dark:hover:text-brand-text-primary-dark'
                     }`}
                   >
@@ -196,120 +238,149 @@ export const Navbar = () => {
                   </a>
                 );
               })}
-              <button
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  setIsHireModalOpen(true);
-                }}
-                className="w-full text-center px-5 py-2.5 text-sm font-semibold rounded-lg bg-slate-900 text-white hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-950 dark:hover:bg-slate-200 transition-colors shadow-xs border border-transparent cursor-pointer"
-              >
-                Hire Me
-              </button>
+              <div className="flex gap-3 pt-2">
+                <a
+                  href={resumePdf}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-grow text-center flex items-center justify-center gap-1.5 px-4 py-2.5 text-xs font-semibold rounded-lg border border-brand-border-light dark:border-brand-border-dark/80 text-brand-text-secondary-light hover:text-brand-text-primary-light dark:text-brand-text-secondary-dark dark:hover:text-brand-text-primary-dark hover:bg-brand-surface-hover-light dark:hover:bg-brand-surface-hover-dark/40 transition-all cursor-pointer shadow-xs"
+                >
+                  <ArrowDownTrayIcon className="w-3.5 h-3.5 shrink-0" />
+                  <span>Resume</span>
+                </a>
+                <button
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    setIsHireModalOpen(true);
+                  }}
+                  className="flex-grow text-center px-4 py-2.5 text-xs font-semibold rounded-lg bg-brand-text-primary-light text-brand-bg-light dark:bg-brand-text-primary-dark dark:text-brand-bg-dark transition-all cursor-pointer shadow-sm active:scale-[0.98]"
+                >
+                  Hire Me
+                </button>
+              </div>
             </div>
           </motion.nav>
         )}
       </AnimatePresence>
 
-      {/* Hire Me Modal */}
-      <AnimatePresence>
-        {isHireModalOpen && (
-          <div className="fixed inset-0 z-[100] flex items-start md:items-center justify-center bg-black/50 dark:bg-black/80 backdrop-blur-xs p-4 overflow-y-auto" onClick={() => setIsHireModalOpen(false)}>
-            <motion.div
-              initial={{ scale: 0.96, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.96, opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="bg-brand-bg-light dark:bg-brand-bg-dark border border-brand-border-light dark:border-brand-border-dark w-full max-w-md rounded-xl shadow-xl p-6 relative flex flex-col gap-6"
-              onClick={(e) => e.stopPropagation()}
+      {/* Connection & Hiring Dialogue Modal */}
+      {typeof document !== 'undefined' && createPortal(
+        <AnimatePresence>
+          {isHireModalOpen && (
+            <div 
+              className="fixed inset-0 z-[300] flex items-start sm:items-center justify-center bg-black/60 dark:bg-black/80 backdrop-blur-xs p-4 sm:p-6 overflow-y-auto cursor-pointer" 
+              onClick={() => setIsHireModalOpen(false)}
             >
-              {/* Header */}
-              <div className="flex items-center justify-between border-b border-brand-border-light dark:border-brand-border-dark pb-4">
-                <h3 className="text-lg font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark">
-                  Hire Me
-                </h3>
+              <motion.div
+                initial={{ scale: 0.98, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.98, opacity: 0 }}
+                transition={{ duration: 0.25, ease: 'easeOut' }}
+                className="bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark w-full max-w-md rounded-xl shadow-xl p-6 sm:p-8 relative flex flex-col gap-6 cursor-default my-8 sm:my-auto"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Close button - absolute top-5 right-5 */}
                 <button
                   onClick={() => setIsHireModalOpen(false)}
-                  className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-brand-surface-hover-dark/40 text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark hover:text-brand-text-primary-light dark:hover:text-brand-text-primary-dark cursor-pointer transition-colors"
+                  className="absolute top-5 right-5 p-1.5 rounded-lg border border-brand-border-light dark:border-brand-border-dark/80 text-brand-text-secondary-light dark:text-brand-text-secondary-dark hover:bg-brand-surface-hover-light dark:hover:bg-brand-surface-hover-dark/40 hover:text-brand-text-primary-light dark:hover:text-brand-text-primary-dark transition-colors cursor-pointer flex items-center justify-center"
                   aria-label="Close modal"
                 >
-                  <XMarkIcon className="w-5 h-5" />
+                  <XMarkIcon className="w-4 h-4" />
                 </button>
-              </div>
 
-              {/* Intro / Recruiter Focus */}
-              <div className="space-y-2">
-                <p className="text-sm text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-relaxed font-normal">
-                  I'm open to full-time opportunities and collaborations. Get in touch directly, view my profiles, or download my resume below.
-                </p>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex flex-col gap-3">
-                {/* Resume Download (Primary Action) */}
-                <a
-                  href={resumePdf}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 w-full py-3 px-4 rounded-lg bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-950 hover:bg-slate-800 dark:hover:bg-slate-200 transition-colors font-semibold text-sm shadow-xs cursor-pointer"
-                >
-                  <ArrowDownTrayIcon className="w-4 h-4 shrink-0" />
-                  View & Download Resume
-                </a>
-
-                {/* Email Action */}
-                <div className="flex items-center gap-2 mt-2">
-                  <a
-                    href="mailto:nikiledwin6@gmail.com"
-                    className="flex-1 flex items-center gap-3 p-3 rounded-lg border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark hover:border-slate-350 dark:hover:border-slate-700 transition-all group"
-                  >
-                    <EnvelopeIcon className="w-5 h-5 text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark group-hover:text-brand-accent-blue dark:group-hover:text-brand-accent-indigo transition-colors" />
-                    <div className="text-left">
-                      <span className="block text-[11px] font-semibold text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark uppercase tracking-wider">Email</span>
-                      <span className="block text-xs font-semibold text-brand-text-primary-light dark:text-brand-text-primary-dark truncate max-w-[150px] sm:max-w-xs">nikiledwin6@gmail.com</span>
-                    </div>
-                  </a>
-                  <button
-                    onClick={handleCopyEmail}
-                    className="p-3 rounded-lg border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark hover:bg-slate-100 dark:hover:bg-brand-surface-hover-dark/40 text-brand-text-secondary-light dark:text-brand-text-secondary-dark text-xs font-semibold cursor-pointer transition-all min-w-[70px]"
-                  >
-                    {copied ? 'Copied!' : 'Copy'}
-                  </button>
+                {/* Title & Description with clean visual hierarchy */}
+                <div className="space-y-1.5 pr-8">
+                  <span className="text-[10px] text-brand-accent-indigo dark:text-brand-accent-indigo tracking-wider font-semibold uppercase block">
+                    Contact
+                  </span>
+                  <h3 className="text-base font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark">
+                    Resume & Contact Details
+                  </h3>
+                  <p className="text-xs text-brand-text-secondary-light dark:text-brand-text-secondary-dark mt-1 leading-relaxed font-normal">
+                    Feel free to access my resume or reach out directly to discuss job opportunities and projects.
+                  </p>
                 </div>
 
-                {/* LinkedIn Link */}
-                <a
-                  href="https://www.linkedin.com/in/nikil-varghese-956281255/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 p-3 rounded-lg border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark hover:border-slate-350 dark:hover:border-slate-700 transition-all group"
-                >
-                  <LinkedInIcon className="w-5 h-5 text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark group-hover:text-brand-accent-blue dark:group-hover:text-brand-accent-indigo transition-colors" />
-                  <div className="text-left">
-                    <span className="block text-[11px] font-semibold text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark uppercase tracking-wider">LinkedIn</span>
-                    <span className="block text-xs font-semibold text-brand-text-primary-light dark:text-brand-text-primary-dark">nikil-varghese-956281255</span>
-                  </div>
-                  <span className="ml-auto text-xs text-brand-text-tertiary-light group-hover:text-brand-text-primary-light dark:group-hover:text-brand-text-primary-dark transition-colors font-medium">Connect &rarr;</span>
-                </a>
+                {/* Action Buttons */}
+                <div className="flex flex-col gap-2.5">
+                  {/* PDF Resume Download */}
+                  <a
+                    href={resumePdf}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-lg bg-brand-text-primary-light text-brand-bg-light dark:bg-brand-text-primary-dark dark:text-brand-bg-dark hover:opacity-90 transition-opacity font-semibold text-xs shadow-xs cursor-pointer"
+                  >
+                    <ArrowDownTrayIcon className="w-3.5 h-3.5 shrink-0" />
+                    View & Download Resume
+                  </a>
 
-                {/* GitHub Link */}
-                <a
-                  href="https://github.com/nikilvarghese"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 p-3 rounded-lg border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark hover:border-slate-350 dark:hover:border-slate-700 transition-all group"
-                >
-                  <GitHubIcon className="w-5 h-5 text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark group-hover:text-brand-accent-blue dark:group-hover:text-brand-accent-indigo transition-colors" />
-                  <div className="text-left">
-                    <span className="block text-[11px] font-semibold text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark uppercase tracking-wider">GitHub</span>
-                    <span className="block text-xs font-semibold text-brand-text-primary-light dark:text-brand-text-primary-dark">nikilvarghese</span>
+                  {/* Email (with Copy utility) */}
+                  <div className="flex gap-2 mt-1">
+                    <a
+                      href="mailto:nikiledwin6@gmail.com"
+                      className="flex-grow flex items-center gap-3 p-2.5 rounded-lg border border-brand-border-light dark:border-brand-border-dark/80 bg-brand-surface-light dark:bg-brand-surface-dark hover:border-brand-accent-indigo/40 dark:hover:border-brand-accent-indigo/40 transition-colors group"
+                    >
+                      <EnvelopeIcon className="w-4 h-4 text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark group-hover:text-brand-accent-indigo transition-colors" />
+                      <div className="text-left leading-none">
+                        <span className="block text-[8px] font-bold text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark uppercase tracking-wider mb-0.5">Email</span>
+                        <span className="block text-xs font-semibold text-brand-text-primary-light dark:text-brand-text-primary-dark truncate max-w-[170px] sm:max-w-xs">nikiledwin6@gmail.com</span>
+                      </div>
+                    </a>
+                    
+                    <button
+                      onClick={handleCopyEmail}
+                      className="px-3.5 rounded-lg border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark hover:bg-brand-surface-hover-light dark:hover:bg-brand-surface-hover-dark/40 text-brand-text-secondary-light dark:text-brand-text-secondary-dark text-xs font-semibold cursor-pointer transition-colors min-w-[75px] flex items-center justify-center gap-1.5"
+                    >
+                      {copied ? (
+                        <>
+                          <CheckIcon className="w-3.5 h-3.5 text-green-500" />
+                          <span className="text-[11px] text-green-500">Copied</span>
+                        </>
+                      ) : (
+                        <>
+                          <DocumentDuplicateIcon className="w-3.5 h-3.5 text-brand-text-tertiary-light" />
+                          <span className="text-[11px]">Copy</span>
+                        </>
+                      )}
+                    </button>
                   </div>
-                  <span className="ml-auto text-xs text-brand-text-tertiary-light group-hover:text-brand-text-primary-light dark:group-hover:text-brand-text-primary-dark transition-colors font-medium">View &rarr;</span>
-                </a>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
+
+                  {/* LinkedIn Link */}
+                  <a
+                    href="https://www.linkedin.com/in/nikil-varghese-956281255/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 p-2.5 rounded-lg border border-brand-border-light dark:border-brand-border-dark/80 bg-brand-surface-light dark:bg-brand-surface-dark hover:border-brand-accent-indigo/40 dark:hover:border-brand-accent-indigo/40 transition-colors group"
+                  >
+                    <LinkedInIcon className="w-4 h-4 text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark group-hover:text-brand-accent-indigo transition-colors" />
+                    <div className="text-left leading-none">
+                      <span className="block text-[8px] font-bold text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark uppercase tracking-wider mb-0.5">LinkedIn</span>
+                      <span className="block text-xs font-semibold text-brand-text-primary-light dark:text-brand-text-primary-dark">nikil-varghese-956281255</span>
+                    </div>
+                    <span className="ml-auto text-[10px] text-brand-text-tertiary-light group-hover:text-brand-text-primary-light dark:group-hover:text-brand-text-primary-dark transition-colors font-medium">Connect &rarr;</span>
+                  </a>
+
+                  {/* GitHub Link */}
+                  <a
+                    href="https://github.com/nikilvarghese"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 p-2.5 rounded-lg border border-brand-border-light dark:border-brand-border-dark/80 bg-brand-surface-light dark:bg-brand-surface-dark hover:border-brand-accent-indigo/40 dark:hover:border-brand-accent-indigo/40 transition-colors group"
+                  >
+                    <GitHubIcon className="w-4 h-4 text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark group-hover:text-brand-accent-indigo transition-colors" />
+                    <div className="text-left leading-none">
+                      <span className="block text-[8px] font-bold text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark uppercase tracking-wider mb-0.5">GitHub</span>
+                      <span className="block text-xs font-semibold text-brand-text-primary-light dark:text-brand-text-primary-dark">nikilvarghese</span>
+                    </div>
+                    <span className="ml-auto text-[10px] text-brand-text-tertiary-light group-hover:text-brand-text-primary-light dark:group-hover:text-brand-text-primary-dark transition-colors font-medium font-semibold">View &rarr;</span>
+                  </a>
+                </div>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </motion.header>
   );
 };
