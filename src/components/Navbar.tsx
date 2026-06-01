@@ -101,8 +101,8 @@ export const Navbar = () => {
         isHireModalOpen ? 'z-[200]' : 'z-50'
       } ${
         isScrolled
-          ? 'bg-brand-bg-light/75 dark:bg-brand-bg-dark/70 backdrop-blur-md border-b border-brand-border-light dark:border-brand-border-dark/60 py-3 shadow-xs'
-          : 'bg-transparent border-b border-transparent py-5'
+          ? 'bg-brand-bg-light/75 dark:bg-brand-bg-dark/70 backdrop-blur-md border-b border-brand-border-light dark:border-brand-border-dark/60 py-2 md:py-3 shadow-xs'
+          : 'bg-transparent border-b border-transparent py-3.5 md:py-5'
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between gap-4 w-full">
@@ -112,7 +112,7 @@ export const Navbar = () => {
           className="flex items-center gap-3 text-lg font-bold tracking-tight text-brand-text-primary-light dark:text-brand-text-primary-dark transition-colors duration-200 group shrink-0 whitespace-nowrap"
           aria-label="Nikil Varghese Home"
         >
-          <NavbarLogo className="h-10 w-auto shrink-0 transition-transform duration-200 group-hover:scale-[1.02]" alt="" />
+          <NavbarLogo className="h-7 md:h-10 w-auto shrink-0 transition-transform duration-200 group-hover:scale-[1.02]" alt="" />
           <span className="whitespace-nowrap shrink-0">Nikil Varghese</span>
         </a>
 

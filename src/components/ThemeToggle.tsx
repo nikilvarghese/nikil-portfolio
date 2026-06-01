@@ -22,19 +22,19 @@ export const ThemeToggle: React.FC = () => {
     <div
       role="radiogroup"
       aria-label="Theme selector"
-      className="relative h-12 w-[88px] sm:w-[172px] rounded-lg p-1 bg-[#f3f4f6] dark:bg-[#1e1e24] border border-black/14 dark:border-white/20 flex items-center transition-colors duration-300 select-none"
+      className="relative h-9 md:h-12 w-[68px] md:w-[172px] rounded-lg p-1 bg-[#f3f4f6] dark:bg-[#1e1e24] border border-black/14 dark:border-white/20 flex items-center transition-colors duration-300 select-none"
     >
       {/* Sliding Active Segment */}
       {theme === 'light' ? (
         <motion.div
           layoutId="activeThemeBg"
-          className="absolute inset-y-1 left-1 w-[38px] sm:w-[82px] rounded-md bg-white shadow-[0_2px_5px_rgba(0,0,0,0.08)] border border-black/5"
+          className="absolute inset-y-1 left-1 w-[30px] md:w-[82px] rounded-md bg-white shadow-[0_2px_5px_rgba(0,0,0,0.08)] border border-black/5"
           transition={{ type: 'tween', ease: 'easeInOut', duration: 0.25 }}
         />
       ) : (
         <motion.div
           layoutId="activeThemeBg"
-          className="absolute inset-y-1 right-1 w-[38px] sm:w-[82px] rounded-md bg-[#383842] shadow-[0_4px_12px_rgba(0,0,0,0.4)] border border-white/10"
+          className="absolute inset-y-1 right-1 w-[30px] md:w-[82px] rounded-md bg-[#383842] shadow-[0_4px_12px_rgba(0,0,0,0.4)] border border-white/10"
           transition={{ type: 'tween', ease: 'easeInOut', duration: 0.25 }}
         />
       )}
@@ -48,14 +48,14 @@ export const ThemeToggle: React.FC = () => {
         aria-checked={theme === 'light'}
       >
         <SunIcon
-          className={`h-5 w-5 transition-colors duration-200 ${
+          className={`h-4 w-4 md:h-5 md:w-5 transition-colors duration-200 ${
             theme === 'light'
               ? 'text-zinc-950 dark:text-white font-semibold'
               : 'text-zinc-500 group-hover:text-zinc-900 dark:text-white/70 dark:group-hover:text-white'
           }`}
         />
         <span
-          className={`hidden sm:inline text-xs font-semibold transition-colors duration-200 ${
+          className={`hidden md:inline text-xs font-semibold transition-colors duration-200 ${
             theme === 'light'
               ? 'text-zinc-950 dark:text-white'
               : 'text-zinc-500 group-hover:text-zinc-900 dark:text-white/70 dark:group-hover:text-white'
@@ -74,14 +74,14 @@ export const ThemeToggle: React.FC = () => {
         aria-checked={theme === 'dark'}
       >
         <MoonIcon
-          className={`h-5 w-5 transition-colors duration-200 ${
+          className={`h-4 w-4 md:h-5 md:w-5 transition-colors duration-200 ${
             theme === 'dark'
               ? 'text-zinc-950 dark:text-white font-semibold'
               : 'text-zinc-500 group-hover:text-zinc-900 dark:text-white/70 dark:group-hover:text-white'
           }`}
         />
         <span
-          className={`hidden sm:inline text-xs font-semibold transition-colors duration-200 ${
+          className={`hidden md:inline text-xs font-semibold transition-colors duration-200 ${
             theme === 'dark'
               ? 'text-zinc-950 dark:text-white'
               : 'text-zinc-500 group-hover:text-zinc-900 dark:text-white/70 dark:group-hover:text-white'
