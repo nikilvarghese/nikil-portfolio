@@ -44,7 +44,7 @@ export const Achievements = () => {
         {/* Grid Container */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {achievementsList.map((item, idx) => (
-            <ScrollReveal key={idx} delay={idx * 100} className="flex animate-card">
+            <ScrollReveal key={idx} delay={idx * 100} className="flex">
               <div
                 className="group w-full bg-brand-surface-light dark:bg-[#121215]/50 border border-brand-border-light dark:border-brand-border-dark hover:border-slate-350 dark:hover:border-zinc-800 rounded-xl p-6 flex flex-col justify-between transition-all duration-300 shadow-xs hover:shadow-sm"
               >

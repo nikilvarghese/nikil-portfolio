@@ -4,14 +4,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Bars3Icon, 
   XMarkIcon, 
-  SunIcon, 
-  MoonIcon, 
   EnvelopeIcon, 
   ArrowDownTrayIcon, 
   CheckIcon,
   DocumentDuplicateIcon
 } from '@heroicons/react/24/outline';
-import { useTheme } from '../context/ThemeContext';
+import { ThemeToggle } from './ThemeToggle';
 import resumePdf from '../assets/resume.pdf';
 import { NavbarLogo } from './NavbarLogo';
 
@@ -39,7 +37,6 @@ const navItems = [
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { theme, toggleTheme } = useTheme();
   const [activeSection, setActiveSection] = useState('');
   const [isHireModalOpen, setIsHireModalOpen] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -108,27 +105,27 @@ export const Navbar = () => {
           : 'bg-transparent border-b border-transparent py-5'
       }`}
     >
-      <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
-        {/* Brand Logo */}
+      <div className="max-w-6xl mx-auto px-6 flex items-center justify-between gap-4 w-full">
+        {/* Brand Logo & Name */}
         <a 
           href="#" 
-          className="flex items-center gap-3 text-lg font-bold tracking-tight text-brand-text-primary-light dark:text-brand-text-primary-dark transition-colors duration-200 group"
+          className="flex items-center gap-3 text-lg font-bold tracking-tight text-brand-text-primary-light dark:text-brand-text-primary-dark transition-colors duration-200 group shrink-0 whitespace-nowrap"
           aria-label="Nikil Varghese Home"
         >
-          <NavbarLogo className="h-[32px] w-auto shrink-0 transition-transform duration-200 group-hover:scale-[1.02]" alt="" />
-          <span>Nikil Varghese</span>
+          <NavbarLogo className="h-10 w-auto shrink-0 transition-transform duration-200 group-hover:scale-[1.02]" alt="" />
+          <span className="whitespace-nowrap shrink-0">Nikil Varghese</span>
         </a>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-7">
-          <div className="flex items-center gap-6 border border-brand-border-light dark:border-brand-border-dark/85 bg-brand-surface-light/40 dark:bg-[#121215]/50 px-5 py-2 rounded-full">
+        {/* Desktop Centered Navigation */}
+        <nav className="hidden lg:flex items-center justify-center flex-grow mx-4">
+          <div className="flex items-center gap-1.5 border border-brand-border-light dark:border-brand-border-dark/85 bg-brand-surface-light/40 dark:bg-[#121215]/50 px-4 py-1.5 rounded-full whitespace-nowrap">
             {navItems.map((item) => {
               const isLinkActive = item.href.slice(1) === activeSection;
               return (
                 <a
                   key={item.name}
                   href={item.href}
-                  className={`relative z-10 text-xs font-medium tracking-tight transition-colors duration-200 px-2 py-0.5 ${
+                  className={`relative z-10 text-xs font-medium tracking-tight transition-colors duration-200 px-2 py-0.5 whitespace-nowrap ${
                     isLinkActive
                       ? 'text-brand-accent-indigo font-semibold dark:text-brand-text-primary-dark'
                       : 'text-brand-text-secondary-light hover:text-brand-text-primary-light dark:text-brand-text-secondary-dark dark:hover:text-brand-text-primary-dark'
@@ -146,58 +143,55 @@ export const Navbar = () => {
               );
             })}
           </div>
-          
-          <div className="h-4 w-px bg-brand-border-light dark:bg-brand-border-dark/80" />
-
-          {/* Theme Toggler */}
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-lg border border-brand-border-light dark:border-brand-border-dark/80 text-brand-text-secondary-light dark:text-brand-text-secondary-dark hover:bg-brand-surface-hover-light dark:hover:bg-brand-surface-hover-dark/40 hover:text-brand-text-primary-light dark:hover:text-brand-text-primary-dark transition-all cursor-pointer"
-            aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}
-          >
-            {theme === 'light' ? (
-              <MoonIcon className="h-4 w-4" />
-            ) : (
-              <SunIcon className="h-4 w-4" />
-            )}
-          </button>
-
-          {/* Resume CTA */}
-          <a
-            href={resumePdf}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 px-4 py-2 text-xs font-semibold rounded-lg border border-brand-border-light dark:border-brand-border-dark/80 text-brand-text-secondary-light hover:text-brand-text-primary-light dark:text-brand-text-secondary-dark dark:hover:text-brand-text-primary-dark hover:bg-brand-surface-hover-light dark:hover:bg-brand-surface-hover-dark/40 transition-all duration-200 cursor-pointer shadow-xs active:scale-[0.98]"
-          >
-            <ArrowDownTrayIcon className="w-3.5 h-3.5 shrink-0" />
-            <span>Resume</span>
-          </a>
-
-          {/* Recruiter CTA */}
-          <button
-            onClick={() => setIsHireModalOpen(true)}
-            className="px-4 py-2 text-xs font-semibold rounded-lg bg-brand-text-primary-light text-brand-bg-light hover:opacity-90 dark:bg-brand-text-primary-dark dark:text-brand-bg-dark transition-all duration-200 cursor-pointer shadow-sm active:scale-[0.98]"
-          >
-            Hire Me
-          </button>
         </nav>
 
-        {/* Mobile Navigation Trigger */}
-        <div className="flex items-center gap-3 md:hidden">
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-lg border border-brand-border-light dark:border-brand-border-dark/80 text-brand-text-secondary-light dark:text-brand-text-secondary-dark hover:bg-brand-surface-hover-light dark:hover:bg-brand-surface-hover-dark/40 hover:text-brand-text-primary-light dark:hover:text-brand-text-primary-dark transition-all cursor-pointer"
-            aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}
-          >
-            {theme === 'light' ? (
-              <MoonIcon className="h-4 w-4" />
-            ) : (
-              <SunIcon className="h-4 w-4" />
-            )}
-          </button>
+        {/* Right Area (Actions & Mobile/Tablet Triggers) */}
+        <div className="flex items-center gap-4 shrink-0">
+          {/* Actions Section (Desktop & Tablet) */}
+          <div className="hidden md:flex items-center gap-4.5">
+            {/* Theme Toggler */}
+            <ThemeToggle />
 
+            {/* Resume CTA */}
+            <a
+              href={resumePdf}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 px-4 py-2 text-xs font-semibold rounded-lg border border-brand-border-light dark:border-brand-border-dark/80 text-brand-text-secondary-light hover:text-brand-text-primary-light dark:text-brand-text-secondary-dark dark:hover:text-brand-text-primary-dark hover:bg-brand-surface-hover-light dark:hover:bg-brand-surface-hover-dark/40 transition-all duration-200 cursor-pointer shadow-xs active:scale-[0.98] whitespace-nowrap"
+            >
+              <ArrowDownTrayIcon className="w-3.5 h-3.5 shrink-0" />
+              <span>Resume</span>
+            </a>
+
+            {/* Recruiter CTA */}
+            <button
+              onClick={() => setIsHireModalOpen(true)}
+              className="px-4 py-2 text-xs font-semibold rounded-lg bg-brand-text-primary-light text-brand-bg-light hover:opacity-90 dark:bg-brand-text-primary-dark dark:text-brand-bg-dark transition-all duration-200 cursor-pointer shadow-sm active:scale-[0.98] whitespace-nowrap"
+            >
+              Hire Me
+            </button>
+          </div>
+
+          {/* Mobile Theme Toggle & Menu (Mobile Only: hidden on md and up) */}
+          <div className="flex items-center gap-3 md:hidden">
+            <ThemeToggle />
+
+            <button
+              className="p-2 text-brand-text-secondary-light dark:text-brand-text-secondary-dark hover:text-brand-text-primary-light dark:hover:text-brand-text-primary-dark border border-brand-border-light dark:border-brand-border-dark/80 rounded-lg cursor-pointer"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? (
+                <XMarkIcon className="h-4 w-4" />
+              ) : (
+                <Bars3Icon className="h-4 w-4" />
+              )}
+            </button>
+          </div>
+
+          {/* Tablet Menu Trigger (Tablet Only: visible on md to lg screens) */}
           <button
-            className="p-2 text-brand-text-secondary-light dark:text-brand-text-secondary-dark hover:text-brand-text-primary-light dark:hover:text-brand-text-primary-dark border border-brand-border-light dark:border-brand-border-dark/80 rounded-lg cursor-pointer"
+            className="hidden md:block lg:hidden p-2 text-brand-text-secondary-light dark:text-brand-text-secondary-dark hover:text-brand-text-primary-light dark:hover:text-brand-text-primary-dark border border-brand-border-light dark:border-brand-border-dark/80 rounded-lg cursor-pointer"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -210,7 +204,7 @@ export const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Nav Menu */}
+      {/* Mobile/Tablet Nav Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.nav
@@ -218,7 +212,7 @@ export const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden absolute top-full left-0 right-0 bg-brand-surface-light dark:bg-[#0f0f11] border-b border-brand-border-light dark:border-brand-border-dark/80 shadow-md"
+            className="lg:hidden absolute top-full left-0 right-0 bg-brand-surface-light dark:bg-[#0f0f11] border-b border-brand-border-light dark:border-brand-border-dark/80 shadow-md"
           >
             <div className="flex flex-col px-6 py-5 space-y-4">
               {navItems.map((item) => {
@@ -238,12 +232,12 @@ export const Navbar = () => {
                   </a>
                 );
               })}
-              <div className="flex gap-3 pt-2">
+              <div className="flex gap-3 pt-2 md:hidden">
                 <a
                   href={resumePdf}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-grow text-center flex items-center justify-center gap-1.5 px-4 py-2.5 text-xs font-semibold rounded-lg border border-brand-border-light dark:border-brand-border-dark/80 text-brand-text-secondary-light hover:text-brand-text-primary-light dark:text-brand-text-secondary-dark dark:hover:text-brand-text-primary-dark hover:bg-brand-surface-hover-light dark:hover:bg-brand-surface-hover-dark/40 transition-all cursor-pointer shadow-xs"
+                  className="flex-grow text-center flex items-center justify-center gap-1.5 px-4 py-2.5 text-xs font-semibold rounded-lg border border-brand-border-light dark:border-brand-border-dark/80 text-brand-text-secondary-light hover:text-brand-text-primary-light dark:text-brand-text-secondary-dark dark:hover:text-brand-text-primary-dark hover:bg-brand-surface-hover-light dark:hover:bg-brand-surface-hover-dark/40 transition-all cursor-pointer shadow-xs whitespace-nowrap"
                 >
                   <ArrowDownTrayIcon className="w-3.5 h-3.5 shrink-0" />
                   <span>Resume</span>
@@ -253,7 +247,7 @@ export const Navbar = () => {
                     setIsMobileMenuOpen(false);
                     setIsHireModalOpen(true);
                   }}
-                  className="flex-grow text-center px-4 py-2.5 text-xs font-semibold rounded-lg bg-brand-text-primary-light text-brand-bg-light dark:bg-brand-text-primary-dark dark:text-brand-bg-dark transition-all cursor-pointer shadow-sm active:scale-[0.98]"
+                  className="flex-grow text-center px-4 py-2.5 text-xs font-semibold rounded-lg bg-brand-text-primary-light text-brand-bg-light dark:bg-brand-text-primary-dark dark:text-brand-bg-dark transition-all cursor-pointer shadow-sm active:scale-[0.98] whitespace-nowrap"
                 >
                   Hire Me
                 </button>
