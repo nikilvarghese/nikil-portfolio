@@ -80,6 +80,7 @@ export const Contact = () => {
                 <button
                   onClick={handleCopyEmail}
                   className="px-3 py-1 bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark hover:bg-brand-surface-hover-light dark:hover:bg-brand-surface-hover-dark/40 text-[10px] text-brand-text-secondary-light dark:text-brand-text-secondary-dark rounded-md font-semibold cursor-pointer transition-colors flex items-center gap-1.5 min-w-[70px] justify-center shadow-xs"
+                  aria-label="Copy email address to clipboard"
                 >
                   {copied ? (
                     <>

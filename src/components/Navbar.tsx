@@ -117,7 +117,7 @@ export const Navbar = () => {
         </a>
 
         {/* Desktop Centered Navigation */}
-        <nav className="hidden lg:flex items-center justify-center flex-grow mx-4">
+        <nav aria-label="Main desktop navigation" className="hidden lg:flex items-center justify-center flex-grow mx-4">
           <div className="flex items-center gap-1.5 border border-brand-border-light dark:border-brand-border-dark/85 bg-brand-surface-light/40 dark:bg-[#121215]/50 px-4 py-1.5 rounded-full whitespace-nowrap">
             {navItems.map((item) => {
               const isLinkActive = item.href.slice(1) === activeSection;
@@ -213,6 +213,7 @@ export const Navbar = () => {
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
             className="lg:hidden absolute top-full left-0 right-0 bg-brand-surface-light dark:bg-[#0f0f11] border-b border-brand-border-light dark:border-brand-border-dark/80 shadow-md"
+            aria-label="Main mobile navigation"
           >
             <div className="flex flex-col px-6 py-5 space-y-4">
               {navItems.map((item) => {
@@ -324,6 +325,7 @@ export const Navbar = () => {
                     <button
                       onClick={handleCopyEmail}
                       className="px-3.5 rounded-lg border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark hover:bg-brand-surface-hover-light dark:hover:bg-brand-surface-hover-dark/40 text-brand-text-secondary-light dark:text-brand-text-secondary-dark text-xs font-semibold cursor-pointer transition-colors min-w-[75px] flex items-center justify-center gap-1.5"
+                      aria-label="Copy email address to clipboard"
                     >
                       {copied ? (
                         <>

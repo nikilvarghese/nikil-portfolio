@@ -387,6 +387,7 @@ export const Projects = () => {
                     <button
                       onClick={() => setSelectedProject(null)}
                       className="p-1 rounded hover:bg-brand-surface-hover-light dark:hover:bg-brand-surface-hover-dark/40 text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark hover:text-brand-text-primary-light dark:hover:text-brand-text-primary-dark cursor-pointer transition-colors"
+                      aria-label="Close project details modal"
                     >
                       <XMarkIcon className="w-5 h-5" />
                     </button>
@@ -409,6 +410,7 @@ export const Projects = () => {
                     <img 
                       src={selectedProject.heroImage} 
                       alt={`${selectedProject.title} Main Screenshot`} 
+                      loading="lazy"
                       className="max-w-full max-h-full object-contain rounded shadow-sm transform group-hover:scale-[1.01] transition-transform duration-300"
                     />
                   </div>
