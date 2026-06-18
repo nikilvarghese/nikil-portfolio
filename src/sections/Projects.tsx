@@ -65,8 +65,8 @@ const ImageCard = ({
       </div>
       <img src={src} alt={alt} loading="lazy" className="max-h-48 object-contain transform group-hover:scale-[1.02] transition-transform duration-300 rounded shadow-xs" />
     </div>
-    <div className="border-l-2 border-brand-accent-indigo pl-2.5 flex flex-col gap-0.5">
-      {title && <h4 className="text-xs font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark group-hover:text-brand-accent-indigo transition-colors">{title}</h4>}
+    <div className="border-l-2 border-brand-accent-blue pl-2.5 flex flex-col gap-0.5">
+      {title && <h4 className="text-xs font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark group-hover:text-brand-accent-blue transition-colors">{title}</h4>}
       <p className="text-[11px] text-brand-text-secondary-light dark:text-brand-text-secondary-dark group-hover:text-brand-text-primary-light dark:group-hover:text-brand-text-primary-dark transition-colors leading-normal font-normal">{caption}</p>
     </div>
   </div>
@@ -224,7 +224,7 @@ export const Projects = () => {
         <ScrollReveal>
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div className="space-y-4 text-left">
-              <span className="text-xs font-semibold text-brand-accent-indigo uppercase tracking-wider block">
+              <span className="text-xs font-semibold text-brand-accent-blue uppercase tracking-wider block">
                 Projects
               </span>
               <h2 className="text-3xl md:text-4xl font-light tracking-tight text-brand-text-primary-light dark:text-brand-text-primary-dark leading-tight">
@@ -266,14 +266,14 @@ export const Projects = () => {
               >
                 <motion.div
                   layout
-                  className="bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark rounded-xl overflow-hidden shadow-xs hover:border-slate-350 dark:hover:border-zinc-800 transition-all duration-300 flex flex-col h-full w-full group"
+                  className="qa-dashboard-card rounded-xl overflow-hidden flex flex-col h-full w-full group"
                 >
                 {/* Cover Image */}
                 <div 
                   className="aspect-[16/9] bg-slate-50 dark:bg-brand-bg-dark/40 flex items-center justify-center p-6 relative overflow-hidden border-b border-brand-border-light dark:border-brand-border-dark cursor-pointer"
                   onClick={() => setSelectedProject(project)}
                 >
-                  <div className="absolute inset-0 bg-brand-accent-indigo/[0.01] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                  <div className="absolute inset-0 bg-brand-accent-blue/[0.01] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                   <img
                     src={project.heroImage}
                     alt={project.title}
@@ -292,7 +292,7 @@ export const Projects = () => {
                     </span>
                   </div>
                   <h3 
-                    className="text-lg font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark group-hover:text-brand-accent-indigo transition-colors cursor-pointer"
+                    className="text-lg font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark group-hover:text-brand-accent-blue transition-colors cursor-pointer"
                     onClick={() => setSelectedProject(project)}
                   >
                     {project.title}
@@ -472,7 +472,7 @@ export const Projects = () => {
                       
                       {/* 2. Project Overview */}
                       <div className="space-y-3.5">
-                        <h3 className="text-xs font-bold uppercase tracking-wider text-brand-text-primary-light dark:text-brand-text-primary-dark border-l-2 border-brand-accent-indigo pl-3">
+                        <h3 className="text-xs font-bold uppercase tracking-wider text-brand-text-primary-light dark:text-brand-text-primary-dark border-l-2 border-brand-accent-blue pl-3">
                           Project Overview
                         </h3>
                         <p className="text-sm text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-[1.65] font-normal">
@@ -482,7 +482,7 @@ export const Projects = () => {
 
                       {/* 3. Problem */}
                       <div className="space-y-3.5">
-                        <h3 className="text-xs font-bold uppercase tracking-wider text-brand-text-primary-light dark:text-brand-text-primary-dark border-l-2 border-brand-accent-indigo pl-3">
+                        <h3 className="text-xs font-bold uppercase tracking-wider text-brand-text-primary-light dark:text-brand-text-primary-dark border-l-2 border-brand-accent-blue pl-3">
                           Problem
                         </h3>
                         <p className="text-sm text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-[1.65] font-normal">
@@ -495,7 +495,7 @@ export const Projects = () => {
 
                       {/* 4. Solution */}
                       <div className="space-y-3.5">
-                        <h3 className="text-xs font-bold uppercase tracking-wider text-brand-text-primary-light dark:text-brand-text-primary-dark border-l-2 border-brand-accent-indigo pl-3">
+                        <h3 className="text-xs font-bold uppercase tracking-wider text-brand-text-primary-light dark:text-brand-text-primary-dark border-l-2 border-brand-accent-blue pl-3">
                           Solution
                         </h3>
                         <p className="text-sm text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-[1.65] font-normal">
@@ -508,7 +508,7 @@ export const Projects = () => {
 
                       {/* 5. Technical Implementation (Visual Diagram) */}
                       <div className="space-y-4 pt-2">
-                        <h3 className="text-xs font-bold uppercase tracking-wider text-brand-text-primary-light dark:text-brand-text-primary-dark border-l-2 border-brand-accent-indigo pl-3">
+                        <h3 className="text-xs font-bold uppercase tracking-wider text-brand-text-primary-light dark:text-brand-text-primary-dark border-l-2 border-brand-accent-blue pl-3">
                           Technical Implementation
                         </h3>
                         <p className="text-sm text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-[1.65] font-normal mb-3">
@@ -521,11 +521,11 @@ export const Projects = () => {
                               <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark px-3 py-1.5 rounded-lg w-full font-semibold">
                                 Client Request
                               </div>
-                              <div className="text-brand-accent-indigo font-bold">↓</div>
+                              <div className="text-brand-accent-blue font-bold">↓</div>
                               <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark px-3 py-1.5 rounded-lg w-full font-semibold">
                                 Nginx Load Balancer (Round-Robin Proxy)
                               </div>
-                              <div className="flex justify-between w-full text-brand-accent-indigo font-bold px-10">
+                              <div className="flex justify-between w-full text-brand-accent-blue font-bold px-10">
                                 <span>↙</span>
                                 <span>↘</span>
                               </div>
@@ -545,15 +545,15 @@ export const Projects = () => {
                               <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark px-3 py-1.5 rounded-lg w-full font-semibold">
                                 Client UI (React Router)
                               </div>
-                              <div className="text-brand-accent-indigo font-bold">↓</div>
+                              <div className="text-brand-accent-blue font-bold">↓</div>
                               <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark px-3 py-1.5 rounded-lg w-full font-semibold">
                                 Authentication Guard & Role Verification Middleware
                               </div>
-                              <div className="text-brand-accent-indigo font-bold">↓</div>
+                              <div className="text-brand-accent-blue font-bold">↓</div>
                               <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark px-3 py-1.5 rounded-lg w-full font-semibold">
                                 Express REST API Endpoint
                               </div>
-                              <div className="text-brand-accent-indigo font-bold">↓</div>
+                              <div className="text-brand-accent-blue font-bold">↓</div>
                               <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark px-3 py-1.5 rounded-lg w-full font-semibold">
                                 MongoDB Database (Mongoose Validation)
                               </div>
@@ -567,35 +567,35 @@ export const Projects = () => {
                                 <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark px-4 py-2 rounded-lg font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark shadow-sm">
                                   User UI Client (React Native / Expo Mobile App)
                                 </div>
-                                <div className="text-brand-accent-indigo font-bold text-base mt-2">↓</div>
+                                <div className="text-brand-accent-blue font-bold text-base mt-2">↓</div>
                               </div>
 
                               {/* Feature Columns Grid */}
                               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
                                 {/* Reply Generator */}
                                 <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark/30 p-3.5 rounded-xl space-y-2 flex flex-col">
-                                  <div className="font-bold text-[10px] text-brand-accent-indigo uppercase tracking-wider text-center border-b border-brand-border-light dark:border-brand-border-dark/60 pb-1.5 mb-1">
+                                  <div className="font-bold text-[10px] text-brand-accent-blue uppercase tracking-wider text-center border-b border-brand-border-light dark:border-brand-border-dark/60 pb-1.5 mb-1">
                                     Reply Generator
                                   </div>
                                   <ul className="space-y-1 text-[10px] text-brand-text-secondary-light dark:text-brand-text-secondary-dark flex-grow font-normal">
                                     <li className="flex items-start gap-1.5">
-                                      <span className="text-brand-accent-indigo shrink-0 font-bold">&rarr;</span>
+                                      <span className="text-brand-accent-blue shrink-0 font-bold">&rarr;</span>
                                       <span>Text Input & Screenshot Upload</span>
                                     </li>
                                     <li className="flex items-start gap-1.5">
-                                      <span className="text-brand-accent-indigo shrink-0 font-bold">&rarr;</span>
+                                      <span className="text-brand-accent-blue shrink-0 font-bold">&rarr;</span>
                                       <span>Gemini Vision OCR Extraction</span>
                                     </li>
                                     <li className="flex items-start gap-1.5">
-                                      <span className="text-brand-accent-indigo shrink-0 font-bold">&rarr;</span>
+                                      <span className="text-brand-accent-blue shrink-0 font-bold">&rarr;</span>
                                       <span>Context Data Cleaning</span>
                                     </li>
                                     <li className="flex items-start gap-1.5">
-                                      <span className="text-brand-accent-indigo shrink-0 font-bold">&rarr;</span>
+                                      <span className="text-brand-accent-blue shrink-0 font-bold">&rarr;</span>
                                       <span>Tone Selection Filter</span>
                                     </li>
                                     <li className="flex items-start gap-1.5">
-                                      <span className="text-brand-accent-indigo shrink-0 font-bold">&rarr;</span>
+                                      <span className="text-brand-accent-blue shrink-0 font-bold">&rarr;</span>
                                       <span>AI Response Generation</span>
                                     </li>
                                   </ul>
@@ -603,24 +603,24 @@ export const Projects = () => {
 
                                 {/* Conversation Openers */}
                                 <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark/30 p-3.5 rounded-xl space-y-2 flex flex-col">
-                                  <div className="font-bold text-[10px] text-brand-accent-indigo uppercase tracking-wider text-center border-b border-brand-border-light dark:border-brand-border-dark/60 pb-1.5 mb-1">
+                                  <div className="font-bold text-[10px] text-brand-accent-blue uppercase tracking-wider text-center border-b border-brand-border-light dark:border-brand-border-dark/60 pb-1.5 mb-1">
                                     Conversation Openers
                                   </div>
                                   <ul className="space-y-1 text-[10px] text-brand-text-secondary-light dark:text-brand-text-secondary-dark flex-grow font-normal">
                                     <li className="flex items-start gap-1.5">
-                                      <span className="text-brand-accent-indigo shrink-0 font-bold">&rarr;</span>
+                                      <span className="text-brand-accent-blue shrink-0 font-bold">&rarr;</span>
                                       <span>Profile Page Analysis</span>
                                     </li>
                                     <li className="flex items-start gap-1.5">
-                                      <span className="text-brand-accent-indigo shrink-0 font-bold">&rarr;</span>
+                                      <span className="text-brand-accent-blue shrink-0 font-bold">&rarr;</span>
                                       <span>Interest & Tag Extraction</span>
                                     </li>
                                     <li className="flex items-start gap-1.5">
-                                      <span className="text-brand-accent-indigo shrink-0 font-bold">&rarr;</span>
+                                      <span className="text-brand-accent-blue shrink-0 font-bold">&rarr;</span>
                                       <span>Dynamic Context Builder</span>
                                     </li>
                                     <li className="flex items-start gap-1.5">
-                                      <span className="text-brand-accent-indigo shrink-0 font-bold">&rarr;</span>
+                                      <span className="text-brand-accent-blue shrink-0 font-bold">&rarr;</span>
                                       <span>AI Opener Generation</span>
                                     </li>
                                   </ul>
@@ -628,31 +628,31 @@ export const Projects = () => {
 
                                 {/* Bio Writer */}
                                 <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark/30 p-3.5 rounded-xl space-y-2 flex flex-col">
-                                  <div className="font-bold text-[10px] text-brand-accent-indigo uppercase tracking-wider text-center border-b border-brand-border-light dark:border-brand-border-dark/60 pb-1.5 mb-1">
+                                  <div className="font-bold text-[10px] text-brand-accent-blue uppercase tracking-wider text-center border-b border-brand-border-light dark:border-brand-border-dark/60 pb-1.5 mb-1">
                                     Bio Writer
                                   </div>
                                   <ul className="space-y-1 text-[10px] text-brand-text-secondary-light dark:text-brand-text-secondary-dark flex-grow font-normal">
                                     <li className="flex items-start gap-1.5">
-                                      <span className="text-brand-accent-indigo shrink-0 font-bold">&rarr;</span>
+                                      <span className="text-brand-accent-blue shrink-0 font-bold">&rarr;</span>
                                       <span>User Personal Details</span>
                                     </li>
                                     <li className="flex items-start gap-1.5">
-                                      <span className="text-brand-accent-indigo shrink-0 font-bold">&rarr;</span>
+                                      <span className="text-brand-accent-blue shrink-0 font-bold">&rarr;</span>
                                       <span>Style & Vibe Selection</span>
                                     </li>
                                     <li className="flex items-start gap-1.5">
-                                      <span className="text-brand-accent-indigo shrink-0 font-bold">&rarr;</span>
+                                      <span className="text-brand-accent-blue shrink-0 font-bold">&rarr;</span>
                                       <span>Persona Builder Ingestion</span>
                                     </li>
                                     <li className="flex items-start gap-1.5">
-                                      <span className="text-brand-accent-indigo shrink-0 font-bold">&rarr;</span>
+                                      <span className="text-brand-accent-blue shrink-0 font-bold">&rarr;</span>
                                       <span>AI Bio Generation</span>
                                     </li>
                                   </ul>
                                 </div>
                               </div>
 
-                              <div className="text-brand-accent-indigo font-bold text-base">↓</div>
+                              <div className="text-brand-accent-blue font-bold text-base">↓</div>
 
                               {/* Shared Services Layer */}
                               <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark p-4 rounded-xl space-y-3">
@@ -675,7 +675,7 @@ export const Projects = () => {
                                 </div>
                               </div>
 
-                              <div className="text-brand-accent-indigo font-bold text-base">↓</div>
+                              <div className="text-brand-accent-blue font-bold text-base">↓</div>
 
                               {/* Outputs */}
                               <div className="space-y-2.5">
@@ -701,19 +701,19 @@ export const Projects = () => {
                               <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark px-3 py-1.5 rounded-lg w-full font-semibold">
                                 Player (Java & Bedrock Cross-Play)
                               </div>
-                              <div className="text-brand-accent-indigo font-bold">↓</div>
+                              <div className="text-brand-accent-blue font-bold">↓</div>
                               <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark px-3 py-1.5 rounded-lg w-full font-semibold">
                                 Aternos Hosted PaperMC Server
                               </div>
-                              <div className="text-brand-accent-indigo font-bold">↓</div>
+                              <div className="text-brand-accent-blue font-bold">↓</div>
                               <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark px-3 py-1.5 rounded-lg w-full font-semibold">
                                 Lobby World (Hub)
                               </div>
-                              <div className="text-brand-accent-indigo font-bold">↓</div>
+                              <div className="text-brand-accent-blue font-bold">↓</div>
                               <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark px-3 py-1.5 rounded-lg w-full font-semibold">
                                 Multiverse World Management
                               </div>
-                              <div className="text-brand-accent-indigo font-bold">↓</div>
+                              <div className="text-brand-accent-blue font-bold">↓</div>
                               <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 w-full font-semibold text-[10px]">
                                 <div className="border border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark/40 p-1.5 rounded-lg">
                                   Survival
@@ -757,7 +757,7 @@ export const Projects = () => {
 
                       {/* 6. Challenges */}
                       <div className="space-y-3.5">
-                        <h3 className="text-xs font-bold uppercase tracking-wider text-brand-text-primary-light dark:text-brand-text-primary-dark border-l-2 border-brand-accent-indigo pl-3">
+                        <h3 className="text-xs font-bold uppercase tracking-wider text-brand-text-primary-light dark:text-brand-text-primary-dark border-l-2 border-brand-accent-blue pl-3">
                           Challenges
                         </h3>
                         <p className="text-sm text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-[1.65] font-normal">
@@ -770,7 +770,7 @@ export const Projects = () => {
 
                       {/* 7. Key Features */}
                       <div className="space-y-3.5">
-                        <h3 className="text-xs font-bold uppercase tracking-wider text-brand-text-primary-light dark:text-brand-text-primary-dark border-l-2 border-brand-accent-indigo pl-3">
+                        <h3 className="text-xs font-bold uppercase tracking-wider text-brand-text-primary-light dark:text-brand-text-primary-dark border-l-2 border-brand-accent-blue pl-3">
                           Key Features
                         </h3>
                         <ul className="space-y-2 text-xs sm:text-sm text-brand-text-secondary-light dark:text-brand-text-secondary-dark font-normal">
@@ -780,7 +780,7 @@ export const Projects = () => {
                             "Role segregation dividing candidates and managers logically."
                           ].map((feat, idx) => (
                             <li key={idx} className="flex items-start gap-2.5">
-                              <span className="text-brand-accent-indigo mt-0.5 shrink-0 font-bold">&rarr;</span>
+                              <span className="text-brand-accent-blue mt-0.5 shrink-0 font-bold">&rarr;</span>
                               <span className="text-sm text-brand-text-secondary-light dark:text-brand-text-secondary-dark font-normal">{feat}</span>
                             </li>
                           ))}
@@ -790,7 +790,7 @@ export const Projects = () => {
                             "Localized structures configuring app texts into distinct language properties."
                           ].map((feat, idx) => (
                             <li key={idx} className="flex items-start gap-2.5">
-                              <span className="text-brand-accent-indigo mt-0.5 shrink-0 font-bold">&rarr;</span>
+                              <span className="text-brand-accent-blue mt-0.5 shrink-0 font-bold">&rarr;</span>
                               <span className="text-sm text-brand-text-secondary-light dark:text-brand-text-secondary-dark font-normal">{feat}</span>
                             </li>
                           ))}
@@ -800,7 +800,7 @@ export const Projects = () => {
                             "Bootstrapping configurations using custom install Bash scripts."
                           ].map((feat, idx) => (
                             <li key={idx} className="flex items-start gap-2.5">
-                              <span className="text-brand-accent-indigo mt-0.5 shrink-0 font-bold">&rarr;</span>
+                              <span className="text-brand-accent-blue mt-0.5 shrink-0 font-bold">&rarr;</span>
                               <span className="text-sm text-brand-text-secondary-light dark:text-brand-text-secondary-dark font-normal">{feat}</span>
                             </li>
                           ))}
@@ -811,7 +811,7 @@ export const Projects = () => {
                             "Skript-based gameplay automation for custom rules, events, and utility features."
                           ].map((feat, idx) => (
                             <li key={idx} className="flex items-start gap-2.5">
-                              <span className="text-brand-accent-indigo mt-0.5 shrink-0 font-bold">&rarr;</span>
+                              <span className="text-brand-accent-blue mt-0.5 shrink-0 font-bold">&rarr;</span>
                               <span className="text-sm text-brand-text-secondary-light dark:text-brand-text-secondary-dark font-normal">{feat}</span>
                             </li>
                           ))}
@@ -820,7 +820,7 @@ export const Projects = () => {
 
                       {/* 8. Outcome */}
                       <div className="space-y-3.5">
-                        <h3 className="text-xs font-bold uppercase tracking-wider text-brand-text-primary-light dark:text-brand-text-primary-dark border-l-2 border-brand-accent-indigo pl-3">
+                        <h3 className="text-xs font-bold uppercase tracking-wider text-brand-text-primary-light dark:text-brand-text-primary-dark border-l-2 border-brand-accent-blue pl-3">
                           Outcome & Value
                         </h3>
                         <p className="text-sm text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-[1.65] font-normal">
@@ -875,7 +875,7 @@ export const Projects = () => {
                       
                       {/* Technical Decisions */}
                       <div className="space-y-1.5">
-                        <span className="text-[10px] text-brand-accent-indigo font-bold uppercase tracking-wider block">
+                        <span className="text-[10px] text-brand-accent-blue font-bold uppercase tracking-wider block">
                           Technical Decisions
                         </span>
                         <p className="text-[11px] text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-relaxed font-normal">
@@ -885,7 +885,7 @@ export const Projects = () => {
 
                       {/* Complexity */}
                       <div className="space-y-1.5">
-                        <span className="text-[10px] text-brand-accent-indigo font-bold uppercase tracking-wider block">
+                        <span className="text-[10px] text-brand-accent-blue font-bold uppercase tracking-wider block">
                           Implementation Complexity
                         </span>
                         <p className="text-[11px] text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-relaxed font-normal">
@@ -895,7 +895,7 @@ export const Projects = () => {
 
                       {/* Scalability */}
                       <div className="space-y-1.5">
-                        <span className="text-[10px] text-brand-accent-indigo font-bold uppercase tracking-wider block">
+                        <span className="text-[10px] text-brand-accent-blue font-bold uppercase tracking-wider block">
                           Scalability Setup
                         </span>
                         <p className="text-[11px] text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-relaxed font-normal">
@@ -905,7 +905,7 @@ export const Projects = () => {
 
                       {/* Business Value */}
                       <div className="space-y-1.5">
-                        <span className="text-[10px] text-brand-accent-indigo font-bold uppercase tracking-wider block">
+                        <span className="text-[10px] text-brand-accent-blue font-bold uppercase tracking-wider block">
                           Value & Outcome
                         </span>
                         <p className="text-[11px] text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-relaxed font-normal">

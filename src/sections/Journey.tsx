@@ -1,52 +1,52 @@
 import { ScrollReveal } from '../components/ScrollReveal';
 import {
-  ServerIcon,
+  BeakerIcon,
+  ClipboardDocumentCheckIcon,
   CommandLineIcon,
-  DevicePhoneMobileIcon
 } from '@heroicons/react/24/outline';
 
 const journeyCards = [
   {
-    code: 'SYS-INF',
-    icon: ServerIcon,
-    title: 'Systems & Infrastructure',
-    sublabel: 'Virtualization & Operations',
-    description: 'Setting up isolated networks, proxy routes, and multi-node virtual machine structures.',
+    code: 'QA-DES',
+    icon: ClipboardDocumentCheckIcon,
+    title: 'Manual QA & Test Design',
+    sublabel: 'Requirements, Cases & Execution',
+    description: 'Translating product requirements into structured test cases, expected results, and repeatable validation paths.',
     points: [
-      'Configuring VMware virtual machines running Ubuntu Server',
-      'Establishing Nginx load balancer reverse proxy routing pools',
-      'Developing automated installation shell scripts for systems',
-      'Monitoring virtual node resources under simulated load spikes'
+      'Designing manual test cases with expected results and priority markers',
+      'Validating candidate and recruiter workflows against business rules',
+      'Checking boundary conditions, negative paths, and missing-data states',
+      'Documenting pass/fail outcomes, defects, and reproduction steps'
     ],
-    tech: ['VMware', 'Ubuntu', 'Nginx', 'Apache', 'Bash', 'Networking']
+    tech: ['Manual Testing', 'Test Cases', 'Functional Testing', 'Bug Reports', 'Excel', 'Requirements']
   },
   {
-    code: 'APP-ENG',
+    code: 'AUTO',
+    icon: BeakerIcon,
+    title: 'Playwright Automation',
+    sublabel: 'E2E Coverage & Reports',
+    description: 'Automating browser workflows with Playwright to strengthen regression coverage and release confidence.',
+    points: [
+      'Automating authentication, dashboards, job applications, and profile flows',
+      'Structuring test modules around maintainable Page Object Model patterns',
+      'Running smoke and regression suites with generated HTML reports',
+      'Capturing terminal evidence and report screenshots for review'
+    ],
+    tech: ['Playwright', 'TypeScript', 'E2E Testing', 'POM', 'Regression', 'Smoke Tests']
+  },
+  {
+    code: 'API-FLOW',
     icon: CommandLineIcon,
-    title: 'Full-Stack Applications',
-    sublabel: 'API Logic & Database Schemes',
-    description: 'Building backend endpoints, secure schema parameters, and checking user actions at the router boundary.',
+    title: 'API & Workflow Validation',
+    sublabel: 'Payloads, States & Evidence',
+    description: 'Inspecting requests, responses, status handling, and user-flow consistency across connected product areas.',
     points: [
-      'Integrating JWT token and OTP session validation flows',
-      'Implementing role-based permission locks (RBAC)',
-      'Designing relational backend models with strict validation rules',
-      'Catching application errors dynamically using Axios interceptors'
+      'Verifying REST API payload shape, JSON responses, and status behavior',
+      'Using Chrome DevTools to inspect browser state and network activity',
+      'Testing role-based access, validation gates, and broken-flow recovery',
+      'Organizing evidence so reports, screenshots, and cases are easy to audit'
     ],
-    tech: ['React', 'Node.js', 'Express', 'JWT', 'MongoDB', 'Mongoose']
-  },
-  {
-    code: 'AI-MOBL',
-    icon: DevicePhoneMobileIcon,
-    title: 'AI & Mobile Integration',
-    sublabel: 'Mobile Interfaces & API Connectors',
-    description: 'Developing mobile clients, connecting language models, and configuring text extraction steps.',
-    points: [
-      'Structuring cross-platform React Native and Expo applications',
-      'Integrating OpenRouter APIs to retrieve text outputs',
-      'Processing user screenshot text via Gemini Vision OCR',
-      'Configuring multi-language routing and localization assets'
-    ],
-    tech: ['React Native', 'Expo', 'Gemini OCR', 'OpenRouter', 'TypeScript', 'Localization']
+    tech: ['Postman', 'REST APIs', 'JSON', 'Chrome DevTools', 'GitHub', 'Reports']
   }
 ];
 
@@ -58,14 +58,12 @@ export const Journey = () => {
         {/* Header */}
         <ScrollReveal>
           <div className="space-y-4 mb-16 text-left">
-            <span className="text-xs font-semibold text-brand-accent-indigo uppercase tracking-wider block">
+            <span className="text-xs font-semibold text-brand-accent-blue uppercase tracking-wider block">
               AREAS OF EXPERIENCE
             </span>
-            <h2 className="text-3xl md:text-4xl font-light tracking-tight text-brand-text-primary-light dark:text-brand-text-primary-dark leading-tight">
-              Focused domains built through <br />
-              <span className="font-semibold text-brand-text-primary-light dark:text-brand-text-primary-dark">
-                practical development experience.
-              </span>
+            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-brand-text-primary-light dark:text-brand-text-primary-dark leading-tight">
+              Practical QA experience across <br />
+              design, automation, and evidence.
             </h2>
           </div>
         </ScrollReveal>
@@ -77,12 +75,12 @@ export const Journey = () => {
             return (
               <ScrollReveal key={idx} delay={idx * 100} className="flex">
                 <div
-                  className="bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark rounded-xl p-6 md:p-8 flex flex-col justify-between hover:border-slate-350 dark:hover:border-zinc-800 transition-all duration-300 shadow-xs group w-full"
+                  className="qa-dashboard-card rounded-xl p-6 md:p-8 flex flex-col justify-between group w-full"
                 >
                 <div>
                   {/* Header: Icon & Category */}
                   <div className="flex items-center gap-4 mb-6">
-                    <div className="p-3 bg-brand-accent-indigo/10 text-brand-accent-indigo rounded-lg border border-brand-accent-indigo/20">
+                    <div className="p-3 bg-brand-accent-blue/10 text-brand-accent-blue rounded-lg border border-brand-accent-blue/20">
                       <Icon className="w-5 h-5" />
                     </div>
                     <div>
@@ -104,7 +102,7 @@ export const Journey = () => {
                   <ul className="space-y-3">
                     {card.points.map((pt, pIdx) => (
                       <li key={pIdx} className="flex items-start gap-2.5 text-xs text-brand-text-secondary-light dark:text-brand-text-secondary-dark">
-                        <span className="w-1.5 h-1.5 rounded-full bg-brand-accent-indigo/80 shrink-0 mt-1.5" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-brand-accent-blue/80 shrink-0 mt-1.5" />
                         <span className="leading-relaxed font-normal">{pt}</span>
                       </li>
                     ))}
@@ -116,7 +114,7 @@ export const Journey = () => {
                   {card.tech.map((t) => (
                     <span
                       key={t}
-                      className="px-2 py-0.5 bg-slate-50 dark:bg-brand-bg-dark border border-brand-border-light dark:border-brand-border-dark/50 text-brand-text-secondary-light dark:text-brand-text-secondary-dark rounded text-[10px] font-semibold"
+                      className="px-2 py-0.5 bg-slate-50 dark:bg-brand-bg-dark border border-brand-border-light dark:border-brand-border-dark/50 text-brand-text-secondary-light dark:text-brand-text-secondary-dark rounded text-[10px] font-semibold font-mono"
                     >
                       {t}
                     </span>

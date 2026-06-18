@@ -31,35 +31,33 @@ export const Contact = () => {
         
         {/* Main Card Block */}
         <ScrollReveal>
-          <div className="bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark rounded-xl p-5 sm:p-8 md:p-12 relative overflow-hidden shadow-xs">
+          <div className="qa-dashboard-card rounded-xl p-5 sm:p-8 md:p-12 relative overflow-hidden">
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
             
             {/* Left Info: Status & Headline */}
             <div className="lg:col-span-7 space-y-6">
-              <span className="text-xs font-semibold text-brand-accent-indigo uppercase tracking-wider block">
+              <span className="text-xs font-semibold text-brand-accent-blue uppercase tracking-wider block">
                 Contact
               </span>
               
-              <h2 className="text-3xl sm:text-4xl font-light tracking-tight text-brand-text-primary-light dark:text-brand-text-primary-dark leading-tight">
-                Let's discuss how we <br />
-                <span className="font-semibold text-brand-text-primary-light dark:text-brand-text-primary-dark">
-                  can build reliable solutions.
-                </span>
+              <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-brand-text-primary-light dark:text-brand-text-primary-dark leading-tight">
+                Let's discuss QA automation <br />
+                and software testing roles.
               </h2>
               
               <p className="text-xs sm:text-sm text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-relaxed font-normal max-w-md">
-                I am currently open to full-time opportunities and strategic projects. Feel free to reach out to schedule a technical chat.
+                I am open to QA Automation Engineer, Software Tester, and Playwright-focused testing opportunities. Feel free to reach out to review my test evidence or schedule a technical discussion.
               </p>
 
               {/* Status Indicator */}
               <div className="flex items-center gap-3 py-2 px-4 bg-brand-bg-light dark:bg-[#09090b] border border-brand-border-light dark:border-brand-border-dark/60 rounded-lg w-fit">
                 <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent-indigo opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-accent-indigo"></span>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent-blue opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-accent-blue"></span>
                 </span>
                 <span className="text-[10px] font-semibold text-brand-text-secondary-light dark:text-brand-text-secondary-dark">
-                  OPEN TO FULL-TIME OPPORTUNITIES
+                  OPEN TO QA AUTOMATION ROLES
                 </span>
               </div>
             </div>
@@ -68,12 +66,12 @@ export const Contact = () => {
             <div className="lg:col-span-5 w-full space-y-3 pt-6 lg:pt-0">
               
               {/* Email Connection */}
-              <div className="flex flex-col min-[400px]:flex-row min-[400px]:items-center min-[400px]:justify-between gap-3 p-4 bg-brand-bg-light dark:bg-[#09090b] border border-brand-border-light dark:border-brand-border-dark/60 rounded-xl hover:border-brand-accent-indigo/35 dark:hover:border-brand-accent-indigo/35 transition-all">
+              <div className="flex flex-col min-[400px]:flex-row min-[400px]:items-center min-[400px]:justify-between gap-3 p-4 bg-brand-bg-light dark:bg-[#09090b] border border-brand-border-light dark:border-brand-border-dark/60 rounded-xl hover:border-brand-accent-blue/35 dark:hover:border-brand-accent-blue/35 transition-all">
                 <a 
                   href="mailto:nikiledwin6@gmail.com" 
-                  className="flex items-center gap-3.5 group text-xs sm:text-sm font-semibold text-brand-text-primary-light dark:text-brand-text-primary-dark hover:text-brand-accent-indigo transition-colors min-w-0"
+                  className="flex items-center gap-3.5 group text-xs sm:text-sm font-semibold text-brand-text-primary-light dark:text-brand-text-primary-dark hover:text-brand-accent-blue transition-colors min-w-0"
                 >
-                  <EnvelopeIcon className="w-4 h-4 text-brand-text-tertiary-light group-hover:text-brand-accent-indigo transition-colors shrink-0" />
+                  <EnvelopeIcon className="w-4 h-4 text-brand-text-tertiary-light group-hover:text-brand-accent-blue transition-colors shrink-0" />
                   <span className="truncate">nikiledwin6@gmail.com</span>
                 </a>
                 
@@ -99,9 +97,9 @@ export const Contact = () => {
               {/* Phone Connection */}
               <a 
                 href="tel:8591766970" 
-                className="flex items-center gap-3.5 p-4 bg-brand-bg-light dark:bg-[#09090b] border border-brand-border-light dark:border-brand-border-dark/60 rounded-xl text-xs sm:text-sm font-semibold text-brand-text-primary-light dark:text-brand-text-primary-dark hover:text-brand-accent-indigo hover:border-brand-accent-indigo/35 dark:hover:border-brand-accent-indigo/35 transition-all group"
+                className="flex items-center gap-3.5 p-4 bg-brand-bg-light dark:bg-[#09090b] border border-brand-border-light dark:border-brand-border-dark/60 rounded-xl text-xs sm:text-sm font-semibold text-brand-text-primary-light dark:text-brand-text-primary-dark hover:text-brand-accent-blue hover:border-brand-accent-blue/35 dark:hover:border-brand-accent-blue/35 transition-all group"
               >
-                <PhoneIcon className="w-4 h-4 text-brand-text-tertiary-light group-hover:text-brand-accent-indigo transition-colors shrink-0" />
+                <PhoneIcon className="w-4 h-4 text-brand-text-tertiary-light group-hover:text-brand-accent-blue transition-colors shrink-0" />
                 +91 8591766970
               </a>
 
@@ -110,10 +108,10 @@ export const Contact = () => {
                 href="https://www.linkedin.com/in/nikil-varghese-956281255/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="flex flex-col min-[450px]:flex-row min-[450px]:items-center min-[450px]:justify-between gap-3 p-4 bg-brand-bg-light dark:bg-[#09090b] border border-brand-border-light dark:border-brand-border-dark/60 rounded-xl text-xs sm:text-sm font-semibold text-brand-text-primary-light dark:text-brand-text-primary-dark hover:text-brand-accent-indigo hover:border-brand-accent-indigo/35 dark:hover:border-brand-accent-indigo/35 transition-all group"
+                className="flex flex-col min-[450px]:flex-row min-[450px]:items-center min-[450px]:justify-between gap-3 p-4 bg-brand-bg-light dark:bg-[#09090b] border border-brand-border-light dark:border-brand-border-dark/60 rounded-xl text-xs sm:text-sm font-semibold text-brand-text-primary-light dark:text-brand-text-primary-dark hover:text-brand-accent-blue hover:border-brand-accent-blue/35 dark:hover:border-brand-accent-blue/35 transition-all group"
               >
                 <div className="flex items-center gap-3.5 min-w-0 w-full min-[450px]:w-auto">
-                  <LinkedInIcon className="w-4 h-4 text-brand-text-tertiary-light group-hover:text-brand-accent-indigo transition-colors shrink-0" />
+                  <LinkedInIcon className="w-4 h-4 text-brand-text-tertiary-light group-hover:text-brand-accent-blue transition-colors shrink-0" />
                   <span className="truncate">nikil-varghese-956281255</span>
                 </div>
                 <span className="text-[10px] text-brand-text-tertiary-light group-hover:text-brand-text-primary-light dark:group-hover:text-brand-text-primary-dark transition-colors font-medium shrink-0 self-start min-[450px]:self-auto">Connect &rarr;</span>
@@ -149,7 +147,7 @@ export const Contact = () => {
               href="https://github.com/nikilvarghese" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-brand-text-secondary-light hover:text-brand-accent-indigo dark:text-brand-text-secondary-dark dark:hover:text-brand-accent-indigo transition-colors text-xs font-semibold cursor-pointer"
+              className="flex items-center gap-2 text-brand-text-secondary-light hover:text-brand-accent-blue dark:text-brand-text-secondary-dark dark:hover:text-brand-accent-blue transition-colors text-xs font-semibold cursor-pointer"
             >
               <CodeBracketIcon className="w-4 h-4" />
               GitHub Repository

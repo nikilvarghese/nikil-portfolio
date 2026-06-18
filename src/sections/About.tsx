@@ -8,20 +8,18 @@ export const About = () => {
         {/* Left Column: Clean label & Title */}
         <ScrollReveal className="lg:col-span-5">
           <div className="space-y-4">
-            <span className="text-xs font-semibold text-brand-accent-indigo uppercase tracking-wider block">
+            <span className="text-xs font-semibold text-brand-accent-blue uppercase tracking-wider block">
               About Me
             </span>
-            <h2 className="text-3xl md:text-4xl font-light tracking-tight text-brand-text-primary-light dark:text-brand-text-primary-dark leading-tight">
-              Building applications <br />
-              <span className="font-semibold text-brand-text-primary-light dark:text-brand-text-primary-dark">
-                with a focus on stability.
-              </span>
+            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-brand-text-primary-light dark:text-brand-text-primary-dark leading-tight">
+              Testing software with <br />
+              structured evidence.
             </h2>
             
-            <div className="h-[2px] w-12 bg-brand-accent-indigo mt-6" />
+            <div className="h-[2px] w-12 bg-brand-accent-blue mt-6" />
             
             <p className="text-xs sm:text-sm text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark max-w-sm mt-4 leading-relaxed font-normal">
-              Integrating backend API routes, virtualization labs, database schema controls, and client logic.
+              Focused on Test Case Design, Manual Testing, Automation Testing, Playwright, QA documentation, and software reliability.
             </p>
           </div>
         </ScrollReveal>
@@ -30,14 +28,24 @@ export const About = () => {
         <ScrollReveal delay={100} className="lg:col-span-7">
           <div className="space-y-6 text-brand-text-secondary-light dark:text-brand-text-secondary-dark text-[15px] sm:text-base leading-[1.7] font-normal">
             <p>
-              I am an IT graduate specializing in backend development, database layers, and local infrastructure virtualization. When building applications, I focus on testing edge cases and ensuring data payloads are validated correctly at every boundary.
+              I am a BSc IT graduate specializing in QA, functional testing, test case design, bug reporting, and automation testing. My work centers on validating requirements, checking real user workflows, and documenting test evidence clearly enough for engineering and recruitment teams to trust.
             </p>
             <p>
-              I have practical experience provisioning local multi-server labs with hypervisors, establishing load balancing with reverse proxies, and writing automation scripts. I dedicate my focus to checking input security, resolving error codes, and documenting layouts for clean developer handoffs.
+              I use Playwright to automate end-to-end journeys, regression checks, smoke tests, and workflow validation. For manual testing, I design structured test cases with expected results, boundary conditions, reproduction steps, and clear pass/fail outcomes.
             </p>
             <p>
-              By combining a BSc in Information Technology with hands-on projects in React, Node.js, and virtualized servers, I focus on writing clear, readable code. I aim to build stable, predictable systems that recruiters can trust to perform reliably.
+              I also validate REST APIs with Postman-style thinking: request payloads, JSON responses, status codes, and data consistency. My goal is simple: improve software reliability through disciplined QA, practical automation, and evidence-backed reporting.
             </p>
+            <div className="flex flex-wrap gap-2 pt-2">
+              {['Functional Testing', 'API Testing', 'Bug Reporting', 'Regression Testing'].map((item) => (
+                <span
+                  key={item}
+                  className="px-3 py-1 rounded border border-brand-border-light dark:border-brand-border-dark/60 bg-slate-50/50 dark:bg-[#0d0d0f]/60 text-[10px] font-semibold text-brand-text-secondary-light dark:text-brand-text-secondary-dark font-mono"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
           </div>
         </ScrollReveal>
 

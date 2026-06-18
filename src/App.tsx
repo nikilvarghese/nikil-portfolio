@@ -3,6 +3,7 @@ import { ScrollToTop } from './components/ScrollToTop';
 import { Hero } from './sections/Hero';
 import { About } from './sections/About';
 import { Projects } from './sections/Projects';
+import { QATesting } from './sections/QATesting';
 import { Achievements } from './sections/Achievements';
 import { Journey } from './sections/Journey';
 import { Skills } from './sections/Skills';
@@ -16,11 +17,12 @@ function App() {
 
       <main>
         <Hero />
+        <Skills />
         <About />
         <Projects />
+        <QATesting />
         <Achievements />
         <Journey />
-        <Skills />
         <Philosophy />
         <Contact />
       </main>

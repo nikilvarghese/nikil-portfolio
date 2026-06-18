@@ -10,7 +10,7 @@ import {
   DocumentDuplicateIcon
 } from '@heroicons/react/24/outline';
 import { ThemeToggle } from './ThemeToggle';
-import resumePdf from '../assets/resume.pdf';
+import resumePdf from '../assets/NikilCV.pdf';
 import { NavbarLogo } from './NavbarLogo';
 
 const LinkedInIcon = ({ className }: { className?: string }) => (
@@ -26,10 +26,11 @@ const GitHubIcon = ({ className }: { className?: string }) => (
 );
 
 const navItems = [
+  { name: 'Expertise', href: '#skills' },
   { name: 'About', href: '#about' },
   { name: 'Projects', href: '#work' },
+  { name: 'QA Evidence', href: '#qa-testing' },
   { name: 'Achievements', href: '#achievements' },
-  { name: 'Expertise', href: '#skills' },
   { name: 'Principles', href: '#philosophy' },
   { name: 'Contact', href: '#contact' },
 ];
@@ -69,7 +70,7 @@ export const Navbar = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
 
-      const sections = ['about', 'work', 'achievements', 'skills', 'philosophy', 'contact'];
+      const sections = ['skills', 'about', 'work', 'qa-testing', 'achievements', 'philosophy', 'contact'];
       const scrollPosition = window.scrollY + 140;
 
       for (const sectionId of sections) {

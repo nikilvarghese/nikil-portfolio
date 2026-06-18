@@ -1,37 +1,102 @@
 import { ScrollReveal } from '../components/ScrollReveal';
+import {
+  BeakerIcon,
+  BugAntIcon,
+  CircleStackIcon,
+  CodeBracketSquareIcon,
+  CommandLineIcon,
+  GlobeAltIcon
+} from '@heroicons/react/24/outline';
 
-const expertiseSections = [
+const skillGroups = [
   {
-    category: 'Backend Development',
-    description: 'Building APIs, authentication systems, role-based access controls, and validation workflows.',
+    icon: BeakerIcon,
+    category: 'QA & Automation',
+    description: 'Core testing methods used to validate product behavior and automate repeatable checks.',
     items: [
-      'REST APIs: Designing stable route endpoints and payload formats.',
-      'Authentication: Integrating secure JWT session locks and verification paths.',
-      'Access Control: Setting up role hierarchies to manage user routes.',
-      'Data Schemas: Creating structured models to prevent database pollution.'
-    ]
+      'Playwright',
+      'Manual Testing',
+      'Automation Testing',
+      'Functional Testing',
+      'Regression Testing',
+      'Smoke Testing',
+      'Test Case Design',
+      'Bug Reporting',
+      'End-to-End Testing'
+    ],
+    accent: 'emerald'
   },
   {
-    category: 'Infrastructure & Deployment',
-    description: 'Managing Linux servers, virtualization environments, reverse proxies, and deployment workflows.',
+    icon: BugAntIcon,
+    category: 'API Testing',
+    description: 'Request, response, and payload validation for REST-driven workflows.',
     items: [
-      'Linux Networking: Bridging connections and managing IP addresses in multi-server labs.',
-      'Virtualization: Cloning and configuring Ubuntu Server environments in VMware.',
-      'Proxy Servers: Establishing Nginx routing rules and round-robin load distribution.',
-      'Scripted Automations: Writing shell scripts to automate service installs.'
-    ]
+      'API Testing',
+      'Postman',
+      'REST APIs',
+      'JSON'
+    ],
+    accent: 'blue'
   },
   {
-    category: 'Testing & Validation',
-    description: 'Testing application behavior, identifying edge cases, validating business logic, and improving stability.',
+    icon: CodeBracketSquareIcon,
+    category: 'Languages',
+    description: 'Programming and scripting used to write automated checks and support test workflows.',
     items: [
-      'Boundary Controls: Intercepting client requests and verifying request variables.',
-      'Error Handling: Configuring middleware to capture application errors and log details.',
-      'Logic Testing: Confirming features behave as expected during runtime tests.',
-      'Troubleshooting: Examining crash logs and debugging database failures.'
-    ]
+      'JavaScript',
+      'TypeScript (Basic)'
+    ],
+    accent: 'slate'
+  },
+  {
+    icon: CommandLineIcon,
+    category: 'Tools',
+    description: 'Everyday tools for source control, debugging, inspection, and evidence review.',
+    items: [
+      'Git',
+      'GitHub',
+      'Chrome DevTools'
+    ],
+    accent: 'amber'
+  },
+  {
+    icon: GlobeAltIcon,
+    category: 'Web Technologies',
+    description: 'Frontend awareness used to inspect user interfaces and test browser workflows.',
+    items: [
+      'HTML',
+      'CSS',
+      'React (Basic)',
+      'Node.js'
+    ],
+    accent: 'indigo'
+  },
+  {
+    icon: CircleStackIcon,
+    category: 'Familiar With',
+    description: 'Additional environments and data layers that support broader QA debugging context.',
+    items: [
+      'MongoDB',
+      'Linux'
+    ],
+    accent: 'zinc'
   }
 ];
+
+const getAccentClasses = (accent: string) => {
+  switch (accent) {
+    case 'emerald':
+      return 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20';
+    case 'blue':
+      return 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20';
+    case 'amber':
+      return 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20';
+    case 'indigo':
+      return 'bg-brand-accent-blue/10 text-brand-accent-blue border-brand-accent-blue/20';
+    default:
+      return 'bg-slate-500/10 text-slate-600 dark:text-slate-300 border-slate-500/15';
+  }
+};
 
 export const Skills = () => {
   return (
@@ -41,62 +106,63 @@ export const Skills = () => {
         {/* Header */}
         <ScrollReveal>
           <div className="space-y-4 mb-16 text-left">
-            <span className="text-xs font-semibold text-brand-accent-indigo uppercase tracking-wider block">
+            <span className="text-xs font-semibold text-brand-accent-blue uppercase tracking-wider block">
               Technical Expertise
             </span>
-            <h2 className="text-3xl md:text-4xl font-light tracking-tight text-brand-text-primary-light dark:text-brand-text-primary-dark leading-tight">
-              Core capabilities focused on <br />
-              <span className="font-semibold text-brand-text-primary-light dark:text-brand-text-primary-dark">
-                functionality, stability, and reliability.
-              </span>
+            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-brand-text-primary-light dark:text-brand-text-primary-dark leading-tight">
+              Technical skills organized for <br />
+              QA automation delivery.
             </h2>
+            <p className="text-sm text-brand-text-secondary-light dark:text-brand-text-secondary-dark max-w-2xl leading-relaxed">
+              A testing-focused toolkit for designing cases, automating browser workflows, validating APIs, reporting defects, and keeping product releases reliable.
+            </p>
           </div>
         </ScrollReveal>
 
-        {/* 3 Categories Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {expertiseSections.map((section, idx) => (
+        {/* Categorized Skills Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {skillGroups.map((section, idx) => {
+            const Icon = section.icon;
+            return (
             <ScrollReveal key={idx} delay={idx * 100} className="flex">
               <div
-                className="bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark rounded-xl p-6 md:p-8 flex flex-col justify-between hover:border-slate-350 dark:hover:border-zinc-800 hover:shadow-xs transition-all duration-300 group w-full"
+                className="qa-dashboard-card rounded-xl p-6 flex flex-col justify-between group w-full"
               >
                 <div className="space-y-5">
                   {/* Header Labels */}
-                  <div>
-                    <span className="text-[10px] font-bold text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark uppercase tracking-wider block mb-1">
-                      Capability 0{idx + 1}
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <span className="text-[10px] font-bold text-brand-text-tertiary-light dark:text-brand-text-tertiary-dark uppercase tracking-wider block mb-1">
+                        Skill Group 0{idx + 1}
+                      </span>
+                      <h3 className="text-base font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark group-hover:text-brand-accent-blue transition-colors duration-200">
+                        {section.category}
+                      </h3>
+                    </div>
+                    <span className={`p-2.5 rounded-lg border shrink-0 transition-transform duration-300 group-hover:scale-105 ${getAccentClasses(section.accent)}`}>
+                      <Icon className="w-5 h-5" />
                     </span>
-                    <h3 className="text-base font-bold text-brand-text-primary-light dark:text-brand-text-primary-dark group-hover:text-brand-accent-indigo transition-colors duration-200">
-                      {section.category}
-                    </h3>
                   </div>
 
                   <p className="text-xs sm:text-sm text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-relaxed font-normal">
                     {section.description}
                   </p>
 
-                  {/* Sublist */}
-                  <ul className="space-y-3.5 pt-2">
-                    {section.items.map((item, itemIdx) => {
-                      const colonIndex = item.indexOf(':');
-                      const prefix = colonIndex !== -1 ? item.substring(0, colonIndex + 1) : '';
-                      const body = colonIndex !== -1 ? item.substring(colonIndex + 1) : item;
-                      
-                      return (
-                        <li key={itemIdx} className="text-xs text-brand-text-secondary-light dark:text-brand-text-secondary-dark leading-relaxed flex items-start gap-2.5">
-                          <span className="text-brand-accent-indigo font-bold shrink-0 mt-0.5">&rarr;</span>
-                          <span>
-                            {prefix && <strong className="font-semibold text-brand-text-primary-light dark:text-brand-text-primary-dark">{prefix}</strong>}
-                            {body}
-                          </span>
-                        </li>
-                      );
-                    })}
-                  </ul>
+                  <div className="flex flex-wrap gap-1.5 pt-1">
+                    {section.items.map((item) => (
+                      <span
+                        key={item}
+                        className="px-2 py-0.5 rounded border border-brand-border-light dark:border-brand-border-dark/60 bg-slate-50/50 dark:bg-[#0d0d0f]/60 text-[10px] font-semibold text-brand-text-secondary-light dark:text-brand-text-secondary-dark font-mono transition-colors group-hover:border-brand-accent-blue/20"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </ScrollReveal>
-          ))}
+            );
+          })}
         </div>
 
       </div>
