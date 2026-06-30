@@ -10,7 +10,7 @@ import {
   DocumentDuplicateIcon
 } from '@heroicons/react/24/outline';
 import { ThemeToggle } from './ThemeToggle';
-import resumePdf from '../assets/NikilCV.pdf';
+import resumePdf from '../assets/Nikil_Varghese_Resume.pdf';
 import { NavbarLogo } from './NavbarLogo';
 
 const LinkedInIcon = ({ className }: { className?: string }) => (
